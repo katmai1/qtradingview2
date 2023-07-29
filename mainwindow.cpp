@@ -13,3 +13,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::displayStatusMessage(QString message)
+{
+    this->statusBar()->showMessage(message, 15000);
+}
+
