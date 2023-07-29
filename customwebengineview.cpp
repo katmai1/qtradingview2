@@ -22,7 +22,7 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
     QWebEnginePage *page = new QWebEnginePage(profile);
     this->setPage(page);
 
-    this->load(QUrl("https://tradingview.com/"));
+    this->load(QUrl("https://es.tradingview.com/chart/"));
     this->showMaximized();
     this->show();
 }
