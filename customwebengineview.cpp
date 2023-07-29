@@ -5,7 +5,7 @@
 
 CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(parent)
 {
-    // get carpeta home
+    // prepara carpeta config
     QString home_path = getenv("HOME");
     QString path_completo = home_path + "/.qtradingview2";
     QDir directorio(path_completo);
@@ -14,7 +14,7 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
     // configura perfil
     QWebEngineProfile *profile = new QWebEngineProfile(QString::fromLatin1("QTradingview.%1").arg(qWebEngineChromiumVersion()));
     profile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
-    profile->setPersistentCookiesPolicy(QWebEngineProfile::ForcePersistentCookies);
+    //profile->setPersistentCookiesPolicy(QWebEngineProfile::ForcePersistentCookies);
     profile->setCachePath(path_completo);
     profile->setPersistentStoragePath(path_completo);
 
