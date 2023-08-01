@@ -71,5 +71,6 @@ Thumbs.db
 *.dll
 *.exe
 
-/builds/
+*.qmake.stash
+/builds/Linux_x64/release/.qtc_clangd/
 /dist/
