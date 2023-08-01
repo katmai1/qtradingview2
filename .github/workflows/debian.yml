@@ -1,4 +1,3 @@
----
 name: release
 
 "on":
@@ -15,7 +14,7 @@ jobs:
   build-linux-packages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: create sample script
         run: |
           mkdir -p .debpkg/usr/bin
@@ -40,16 +39,3 @@ jobs:
           version: ${{ github.ref }}
           arch: 'x86_64'
           desc: '${{ env.DESC }}'
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: artifact-deb
-          path: |
-            ./*.deb
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: artifact-rpm
-          path: |
-            ./*.rpm
-            !./*-debuginfo-*.rpm
