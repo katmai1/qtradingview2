@@ -17,11 +17,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>QTradingview</string>
+   <string>QTradingview2</string>
   </property>
   <property name="windowIcon">
    <iconset resource="recursos.qrc">
-    <normaloff>:/icons/icons/logo.svg</normaloff>:/icons/icons/logo.svg</iconset>
+    <normaloff>:/icons/logo</normaloff>:/icons/logo</iconset>
   </property>
   <property name="unifiedTitleAndToolBarOnMac">
    <bool>false</bool>
@@ -75,7 +75,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>120</width>
+     <width>274</width>
      <height>193</height>
     </size>
    </property>
