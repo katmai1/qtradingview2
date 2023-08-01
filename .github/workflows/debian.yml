@@ -13,7 +13,7 @@ jobs:
 
       - name: create sample script
         run: |
-          cp builds/Linux_x64/release/QTradingview2 > .debpkg/usr/bin/qtradingview2
+          cp builds/Linux_x64/release/QTradingview2 .debpkg/usr/bin/qtradingview2
          
           # create DEBIAN directory if you want to add other pre/post scripts
           mkdir -p .debpkg/DEBIAN
