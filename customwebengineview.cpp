@@ -7,7 +7,7 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
 {
     // prepara carpeta config
     QString home_path = getenv("HOME");
-    QString path_completo = home_path + "/.qtradingview2";
+    path_completo = home_path + "/.qtradingview2";
     QDir directorio(path_completo);
     if (!directorio.exists()) { directorio.mkpath(path_completo); }
 
@@ -25,4 +25,11 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
     this->load(QUrl("https://es.tradingview.com/chart/"));
     this->showMaximized();
     this->show();
+}
+
+
+void CustomWebEngineView::loadChart(QString symbol) {
+    QStringList market = symbol.split("/");
+    QString url = "https://es.tradingview.com/chart/?symbol=BINANCE:" + market[0] + market[1];
+    this->load(QUrl(url));
 }

@@ -9,10 +9,14 @@ class CustomWebEngineView : public QWebEngineView
 
 public:
     explicit CustomWebEngineView(QWidget *parent = nullptr);
-    // Puedes agregar aquí cualquier función adicional que desees.
+
+    QString path_completo;
+
+    void loadChart(QString symbol);
 
 private:
     // Puedes agregar aquí cualquier variable adicional que desees.
+
 };
 
 #endif // CUSTOMWEBENGINEVIEW_H

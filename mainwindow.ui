@@ -10,11 +10,20 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>QTradingview</string>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="CustomWebEngineView" name="webview" native="true">
       <property name="sizePolicy">
@@ -41,15 +50,29 @@
      <string>Ver</string>
     </property>
     <addaction name="action_Favoritos"/>
+    <addaction name="actionPantalla_completa"/>
    </widget>
+   <widget class="QMenu" name="menu_Archivo">
+    <property name="title">
+     <string>&amp;Archivo</string>
+    </property>
+    <addaction name="actionSalir"/>
+   </widget>
+   <addaction name="menu_Archivo"/>
    <addaction name="menuVer"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dock_favoritos">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="minimumSize">
     <size>
-     <width>274</width>
-     <height>136</height>
+     <width>120</width>
+     <height>193</height>
     </size>
    </property>
    <property name="features">
@@ -70,14 +93,52 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>PushButton</string>
+      <widget class="QLineEdit" name="ed_symbol">
+       <property name="placeholderText">
+        <string>ETH/BTC</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="listWidget"/>
+      <widget class="QPushButton" name="bt_add">
+       <property name="text">
+        <string>Añadir</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_delete">
+       <property name="text">
+        <string>Eliminar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="list_favorites">
+       <item>
+        <property name="text">
+         <string>BTC/USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>ETH/USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CHZ/USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>MATIC/USDT</string>
+        </property>
+       </item>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -91,6 +152,25 @@
    </property>
    <property name="text">
     <string>&amp;Favoritos</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionSalir">
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </action>
+  <action name="actionPantalla_completa">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Pantalla completa</string>
+   </property>
+   <property name="shortcut">
+    <string>F11</string>
    </property>
   </action>
  </widget>
@@ -117,6 +197,22 @@
     <hint type="destinationlabel">
      <x>28</x>
      <y>298</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSalir</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
     </hint>
    </hints>
   </connection>
