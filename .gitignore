@@ -74,3 +74,7 @@ Thumbs.db
 *.qmake.stash
 /builds/Linux_x64/release/.qtc_clangd/
 /dist/
+/builds/Linux_x64/debug/
+/builds/Linux_x64/profile/
+/builds/Linux_x64/release/moc_predefs.h
+/builds/Linux_x64/release/qmake_qmake_qm_files.qrc
