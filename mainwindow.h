@@ -33,6 +33,8 @@ private slots:
 
     void on_actionGuardar_lista_triggered();
 
+    void on_actionCargar_lista_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

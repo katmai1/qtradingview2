@@ -67,6 +67,7 @@
      <string>Favoritos</string>
     </property>
     <addaction name="actionGuardar_lista"/>
+    <addaction name="actionCargar_lista"/>
    </widget>
    <addaction name="menu_Archivo"/>
    <addaction name="menuVer"/>
@@ -128,28 +129,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="list_favorites">
-       <item>
-        <property name="text">
-         <string>BTC/USDT</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>ETH/USDT</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>CHZ/USDT</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>MATIC/USDT</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QListWidget" name="list_favorites"/>
      </item>
     </layout>
    </widget>
@@ -187,6 +167,11 @@
   <action name="actionGuardar_lista">
    <property name="text">
     <string>Guardar lista</string>
+   </property>
+  </action>
+  <action name="actionCargar_lista">
+   <property name="text">
+    <string>Cargar lista</string>
    </property>
   </action>
  </widget>

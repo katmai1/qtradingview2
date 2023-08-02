@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     filepath_favorites = this->ui->webview->path_completo + "/favoritos.txt";
+    this->on_actionCargar_lista_triggered();
 }
 
 MainWindow::~MainWindow()
@@ -45,6 +46,7 @@ void MainWindow::on_bt_add_clicked()
     QList<QListWidgetItem *> lista = this->ui->list_favorites->findItems(symbol, Qt::MatchExactly);
     if (lista.count() > 0) {    this->sendStatus("Este par ya está en la lista...");    }
     else {  this->ui->list_favorites->addItem(symbol);  }
+    this->on_actionGuardar_lista_triggered();
 }
 
 
@@ -54,6 +56,8 @@ void MainWindow::on_bt_delete_clicked()
 {
     QList<QListWidgetItem *> lista = this->ui->list_favorites->selectedItems();
     for (QListWidgetItem *item : lista ) {  delete item;    }
+    this->on_actionGuardar_lista_triggered();
+
 }
 
 
@@ -83,5 +87,26 @@ void MainWindow::on_actionGuardar_lista_triggered()
     } else {
         // Manejar el error si no se pudo abrir el archivo.
     }
+    this->sendStatus("Lista de favoritos guardada");
+}
+
+
+void MainWindow::on_actionCargar_lista_triggered()
+{
+    this->ui->list_favorites->clear();
+    QFile file(filepath_favorites);
+
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            this->ui->list_favorites->addItem(line);
+            qDebug() << line;
+        }
+        file.close();
+    } else {
+        // Manejar el error si no se pudo abrir el archivo.
+    }
+    this->sendStatus("Lista de favoritos cargada");
 }
 
