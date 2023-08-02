@@ -17,6 +17,8 @@ public:
 
     ~MainWindow();
 
+    QString filepath_favorites;
+
     void sendStatus(QString message, int timeout);
 
 private slots:
@@ -28,6 +30,8 @@ private slots:
 
     void on_list_favorites_itemDoubleClicked(QListWidgetItem *item);
 
+
+    void on_actionGuardar_lista_triggered();
 
 private:
     Ui::MainWindow *ui;

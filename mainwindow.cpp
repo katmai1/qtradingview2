@@ -1,30 +1,19 @@
 #include "mainwindow.h"
+#include "qdir.h"
 #include "ui_mainwindow.h"
 #include "QFile"
+#include <QDebug>
+#include "QDir"
 
 
-// aun no funciona
-void saveListWidgetItems(QListWidget *lista_raw, QString path) {
-    QString filepath = path + "/lista.txt";
-    QFile file(filepath);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        printf("entraa");
-        QTextStream out(&file);
-        for (int i = 0; i < lista_raw->count(); ++i) {
-             QListWidgetItem* item = lista_raw->item(i);
-             out << item->text() << "\n";
-       }
-    file.close();
-    }
-    else { printf("error"); }
-}
 
 // --------------------------------------
 // Main Window
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);   
+    ui->setupUi(this);
+    filepath_favorites = this->ui->webview->path_completo + "/favoritos.txt";
 }
 
 MainWindow::~MainWindow()
@@ -74,5 +63,25 @@ void MainWindow::on_list_favorites_itemDoubleClicked(QListWidgetItem *item)
 {
     QString symbol = item->text();
     this->ui->webview->loadChart(symbol);
+}
+
+
+void MainWindow::on_actionGuardar_lista_triggered()
+{
+    // extraemos todos los items a un lista
+    int total = this->ui->list_favorites->count();
+    //creamos el fichero...
+    QFile file(filepath_favorites);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+        // guardamos cada item al archivo...
+        for (int i = 0; i < total; ++i) {
+            QListWidgetItem* item = this->ui->list_favorites->item(i);
+            out << item->text() << "\n";
+        }
+        file.close();
+    } else {
+        // Manejar el error si no se pudo abrir el archivo.
+    }
 }
 

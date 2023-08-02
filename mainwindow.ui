@@ -62,8 +62,15 @@
     </property>
     <addaction name="actionSalir"/>
    </widget>
+   <widget class="QMenu" name="menuFavoritos">
+    <property name="title">
+     <string>Favoritos</string>
+    </property>
+    <addaction name="actionGuardar_lista"/>
+   </widget>
    <addaction name="menu_Archivo"/>
    <addaction name="menuVer"/>
+   <addaction name="menuFavoritos"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dock_favoritos">
@@ -175,6 +182,11 @@
    </property>
    <property name="shortcut">
     <string>F11</string>
+   </property>
+  </action>
+  <action name="actionGuardar_lista">
+   <property name="text">
+    <string>Guardar lista</string>
    </property>
   </action>
  </widget>
