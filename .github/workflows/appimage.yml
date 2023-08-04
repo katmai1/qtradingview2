@@ -39,5 +39,5 @@ jobs:
     - name: Create AppImage
       run: |
         mkdir appdir
-        cp ./ appdir/  # Ajusta esta línea según la ubicación del archivo de salida después de compilar
+        cp QTradingview2 appdir/  # Ajusta esta línea según la ubicación del archivo de salida después de compilar
         ../linuxdeployqt appdir -appimage
