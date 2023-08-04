@@ -41,5 +41,5 @@ jobs:
         mkdir -p appdir/usr/bin
         cp QTradingview2 appdir/usr/bin/  # Ajusta esta línea según la ubicación del archivo de salida después de compilar
         cp qtradingview2.desktop appdir/
-        cp icons/logo.png appdir/qtradingview2.png
+        cp icons/qtradingview2.png appdir/
         ./linuxdeployqt appdir/usr/bin/QTradingview2 -appimage -no-plugins -verbose=2
