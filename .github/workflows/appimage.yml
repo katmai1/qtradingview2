@@ -49,8 +49,11 @@ jobs:
         mkdir artifacts
         mv QTradingview2*.AppImage artifacts/QTradingview2.AppImage
     
-    - name: Upload AppImage to Releases
-      uses: softprops/action-gh-release@v1
+    uses: svenstaro/upload-release-action@v2
       with:
-        files: artifacts/QTradingview2.AppImage
-        tag_name: ${{ env.GITHUB_REF_NAME }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: artifacts/QTradingview2.AppImage
+        asset_name: QTradingview2
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: "This is my release text"
