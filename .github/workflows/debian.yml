@@ -46,4 +46,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: debian-package
-        path: QTradingview2.deb/
+        path: QTradingview2.deb
