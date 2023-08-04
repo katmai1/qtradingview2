@@ -32,7 +32,7 @@ jobs:
       run: |
         mkdir -p qtradingview2/usr/bin
         cp -r deploy/* qtradingview2/
-        echo "Version: ${{github.ref_name}}" >> qtradingview2/DEBIAN/control
+        sed -i 's/Version: 1.0.0/Version: ${{github.ref_name}}/' qtradingview2/DEBIAN/control
         cp QTradingview2 qtradingview2/usr/bin/
 
     - name: Package for Debian
