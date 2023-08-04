@@ -16,9 +16,10 @@ jobs:
     - name: Install Qt 6.2.1
       uses: jurplel/install-qt-action@v3
       with:
-        version: '6.2.*'
-        archives: qtwebengine qtwebchannel qtpositioning
+        version: '6.3.*'
+        modules: qtwebengine qtwebchannel qtpositioning
         tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+        archives: qtbase
         
     - name: Install dependencies
       run: |
