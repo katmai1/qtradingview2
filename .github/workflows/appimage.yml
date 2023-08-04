@@ -31,7 +31,7 @@ jobs:
 
     - name: Compile the application
       working-directory: $BUILD_DIR
-      run: qmake -makefile ../ && make
+      run: qmake -makefile && make
 
     - name: Install AppImage tools
       run: sudo apt-get install -y desktop-file-utils file
