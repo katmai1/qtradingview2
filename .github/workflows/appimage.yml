@@ -48,4 +48,4 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: QTradingview2*.AppImage
-        tag_name: v0.5.3  
+        tag_name: v0.5.8  
