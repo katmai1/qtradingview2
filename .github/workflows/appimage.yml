@@ -27,10 +27,10 @@ jobs:
         sudo apt-get install -y build-essential libgl1-mesa-dev libxkbcommon-x11-0 libxi-dev libxcursor-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxtst-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libasound2-dev libdbus-1-dev
 
     - name: Create build directory
-      run: mkdir ${{BUILD_DIR}}
+      run: mkdir build
 
     - name: Compile the application
-      working-directory: ${{BUILD_DIR}}
+      working-directory: build
       run: qmake -makefile && make
 
     - name: Install AppImage tools
@@ -42,7 +42,7 @@ jobs:
         chmod +x linuxdeployqt
 
     - name: Create AppImage
-      working-directory: ${{BUILD_DIR}}
+      working-directory: build
       run: |
         mkdir appdir
         cp build appdir/  # Ajusta esta línea según la ubicación del archivo de salida después de compilar
