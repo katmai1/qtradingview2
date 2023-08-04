@@ -1,6 +1,7 @@
 Package: QTradingview
 Architecture: amd64 
 Maintainer: katmai1
+Version: 1.0.0
 Depends:
 Description: Descripción de tu aplicación
 
