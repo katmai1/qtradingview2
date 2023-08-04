@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=QTradingview2
-Exec=/usr/bin/QTradingview2  # Ajusta la ruta del ejecutable según tu aplicación
-Icon=qtradingview2.png  # Ajusta el nombre del icono según el que estás utilizando
+Exec=/usr/bin/QTradingview2
+Icon=qtradingview2.png
 Type=Application
-Categories=Utils;  # Ajusta las categorías según las adecuadas para tu aplicación
+Categories=Utils;
