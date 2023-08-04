@@ -1,0 +1,29 @@
+name: Build and Package for Debian
+on:
+  push:
+    branches:
+      - main  # Cambia esto por el nombre de la rama donde quieres que se active el flujo de trabajo
+
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y build-essential qt6-default qttools5-dev-tools
+
+    - name: Build the application
+      run: qmake && make
+
+    - name: Package for Debian
+      run: fakeroot dpkg-deb --build path/to/your/application
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: debian-package
+        path: path/to/your/application.deb
