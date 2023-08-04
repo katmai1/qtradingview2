@@ -45,7 +45,9 @@ jobs:
         ./linuxdeployqt appdir/usr/bin/QTradingview2 -appimage -no-plugins -verbose=1
 
     - name: Move the AppImage to an artifacts directory
-      run: mv QTradingview2*.AppImage artifacts/QTradingview2.AppImage
+      run: |
+        mkdir artifacts
+        mv QTradingview2*.AppImage artifacts/QTradingview2.AppImage
     
     - name: Upload AppImage to Releases
       uses: softprops/action-gh-release@v1
