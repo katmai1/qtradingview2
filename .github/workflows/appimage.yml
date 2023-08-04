@@ -47,5 +47,5 @@ jobs:
     - name: Upload AppImage to Releases
       uses: softprops/action-gh-release@v1
       with:
-        files: QTradingview2.AppImage
+        files: QTradingview2*.AppImage
         tag_name: ${{ github.ref }}  
