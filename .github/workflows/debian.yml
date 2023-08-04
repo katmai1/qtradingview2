@@ -23,20 +23,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libgl1-mesa-dev libxkbcommon-x11-0 libxi-dev libxcursor-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxtst-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libasound2-dev libdbus-1-dev
+        sudo apt-get install -y build-essential devscripts libgl1-mesa-dev libxkbcommon-x11-0 libxi-dev libxcursor-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxtst-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libasound2-dev libdbus-1-dev
 
     - name: Build the application
       run: qmake && make
 
-    - name: Create DEBIAN folder
-      run: mkdir -p qtradingview2/DEBIAN
-
-    - name: Copy control file
-      run: cp control qtradingview2/DEBIAN/
-
-    - name: Copy application executable
+    - name: Prepare DEBIAN folder
       run: |
-        mkdir -p qtradingview2/usr/bin
+        mkdir -p qtradingview2
+        cp deploy/* qtradingview2/
         cp QTradingview2 qtradingview2/usr/bin/
 
     - name: Package for Debian
