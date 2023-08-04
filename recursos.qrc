@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
         <file alias="logo">icons/logo.png</file>
+        <file alias="star">icons/star.svg</file>
     </qresource>
 </RCC>

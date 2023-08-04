@@ -21,7 +21,9 @@ FORMS += \
     mainwindow.ui
 
 TRANSLATIONS += \
-    QTradingview2_es_ES.ts
+    QTradingview2_es_ES.ts \
+    QTradingview2_en_EN.ts
+
 CONFIG += lrelease
 CONFIG += embed_translations
 
@@ -32,3 +34,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     recursos.qrc
+
+DISTFILES += \
+    QTradingview2_en_EN.ts

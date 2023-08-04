@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -54,6 +57,8 @@
      <string>Ver</string>
     </property>
     <addaction name="action_Favoritos"/>
+    <addaction name="actionMarkets"/>
+    <addaction name="separator"/>
     <addaction name="actionPantalla_completa"/>
    </widget>
    <widget class="QMenu" name="menu_Archivo">
@@ -64,19 +69,75 @@
    </widget>
    <widget class="QMenu" name="menuFavoritos">
     <property name="title">
-     <string>Favoritos</string>
+     <string>Test</string>
     </property>
     <addaction name="actionGuardar_lista"/>
     <addaction name="actionCargar_lista"/>
+    <addaction name="separator"/>
+    <addaction name="actionjavascript"/>
    </widget>
    <addaction name="menu_Archivo"/>
    <addaction name="menuVer"/>
    <addaction name="menuFavoritos"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="dock_markets">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::RightDockWidgetArea|Qt::TopDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Mercados</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_5">
+    <property name="maximumSize">
+     <size>
+      <width>274</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLineEdit" name="ed_filtro">
+       <property name="placeholderText">
+        <string>Filtrar...</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bt_add_tofav">
+       <property name="text">
+        <string>Añadir a favoritos</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="list_markets">
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <widget class="QDockWidget" name="dock_favoritos">
    <property name="sizePolicy">
-    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
@@ -87,8 +148,18 @@
      <height>193</height>
     </size>
    </property>
+   <property name="windowIcon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/icons/star</normaloff>:/icons/star</iconset>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
     <string>Favoritos</string>
@@ -129,7 +200,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="list_favorites"/>
+      <widget class="QListWidget" name="list_favorites">
+       <property name="contextMenuPolicy">
+        <enum>Qt::ActionsContextMenu</enum>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -174,6 +252,22 @@
     <string>Cargar lista</string>
    </property>
   </action>
+  <action name="actionjavascript">
+   <property name="text">
+    <string>javascript</string>
+   </property>
+  </action>
+  <action name="actionMarkets">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Markets</string>
+   </property>
+   <property name="shortcut">
+    <string>F4</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -187,6 +281,22 @@
   <include location="recursos.qrc"/>
  </resources>
  <connections>
+  <connection>
+   <sender>actionSalir</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
   <connection>
    <sender>action_Favoritos</sender>
    <signal>toggled(bool)</signal>
@@ -204,18 +314,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionSalir</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
+   <sender>actionMarkets</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dock_markets</receiver>
+   <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
+     <x>136</x>
+     <y>197</y>
     </hint>
    </hints>
   </connection>

@@ -1,6 +1,7 @@
 #ifndef CUSTOMWEBENGINEVIEW_H
 #define CUSTOMWEBENGINEVIEW_H
 
+#include "qdir.h"
 #include <QWebEngineView>
 
 class CustomWebEngineView : public QWebEngineView
@@ -11,10 +12,15 @@ public:
     explicit CustomWebEngineView(QWidget *parent = nullptr);
 
     QString path_completo;
+    QDir directorio;
 
     void loadChart(QString symbol);
 
+public slots:
+    void testJavascript();
+
 private:
+    void init_folder();
     // Puedes agregar aquí cualquier variable adicional que desees.
 
 };

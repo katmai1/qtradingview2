@@ -18,6 +18,8 @@ public:
     ~MainWindow();
 
     QString filepath_favorites;
+    QString filepath_binance;
+
 
     void sendStatus(QString message, int timeout);
 
@@ -28,12 +30,19 @@ private slots:
 
     void on_bt_delete_clicked();
 
-    void on_list_favorites_itemDoubleClicked(QListWidgetItem *item);
+    void on_list_favorites_itemDoubleClicked();
 
+    void cargarFicheroLista(QListWidget *lista, QString path);
 
     void on_actionGuardar_lista_triggered();
 
-    void on_actionCargar_lista_triggered();
+    void on_actionjavascript_triggered();
+
+    void ShowContextMenuFavorites(const QPoint& pos);
+
+    void on_bt_add_tofav_clicked();
+
+    void on_ed_filtro_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
