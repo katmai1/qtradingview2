@@ -29,21 +29,21 @@ jobs:
       run: qmake && make
 
     - name: Create DEBIAN folder
-      run: mkdir -p app/DEBIAN
+      run: mkdir -p qtradingview2/DEBIAN
 
     - name: Copy control file
-      run: cp control app/DEBIAN/
+      run: cp control qtradingview2/DEBIAN/
 
     - name: Copy application executable
       run: |
         mkdir -p app/usr/bin
-        cp QTradingview2 app/usr/bin/
+        cp QTradingview2 qtradingview2/usr/bin/
 
     - name: Package for Debian
-      run: fakeroot dpkg-deb --build app
+      run: fakeroot dpkg-deb --build qtradingview2
       
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: debian-package
-        path: QTradingview2.deb
+        path: qtradingview2.deb
