@@ -35,7 +35,9 @@ jobs:
       run: cp control app/DEBIAN/
 
     - name: Copy application executable
-      run: cp QTradingview2 app/usr/bin/
+      run: |
+        mkdir -p app/usr/bin
+        cp QTradingview2 app/usr/bin/
 
     - name: Package for Debian
       run: fakeroot dpkg-deb --build app
