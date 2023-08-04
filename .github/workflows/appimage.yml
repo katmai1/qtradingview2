@@ -16,11 +16,11 @@ jobs:
     - name: Checkout the repository
       uses: actions/checkout@v2
 
-    - name: Set up Qt
-      uses: jurplel/install-qt-action@v3
+    - name: Install Qt 6.3.1
+      uses: jurplel/install-qt-action@v1
       with:
-        qt-version: '6.3.1'  # Ajusta la versión de Qt según tu proyecto
-
+        version: '6.3.1'
+        
     - name: Install dependencies
       run: |
         sudo apt-get update
