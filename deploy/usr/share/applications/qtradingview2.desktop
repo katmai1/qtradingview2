@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=QTradingview2
 Exec=/usr/bin/QTradingview2
-Icon=qtradingview2
+Icon=/usr/share/icons/hicolor/48x48/qtradingview2
 Type=Application
-Categories=Network;
+Categories=Utility;
