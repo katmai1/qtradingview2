@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      BUILD_DIR: 'build'  # Especifica la carpeta de compilación
+
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v2
@@ -16,15 +19,19 @@ jobs:
     - name: Set up Qt
       uses: jichu4n/actions/setup-qt@v2
       with:
-        qt-version: '5.15'  # Ajusta la versión de Qt según tu proyecto
+        qt-version: '6.3'  # Ajusta la versión de Qt según tu proyecto
 
     - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential libgl1-mesa-dev libxkbcommon-x11-0 libxkbcommon-x11-0-dbg libxi-dev libxcursor-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxtst-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libasound2-dev libdbus-1-dev
 
+    - name: Create build directory
+      run: mkdir $BUILD_DIR
+
     - name: Compile the application
-      run: qmake -makefile && make
+      working-directory: $BUILD_DIR
+      run: qmake -makefile ../ && make
 
     - name: Install AppImage tools
       run: sudo apt-get install -y desktop-file-utils file
@@ -35,7 +42,8 @@ jobs:
         chmod +x linuxdeployqt
 
     - name: Create AppImage
+      working-directory: $BUILD_DIR
       run: |
         mkdir appdir
-        cp path/to/your/compiled/application appdir/  # Ajusta esta línea según el nombre de tu archivo de salida
-        ./linuxdeployqt appdir/path/to/your/compiled/application -appimage
+        cp build appdir/  # Ajusta esta línea según la ubicación del archivo de salida después de compilar
+        ../linuxdeployqt appdir -appimage
