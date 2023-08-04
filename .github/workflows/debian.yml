@@ -36,7 +36,7 @@ jobs:
 
     - name: Copy application executable
       run: |
-        mkdir -p app/usr/bin
+        mkdir -p qtradingview2/usr/bin
         cp QTradingview2 qtradingview2/usr/bin/
 
     - name: Package for Debian
