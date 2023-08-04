@@ -30,7 +30,7 @@ jobs:
 
     - name: Prepare DEBIAN folder
       run: |
-        mkdir -p qtradingview2
+        mkdir -p qtradingview2/usr/bin
         cp -r deploy/* qtradingview2/
         cp QTradingview2 qtradingview2/usr/bin/
 
