@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Qt 6.2.1
       uses: jurplel/install-qt-action@v3
@@ -43,7 +43,7 @@ jobs:
       run: fakeroot dpkg-deb --build qtradingview2
       
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: debian-package
         path: qtradingview2.deb
