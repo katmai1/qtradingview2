@@ -31,7 +31,7 @@ jobs:
     - name: Prepare DEBIAN folder
       run: |
         mkdir -p qtradingview2
-        cp deploy/* qtradingview2/
+        cp -r deploy/* qtradingview2/
         cp QTradingview2 qtradingview2/usr/bin/
 
     - name: Package for Debian
