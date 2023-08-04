@@ -3,4 +3,4 @@ Name=QTradingview2
 Exec=/usr/bin/QTradingview2
 Icon=qtradingview2.png
 Type=Application
-Categories=Utils;
+Categories=Network;
