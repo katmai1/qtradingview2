@@ -17,9 +17,9 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.3.*'
-        modules: qtwebengine qtwebchannel qtpositioning
+        modules: 'qtwebengine qtwebchannel qtpositioning'
         tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
-        archives: qtbase
+        archives: 'qtbase icu'
         
     - name: Install dependencies
       run: |
