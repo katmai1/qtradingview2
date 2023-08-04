@@ -9,9 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-20.04
 
-    env:
-      BUILD_DIR: 'build'  # Especifica la carpeta de compilación
-
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v2
@@ -26,12 +23,8 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libgl1-mesa-dev libxkbcommon-x11-0 libxi-dev libxcursor-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxtst-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libasound2-dev libdbus-1-dev
 
-    - name: Create build directory
-      run: mkdir build
-
     - name: Compile the application
-      working-directory: build
-      run: qmake QTradingview2.pro && make
+      run: qmake && make
 
     - name: Install AppImage tools
       run: sudo apt-get install -y desktop-file-utils file
@@ -42,8 +35,7 @@ jobs:
         chmod +x linuxdeployqt
 
     - name: Create AppImage
-      working-directory: build
       run: |
         mkdir appdir
-        cp build appdir/  # Ajusta esta línea según la ubicación del archivo de salida después de compilar
+        cp ./ appdir/  # Ajusta esta línea según la ubicación del archivo de salida después de compilar
         ../linuxdeployqt appdir -appimage
