@@ -47,12 +47,13 @@ jobs:
     - name: Move the AppImage to an artifacts directory
       run: |
         mkdir artifacts
-        mv QTradingview2*.AppImage artifacts/QTradingview2.AppImage
+        mv QTradingview2*.AppImage artifacts/
+    
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: artifacts/QTradingview2.AppImage
+        file: artifacts/QTradingview2*.AppImage
         asset_name: QTradingview2
         tag: ${{ github.ref }}
         overwrite: true
