@@ -2,7 +2,7 @@ name: Build and Package for Debian
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - '*'
 
 jobs:
   build:
