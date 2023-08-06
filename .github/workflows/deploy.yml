@@ -30,3 +30,8 @@ jobs:
           arch: 'amd64'
           depends: 'libc6 (>= 2.2.1)'
           desc: 'this is sample package.'
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: qtradingview2.deb
