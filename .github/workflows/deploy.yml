@@ -34,4 +34,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: qtradingview2.deb
+          path: qtradingview2_${{ github.ref_name }}_amd64.deb
