@@ -36,9 +36,7 @@ jobs:
           name: artifacts
           path: qtradingview2_${{ github.ref_name }}_amd64.deb
      
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - uses: zattoo/publish@v1
         with:
-          files: qtradingview2_${{ github.ref_name }}_amd64.deb
-    env:
-      GITHUB_TOKEN: ${{ github.token }}
+          github_token: ${{github.token}}
+          sources: '*.deb'
