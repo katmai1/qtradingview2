@@ -33,5 +33,12 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
+          name: artifacts
           path: qtradingview2_${{ github.ref_name }}_amd64.deb
+     
+      - name: Release
+        uses: softprops/action-gh-release@91409e712cf565ce9eff10c87a8d1b11b81757ae
+        with:
+          files: artifacts/*
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
