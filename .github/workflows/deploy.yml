@@ -39,6 +39,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@91409e712cf565ce9eff10c87a8d1b11b81757ae
         with:
-          files: artifacts/*
+          files: qtradingview2_${{ github.ref_name }}_amd64.deb
     env:
       GITHUB_TOKEN: ${{ github.token }}
