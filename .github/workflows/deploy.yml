@@ -19,12 +19,12 @@ jobs:
 
           # create DEBIAN directory if you want to add other pre/post scripts
           mkdir -p debpkg/DEBIAN
-          echo -e "echo postinst" > .debpkg/DEBIAN/postinst
-          chmod +x .debpkg/DEBIAN/postinst
+          echo -e "echo postinst" > debpkg/DEBIAN/postinst
+          chmod +x debpkg/DEBIAN/postinst
       - uses: jiro4989/build-deb-action@v3
         with:
           package: qtradingview2
-          package_root: .debpkg
+          package_root: debpkg
           maintainer: katmai1
           version: ${{ github.ref_name }}
           arch: 'amd64'
