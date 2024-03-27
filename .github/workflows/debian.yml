@@ -22,6 +22,7 @@ jobs:
     - name: create package
       run: |
           # echo "Version: 0.8.6" >> ${{ env.DEB_DIR }}/DEBIAN/control
+          cp ${{ env.BIN_FILE }} ${{ env.DEB_DIR }}/usr/bin
           dpkg-deb --build ${{ env.DEB_DIR }} qtradingview2.deb
 
     - name: Release
