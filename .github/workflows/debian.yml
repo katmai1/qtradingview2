@@ -23,6 +23,7 @@ jobs:
       run: |
         mkdir -p .debpkg/usr/bin
         cp ${{ env.BIN_FILE }} .debpkg/usr/bin/
+        cp -r ${{ env.DEB_DIR}}/usr/share .debpkg/usr/
           # mkdir .debpkg
           # cp -r ${{ env.DEB_DIR}}/* .debpkg/
           # # echo "Version: 0.8.6" >> ${{ env.DEB_DIR }}/DEBIAN/control
