@@ -38,3 +38,8 @@ jobs:
       run:  |
             qmake -r ${{ env.SOURCE_DIR }}/QTradingview2.pro
             make
+    
+    - uses: actions/upload-artifact@v4
+      with:
+          name: my-artifact
+          path: ${{ env.SOURCE_DIR }}/buildd/QTradingview2
