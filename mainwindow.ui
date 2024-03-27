@@ -69,7 +69,7 @@
    </widget>
    <widget class="QMenu" name="menuFavoritos">
     <property name="title">
-     <string>Test</string>
+     <string>&amp;Debug</string>
     </property>
     <addaction name="actionGuardar_lista"/>
     <addaction name="actionCargar_lista"/>
