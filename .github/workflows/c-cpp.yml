@@ -3,7 +3,7 @@ name: C/C++ CI
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*'
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
