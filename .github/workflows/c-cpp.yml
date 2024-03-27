@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build & Publish
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
+  DEB_DIR:		${{ github.workspace }}/deploy
   QT_VERSION:   6.5.2
-  ARTIFACT:     QTradingview2.AppImage
   
 jobs:
   build:
@@ -38,8 +38,24 @@ jobs:
       run:  |
             qmake -r ${{ env.SOURCE_DIR }}/QTradingview2.pro
             make
-    
-    - uses: actions/upload-artifact@v4
+
+    - name: create package
+      run: |
+        mkdir -p .debpkg/usr/bin
+        cp ${{ env.SOURCE_DIR }}/buildd/QTradingview2 .debpkg/usr/bin/
+        cp -r ${{ env.DEB_DIR}}/usr/share .debpkg/usr/
+
+    - uses: jiro4989/build-deb-action@v3
       with:
-          name: my-artifact
-          path: ${{ env.SOURCE_DIR }}/buildd/QTradingview2
+        package: qtradingview2
+        package_root: .debpkg
+        maintainer: katmai1
+        version: ${{ github.ref }}
+        arch: 'amd64'
+        depends: 'libc6 (>= 2.2.1)'
+        desc: ' QTradingview in C++ '
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: qtradingview*.deb
