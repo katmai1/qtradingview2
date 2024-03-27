@@ -2,7 +2,8 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "master" ]
+    tags:
+      - 'v*.*.*'
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
@@ -38,17 +39,22 @@ jobs:
             qmake -r ${{ env.SOURCE_DIR }}/QTradingview2.pro
             make
     
-    - name: AppImage
-      working-directory: ${{ env.SOURCE_DIR }}/buildd
-      run: |
-           wget -O deploy.AppImage https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-           chmod +x deploy.AppImage
-           export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${{ github.workspace }}/Qt/6.5.2/gcc_64/lib/
-           ./deploy.AppImage QTradingview2.desktop -appimage -no-translations -qmldir=${{ env.SOURCE_DIR }} -extra-plugins=renderers
-           mv *.AppImage ${{ env.ARTIFACT }} 
-    
-    - name: Linux artefact
-      uses: actions/upload-artifact@v1
-      with:
-           name: ${{ env.ARTIFACT }}
-           path: ${{ env.SOURCE_DIR }}/build/${{ env.ARTIFACT }}
+    - name: create debianpackage
+        run: |
+          mkdir -p .debpkg/usr/bin
+          mkdir -p .debpkg/usr/lib/qtradingview2
+          cp ${{ env.SOURCE_DIR }}/buildd/QTradingview2 > .debpkg/usr/bin/qtradingview2
+          chmod +x .debpkg/usr/bin/qtradingview2
+
+          mkdir -p .debpkg/DEBIAN
+          
+      - uses: jiro4989/build-deb-action@v3
+        with:
+          package: qtradingview2
+          package_root: .debpkg
+          maintainer: katmai1
+          version: ${{ github.ref }}
+          arch: 'amd64'
+          depends: 'libc6 (>= 2.2.1), git'
+          desc: 'this is sample package.'
+          
