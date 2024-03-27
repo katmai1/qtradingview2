@@ -3,7 +3,7 @@ name: Build & Publish
 on:
   push:
     tags:
-      - 'build*'
+      - 'v*'
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
