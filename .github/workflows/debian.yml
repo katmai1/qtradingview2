@@ -20,11 +20,11 @@ jobs:
       uses: actions/checkout@v3
 
     - name: create package
-        run: |
+      run: |
           echo "Version: ${{ github.ref }}" >> ${{ env.DEB_DIR }}/DEBIAN/control
           dpkg-deb --build ${{ env.DEB_DIR }} qtradingview2.deb
 
-      - name: Release the Package
-        uses: softprops/action-gh-release@v1
-        with:
-          files: qtradingview2.deb
+    - name: Release the Package
+      uses: softprops/action-gh-release@v1
+		  with:
+			  files: qtradingview2.deb
