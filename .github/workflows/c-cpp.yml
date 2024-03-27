@@ -28,7 +28,7 @@ jobs:
           arch:         gcc_64
           dir:          ${{ runner.temp }}
           modules:      qtwebengine qtwebchannel qtpositioning qtquick3d
-          setup-python: false
+          setup-python: true
     
     - name: Create build directory
       run:  mkdir ${{ env.SOURCE_DIR }}/buildd
