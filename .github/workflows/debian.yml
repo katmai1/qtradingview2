@@ -24,7 +24,7 @@ jobs:
           mkdir .debpkg
           cp -r ${{ env.DEB_DIR}}/* .debpkg/
           # echo "Version: 0.8.6" >> ${{ env.DEB_DIR }}/DEBIAN/control
-          cp ${{ env.BIN_FILE }} .debpkg/usr/bin/qtradingview2
+          cp ${{ env.BIN_FILE }} .debpkg/usr/bin/
           dpkg-deb --build .debpkg qtradingview2.deb
 
     - name: Release
