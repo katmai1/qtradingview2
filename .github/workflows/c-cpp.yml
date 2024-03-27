@@ -4,22 +4,35 @@ on:
   push:
     branches: [ "master" ]
 
+env:
+  SOURCE_DIR:   ${{ github.workspace }}
+  QT_VERSION:   6.5.2
+  
 jobs:
   build:
 
     runs-on: ubuntu-latest
     
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        version: '6.5.2'
-    - uses: actions/checkout@v3
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+          version:      ${{ env.QT_VERSION }}
+          host:         linux
+          target:       desktop
+          arch:         gcc_64
+          dir:          ${{ runner.temp }}
+          modules:      webenginewidgets
+          setup-python: false
+    
+    - name: Create build directory
+      run:  mkdir ${{ env.SOURCE_DIR }}/buildd
+        
+    - name: Build
+      working-directory: ${{ env.SOURCE_DIR }}/buildd
+      run:  |
+            qmake -r ${{ env.SOURCE_DIR }}/QTradingview2.pro
+            make
