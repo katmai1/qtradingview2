@@ -89,13 +89,13 @@
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
    <property name="allowedAreas">
-    <set>Qt::RightDockWidgetArea|Qt::TopDockWidgetArea</set>
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
     <string>Mercados</string>
    </property>
    <attribute name="dockWidgetArea">
-    <number>2</number>
+    <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_5">
     <property name="maximumSize">
