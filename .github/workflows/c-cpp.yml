@@ -25,7 +25,7 @@ jobs:
           target:       desktop
           arch:         gcc_64
           dir:          ${{ runner.temp }}
-          modules:      qtwebengine qtwebchannel
+          modules:      qtwebengine qtwebchannel qtpositioning
           setup-python: false
     
     - name: Create build directory
