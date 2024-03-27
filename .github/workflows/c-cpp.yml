@@ -28,9 +28,10 @@ jobs:
           arch:         gcc_64
           dir:          ${{ runner.temp }}
           modules:      qtwebengine qtwebchannel qtpositioning qtquick3d
+          install-deps: true
           archives: qtbase qtwebengine
           setup-python: false
-          tools: tools_ifw tools_qtcreator qt.tools.qtcreator
+          tools: tools_ifw tools_qtcreator
           set-env: true
     
     - name: Create build directory
