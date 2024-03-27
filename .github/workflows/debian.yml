@@ -24,7 +24,7 @@ jobs:
           echo "Version: ${{ github.ref }}" >> ${{ env.DEB_DIR }}/DEBIAN/control
           dpkg-deb --build ${{ env.DEB_DIR }} qtradingview2.deb
 
-    - name: Release the Package
-      uses: softprops/action-gh-release@v1
-		  with:
-			  files: qtradingview2.deb
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: qtradingview2.deb
