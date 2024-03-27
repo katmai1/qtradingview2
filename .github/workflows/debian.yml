@@ -1,0 +1,30 @@
+name: Debian Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  SOURCE_DIR:   ${{ github.workspace }}
+  BIN_FILE:		${{ github.workspace }}/builds/Linux_x64/release/QTradingview2
+  DEB_DIR:		${{ github.workspace }}/deploy
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: create package
+        run: |
+          echo "Version: ${{ github.ref }}" >> ${{ env.DEB_DIR }}/DEBIAN/control
+          dpkg-deb --build ${{ env.DEB_DIR }} qtradingview2.deb
+
+      - name: Release the Package
+        uses: softprops/action-gh-release@v1
+        with:
+          files: qtradingview2.deb

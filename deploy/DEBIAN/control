@@ -1,7 +1,6 @@
-Package: QTradingview
+Package: QTradingview2
 Architecture: amd64 
 Maintainer: katmai1
-Version: 1.0.0
 Depends: debhelper
 Description: Descripción de tu aplicación
 
