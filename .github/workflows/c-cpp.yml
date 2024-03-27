@@ -40,13 +40,12 @@ jobs:
             make
     
     - name: create debianpackage
-        run: |
-          mkdir -p .debpkg/usr/bin
-          mkdir -p .debpkg/usr/lib/qtradingview2
-          cp ${{ env.SOURCE_DIR }}/buildd/QTradingview2 > .debpkg/usr/bin/qtradingview2
-          chmod +x .debpkg/usr/bin/qtradingview2
-
-          mkdir -p .debpkg/DEBIAN
+      run: |
+           mkdir -p .debpkg/usr/bin
+           mkdir -p .debpkg/usr/lib/qtradingview2
+           cp ${{ env.SOURCE_DIR }}/buildd/QTradingview2 > .debpkg/usr/bin/qtradingview2
+           chmod +x .debpkg/usr/bin/qtradingview2
+           mkdir -p .debpkg/DEBIAN
           
       - uses: jiro4989/build-deb-action@v3
         with:
