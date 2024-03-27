@@ -40,5 +40,5 @@ jobs:
 
     - name: Release
       uses: softprops/action-gh-release@v2
-      # with:
-      #   files: .deb
+      with:
+        files: qtradingview*.deb
