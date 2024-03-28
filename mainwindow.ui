@@ -95,7 +95,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>100</width>
+     <width>130</width>
      <height>164</height>
     </size>
    </property>
@@ -176,7 +176,7 @@
     <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>Favoritos</string>
+    <string>Favoritos (F4)</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
