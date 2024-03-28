@@ -33,9 +33,9 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
 
 void CustomWebEngineView::init_folder() {
     this->directorio.mkpath(path_completo);
-    QString binance =  R"delim(curl -s 'https://api.binance.com/api/v3/exchangeInfo' | jq -r '.symbols[] | "\(.baseAsset)/\(.quoteAsset)"' > )delim";
-    binance += path_completo + "/binance.txt";
-    std::system(binance.toUtf8().constData());
+//    QString binance =  R"delim(curl -s 'https://api.binance.com/api/v3/exchangeInfo' | jq -r '.symbols[] | "\(.baseAsset)/\(.quoteAsset)"' > )delim";
+//    binance += path_completo + "/binance.txt";
+//    std::system(binance.toUtf8().constData());
 }
 
 
@@ -53,7 +53,8 @@ void CustomWebEngineView::testJavascript() {
 }
 
 void CustomWebEngineView::loadChart(QString symbol) {
-    QStringList market = symbol.split("/");
-    QString url = "https://es.tradingview.com/chart/?symbol=BINANCE:" + market[0] + market[1];
+    QStringList s = symbol.split(":");
+    QStringList market = s[0].split("/");
+    QString url = "https://es.tradingview.com/chart/?symbol=" + s[1] + ":" + market[0] + market[1];
     this->load(QUrl(url));
 }

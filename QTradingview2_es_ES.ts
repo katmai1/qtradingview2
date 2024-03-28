@@ -6,107 +6,144 @@
     <message>
         <location filename="mainwindow.ui" line="23"/>
         <source>QTradingview2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="57"/>
-        <source>Ver</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="66"/>
+        <location filename="mainwindow.ui" line="67"/>
         <source>&amp;Archivo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="72"/>
+        <location filename="mainwindow.ui" line="235"/>
+        <source>About</source>
+        <translation>Acerca de...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="243"/>
+        <source>Debug</source>
+        <translation>Depurar</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="246"/>
+        <source>F12</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="251"/>
         <source>Test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="95"/>
-        <source>Mercados</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="111"/>
+        <location filename="mainwindow.ui" line="137"/>
         <source>Filtrar...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="121"/>
-        <source>Añadir a favoritos</source>
-        <translation type="unfinished"></translation>
+        <location filename="mainwindow.ui" line="200"/>
+        <source>Salir</source>
+        <translation>Salir</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="165"/>
-        <source>Favoritos</source>
-        <translation type="unfinished"></translation>
+        <location filename="mainwindow.ui" line="211"/>
+        <source>F11</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="57"/>
+        <source>&amp;View</source>
+        <translation>Ver</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="74"/>
+        <source>&amp;Debug</source>
+        <translation>Depurar</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="82"/>
+        <source>Help</source>
+        <translation>Ayuda</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="115"/>
+        <source>Markets (F4)</source>
+        <translation>Mercados</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="160"/>
+        <source>Añadir...</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="181"/>
-        <source>ETH/BTC</source>
-        <translation type="unfinished"></translation>
+        <source>Debug (F12)</source>
+        <translation>Depurar (F12)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="191"/>
-        <source>Añadir</source>
-        <translation type="unfinished"></translation>
+        <location filename="mainwindow.ui" line="208"/>
+        <source>Fullscreen</source>
+        <translation>Pantalla Completa</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="198"/>
-        <source>Eliminar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="223"/>
-        <source>&amp;Favoritos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="226"/>
-        <source>F3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="231"/>
-        <source>Salir</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="239"/>
-        <source>Pantalla completa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="242"/>
-        <source>F11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="247"/>
-        <source>Guardar lista</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="252"/>
-        <source>Cargar lista</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="257"/>
+        <location filename="mainwindow.ui" line="216"/>
         <source>javascript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="265"/>
+        <location filename="mainwindow.ui" line="227"/>
         <source>Markets</source>
+        <translation>Mercados</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="230"/>
+        <source>F4</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>dialogAbout</name>
+    <message>
+        <location filename="dialogabout.ui" line="14"/>
+        <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="268"/>
-        <source>F4</source>
+        <location filename="dialogabout.ui" line="26"/>
+        <source>About</source>
+        <translation>Acerca de</translation>
+    </message>
+</context>
+<context>
+    <name>dialogAddMarket</name>
+    <message>
+        <location filename="dialogaddmarket.ui" line="14"/>
+        <source>Dialog</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogaddmarket.ui" line="20"/>
+        <source>Añadir nuevo...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="dialogaddmarket.ui" line="26"/>
+        <source>Introduce el par:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="dialogaddmarket.ui" line="39"/>
+        <source>BTC/USDT</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="dialogaddmarket.ui" line="62"/>
+        <source>Selecciona el exchange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogaddmarket.ui" line="70"/>
+        <source>Binance</source>
+        <comment>binsance</comment>
+        <translation></translation>
     </message>
 </context>
 </TS>
