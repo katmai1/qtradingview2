@@ -65,9 +65,10 @@
     <property name="title">
      <string>&amp;Archivo</string>
     </property>
+    <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
-   <widget class="QMenu" name="menuFavoritos">
+   <widget class="QMenu" name="menuDebug">
     <property name="title">
      <string>&amp;Debug</string>
     </property>
@@ -84,13 +85,19 @@
    </widget>
    <addaction name="menu_Archivo"/>
    <addaction name="menuVer"/>
-   <addaction name="menuFavoritos"/>
+   <addaction name="menuDebug"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="dock_markets">
    <property name="enabled">
     <bool>true</bool>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>164</height>
+    </size>
    </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
@@ -99,7 +106,7 @@
     <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>Mercados</string>
+    <string>Mercados (F3)</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -253,6 +260,9 @@
    <property name="text">
     <string>Guardar lista</string>
    </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actionCargar_lista">
    <property name="text">
@@ -278,6 +288,14 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="check_modoDebug">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Modo debug</string>
    </property>
   </action>
  </widget>
