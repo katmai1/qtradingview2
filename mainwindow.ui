@@ -30,7 +30,7 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="CustomWebEngineView" name="webview" native="true">
       <property name="sizePolicy">
@@ -60,6 +60,8 @@
     <addaction name="actionMarkets"/>
     <addaction name="separator"/>
     <addaction name="actionPantalla_completa"/>
+    <addaction name="separator"/>
+    <addaction name="actionDebug"/>
    </widget>
    <widget class="QMenu" name="menu_Archivo">
     <property name="title">
@@ -76,6 +78,7 @@
     <addaction name="actionCargar_lista"/>
     <addaction name="separator"/>
     <addaction name="actionjavascript"/>
+    <addaction name="actionTest"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -93,6 +96,12 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="minimumSize">
     <size>
      <width>130</width>
@@ -106,12 +115,18 @@
     <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>Mercados (F3)</string>
+    <string>Mercados (F4)</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_5">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="maximumSize">
      <size>
       <width>274</width>
@@ -151,14 +166,14 @@
   </widget>
   <widget class="QDockWidget" name="dock_favoritos">
    <property name="sizePolicy">
-    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+    <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
    <property name="minimumSize">
     <size>
-     <width>274</width>
+     <width>98</width>
      <height>193</height>
     </size>
    </property>
@@ -170,20 +185,20 @@
     <bool>false</bool>
    </property>
    <property name="features">
-    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+    <set>QDockWidget::DockWidgetMovable</set>
    </property>
    <property name="allowedAreas">
-    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>Favoritos (F4)</string>
+    <string>Favoritos (F3)</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
     <property name="sizePolicy">
-     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+     <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
@@ -219,6 +234,37 @@
         <enum>Qt::ActionsContextMenu</enum>
        </property>
        <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockDebug">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Debug (F12)</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QTextEdit" name="txtDebug">
+       <property name="readOnly">
         <bool>true</bool>
        </property>
       </widget>
@@ -290,12 +336,20 @@
     <string>About</string>
    </property>
   </action>
-  <action name="check_modoDebug">
+  <action name="actionDebug">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Modo debug</string>
+    <string>Debug</string>
+   </property>
+   <property name="shortcut">
+    <string>F12</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>Test</string>
    </property>
   </action>
  </widget>
@@ -356,6 +410,22 @@
     <hint type="destinationlabel">
      <x>136</x>
      <y>197</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDebug</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockDebug</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>478</y>
     </hint>
    </hints>
   </connection>

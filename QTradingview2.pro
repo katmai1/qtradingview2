@@ -10,14 +10,17 @@ CONFIG += c++17
 
 SOURCES += \
     customwebengineview.cpp \
+    dialogabout.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     customwebengineview.h \
+    dialogabout.h \
     mainwindow.h
 
 FORMS += \
+    dialogabout.ui \
     mainwindow.ui
 
 TRANSLATIONS += \

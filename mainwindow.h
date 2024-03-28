@@ -22,6 +22,7 @@ public:
 
 
     void sendStatus(QString message, int timeout);
+    void sendDebug(QString message);
 
 private slots:
     void on_actionPantalla_completa_triggered(bool checked);
@@ -43,6 +44,10 @@ private slots:
     void on_bt_add_tofav_clicked();
 
     void on_ed_filtro_textChanged(const QString &arg1);
+
+    void on_actionTest_triggered();
+
+    void on_actionAbout_triggered();
 
 private:
     Ui::MainWindow *ui;
