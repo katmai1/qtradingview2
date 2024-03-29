@@ -9,115 +9,117 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="67"/>
+        <location filename="mainwindow.ui" line="60"/>
+        <source>&amp;Ver</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="70"/>
         <source>&amp;Archivo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="235"/>
-        <source>About</source>
-        <translation>Acerca de...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="243"/>
-        <source>Debug</source>
-        <translation>Depurar</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="246"/>
-        <source>F12</source>
+        <location filename="mainwindow.ui" line="79"/>
+        <location filename="mainwindow.ui" line="251"/>
+        <source>Depurar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="251"/>
-        <source>Test</source>
-        <translation type="unfinished"></translation>
+        <location filename="mainwindow.ui" line="87"/>
+        <source>Ayuda</source>
+        <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="137"/>
+        <location filename="mainwindow.ui" line="120"/>
+        <location filename="mainwindow.ui" line="235"/>
+        <source>Mercados</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="142"/>
         <source>Filtrar...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="200"/>
-        <source>Salir</source>
-        <translation>Salir</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="211"/>
-        <source>F11</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="57"/>
-        <source>&amp;View</source>
-        <translation>Ver</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="74"/>
-        <source>&amp;Debug</source>
-        <translation>Depurar</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="82"/>
-        <source>Help</source>
-        <translation>Ayuda</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="115"/>
-        <source>Markets (F4)</source>
-        <translation>Mercados</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="160"/>
+        <location filename="mainwindow.ui" line="165"/>
         <source>Añadir...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="181"/>
+        <location filename="mainwindow.ui" line="186"/>
         <source>Debug (F12)</source>
-        <translation>Depurar (F12)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="205"/>
+        <source>Salir</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="208"/>
-        <source>Fullscreen</source>
-        <translation>Pantalla Completa</translation>
+        <source>Ctrl+Q</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="216"/>
+        <source>Pantalla completa</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="219"/>
+        <source>F11</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="224"/>
         <source>javascript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="227"/>
-        <source>Markets</source>
-        <translation>Mercados</translation>
+        <location filename="mainwindow.ui" line="238"/>
+        <source>F4</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="230"/>
-        <source>F4</source>
+        <location filename="mainwindow.ui" line="243"/>
+        <source>Acerca de...</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="254"/>
+        <source>F12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="259"/>
+        <source>Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="264"/>
+        <source>Opciones...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>dialogAbout</name>
     <message>
         <location filename="dialogabout.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <source>Acerca de...</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="dialogabout.ui" line="26"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>dialogAddMarket</name>
     <message>
         <location filename="dialogaddmarket.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <source>Añadir mercado</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="dialogaddmarket.ui" line="20"/>
@@ -126,7 +128,8 @@
     </message>
     <message>
         <location filename="dialogaddmarket.ui" line="26"/>
-        <source>Introduce el par:</source>
+        <source>Introduce el mercado:</source>
+        <oldsource>Introduce el par:</oldsource>
         <translation></translation>
     </message>
     <message>
@@ -137,13 +140,32 @@
     <message>
         <location filename="dialogaddmarket.ui" line="62"/>
         <source>Selecciona el exchange</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="dialogaddmarket.ui" line="70"/>
         <source>Binance</source>
         <comment>binsance</comment>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="dialogaddmarket.ui" line="75"/>
+        <source>Kucoin</source>
+        <comment>kuku</comment>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>dialogoptions</name>
+    <message>
+        <location filename="dialogoptions.ui" line="17"/>
+        <source>Opciones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogoptions.ui" line="28"/>
+        <source>Idioma</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QString file_config = home_path + "/.qtradingview2/config.ini";
     QSettings settings(file_config, QSettings::NativeFormat);
 
-    QString language = settings.value("language", "sysjtem").toString();
+    QString language = settings.value("language", "system").toString();
 
     QTranslator translator;
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         }
     }
     else {
-        const QString baseName = "QTradingview2_en_EN";
+        const QString baseName = "QTradingview2_" + language;
         if (translator.load(":/i18n/" + baseName)) {
             a.installTranslator(&translator);
         }

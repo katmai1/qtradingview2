@@ -17,8 +17,6 @@ public:
 
     ~MainWindow();
 
-    QString filepath_favorites;
-    QString filepath_binance;
     QString filepath_markets;
 
 
@@ -29,25 +27,29 @@ public:
 private slots:
     void saveListMarkets();
 
-    void on_actionPantalla_completa_triggered(bool checked);
-
     void on_bt_delete_clicked();
 
-    void cargarFicheroLista(QListWidget *lista, QString path);
+    void loadListMarkets(QListWidget *list, QString path);
 
     void on_actionjavascript_triggered();
 
     void ShowContextMenuMarkets(const QPoint& pos);
 
-    void on_ed_filtro_textChanged(const QString &arg1);
+    void on_contextLoadMarket();
 
     void on_actionTest_triggered();
 
     void on_actionAbout_triggered();
 
-    void on_list_markets_itemDoubleClicked(QListWidgetItem *item);
+    void on_listMarkets_itemDoubleClicked(QListWidgetItem *item);
 
     void on_btAdd_clicked();
+
+    void on_actionFullscreen_triggered(bool checked);
+
+    void on_edFilter_textChanged(const QString &arg1);
+
+    void on_actionOptions_triggered();
 
 private:
     Ui::MainWindow *ui;

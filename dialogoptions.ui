@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dialogAbout</class>
- <widget class="QDialog" name="dialogAbout">
+ <class>dialogoptions</class>
+ <widget class="QDialog" name="dialogoptions">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
+    <width>184</width>
     <height>240</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Acerca de...</string>
+   <string>Opciones</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>About</string>
-     </property>
-    </widget>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Idioma</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="comboLanguage">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -33,10 +47,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
-     </property>
-     <property name="centerButtons">
-      <bool>true</bool>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
@@ -47,7 +58,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>dialogAbout</receiver>
+   <receiver>dialogoptions</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -63,7 +74,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>dialogAbout</receiver>
+   <receiver>dialogoptions</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
