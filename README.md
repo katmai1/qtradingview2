@@ -1,0 +1,1 @@
+# QTradingview2
