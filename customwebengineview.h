@@ -18,6 +18,7 @@ public:
 
 public slots:
     void testJavascript();
+    void testJavascript2();
 
 private:
     void init_folder();

@@ -33,19 +33,28 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
 
 void CustomWebEngineView::init_folder() {
     this->directorio.mkpath(path_completo);
-//    QString binance =  R"delim(curl -s 'https://api.binance.com/api/v3/exchangeInfo' | jq -r '.symbols[] | "\(.baseAsset)/\(.quoteAsset)"' > )delim";
-//    binance += path_completo + "/binance.txt";
-//    std::system(binance.toUtf8().constData());
 }
 
 
 void CustomWebEngineView::testJavascript() {
-    qDebug("entraaa");
+    // const adWrapper = document.querySelector('div[class^=toast-positioning-wrapper-]');
     QString code = R"delim(
         const hideAds = setInterval(() => {
-            const adWrapper = document.querySelector('div[class^=toast-positioning-wrapper-]');
+            const adWrapper = document.querySelector('div[class^=ad]');
             if (adWrapper) {
                 adWrapper.querySelector('button').click();
+            }
+        }, 10000);
+    )delim";
+    this->page()->runJavaScript(code);
+}
+
+void CustomWebEngineView::testJavascript2() {
+    QString code = R"delim(
+        const hideAds2 = setInterval(() => {
+            const adWrapper2 = document.querySelector('div[class^=ad]');
+            if (adWrapper2) {
+                adWrapper2.querySelector('button').click();
             }
         }, 10000);
     )delim";
