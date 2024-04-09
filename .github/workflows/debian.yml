@@ -21,8 +21,8 @@ jobs:
 
     - name: Update version
       run: |
-        version = $(echo "${{ github.ref }}" | cut -d 'v' -f 2)
-        sed -i 's/1.0.0/${{version}}/g' version.h
+        echo "${{ github.ref }}" | cut -d 'v' -f 2 >> $version
+        sed -i 's/1.0.0/$version/g' version.h
         
     - name: create package
       run: |
