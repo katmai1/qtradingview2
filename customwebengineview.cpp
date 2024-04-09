@@ -49,14 +49,14 @@ void CustomWebEngineView::testJavascript() {
     this->page()->runJavaScript(code);
 }
 
-void CustomWebEngineView::testJavascript2() {
+void CustomWebEngineView::adBlockJS() {
     QString code = R"delim(
-        const hideAds2 = setInterval(() => {
-            const adWrapper2 = document.querySelector('div[class^=ad]');
-            if (adWrapper2) {
-                adWrapper2.querySelector('button').click();
+        const adBlock = setInterval(() => {
+            const adBlock = document.querySelector("article[class^='toast-']");
+            if (adBlock) {
+                adBlock.querySelector('button').click();
             }
-        }, 10000);
+        }, 5000);
     )delim";
     this->page()->runJavaScript(code);
 }

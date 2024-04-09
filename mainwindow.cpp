@@ -114,7 +114,7 @@ void MainWindow::loadListMarkets(QListWidget *list, QString path)
 // ejecuta javascript
 void MainWindow::on_actionjavascript_triggered()
 {
-    this->ui->webview->testJavascript2();
+    this->ui->webview->adBlockJS();
 }
 
 void MainWindow::on_contextLoadMarket()

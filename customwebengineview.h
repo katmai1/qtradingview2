@@ -18,7 +18,7 @@ public:
 
 public slots:
     void testJavascript();
-    void testJavascript2();
+    void adBlockJS();
 
 private:
     void init_folder();
