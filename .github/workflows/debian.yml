@@ -20,13 +20,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Update version
-      run: |
-        echo "const char* const APP_VERSION = \"$(git describe --tags --abbrev=0)\";" > version.h
-        git config --global user.email "katmai.mobil@gmail.com"
-        git config --global user.name "katmai"
-        git add version.h
-        git commit -m "Creando nueva version"
-        git push
+      run: sed -i 's/1.0.0/${{ github.ref }}/g' version.h
         
     - name: create package
       run: |
