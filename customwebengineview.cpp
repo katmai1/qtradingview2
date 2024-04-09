@@ -21,7 +21,7 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
 
     // crea pagin i assigna
     QWebEnginePage *page = new QWebEnginePage(profile);
-    connect(page, &QWebEnginePage::loadFinished, this, &CustomWebEngineView::testJavascript);
+    connect(page, &QWebEnginePage::loadFinished, this, &CustomWebEngineView::adBlockJS);
 
     this->setPage(page);
 

@@ -24,7 +24,8 @@ HEADERS += \
     dialogaddmarket.h \
     dialogoptions.h \
     mainwindow.h \
-    uimanager.h
+    uimanager.h \
+    version.h
 
 FORMS += \
     dialogabout.ui \

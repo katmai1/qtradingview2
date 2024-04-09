@@ -12,6 +12,8 @@
 #include <QTextEdit>
 #include <QDebug>
 #include "uimanager.h"
+#include "version.h"
+
 
 //// Función personalizada para manejar los mensajes de depuración
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -58,12 +60,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             this, SLOT(ShowContextMenuMarkets(QPoint)));
 
     qInstallMessageHandler(customMessageHandler);
-
-    // Emitir algunos mensajes de depuración
-    qDebug() << "debug1.";
-    qInfo() << "Este es un mensaje de información.";
-    qWarning() << "advertencia";
-    qCritical() << "Este es un mensaje crítico.";
+    qInfo() << "Iniciando version: " << APP_VERSION;
 }
 
 
@@ -152,7 +149,7 @@ void MainWindow::loadListMarkets(QListWidget *list, QString path)
 // ejecuta javascript
 void MainWindow::on_actionjavascript_triggered()
 {
-    this->ui->webview->adBlockJS();
+    this->ui->webview->testJavascript();
 }
 
 void MainWindow::on_contextLoadMarket()

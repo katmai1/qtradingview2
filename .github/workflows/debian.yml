@@ -19,6 +19,13 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
+    - name: Update version
+      run: |
+        echo "const char* const APP_VERSION = \"$(git describe --tags --abbrev=0)\";" > version.h
+        git add version.h
+        git commit -m "Creando nueva version"
+        git push
+        
     - name: create package
       run: |
         mkdir -p .debpkg/usr/bin

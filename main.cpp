@@ -4,34 +4,6 @@
 #include <QLocale>
 #include <QTranslator>
 #include <QSettings>
-#include <QDebug>
-#include "uimanager.h"
-//#include <iostream>
-
-////// Función personalizada para manejar los mensajes de depuración
-//void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-//{
-//    QTextEdit *txt = UIManager::getInstance()->getTextEdit();
-//    QString formattedMessage;
-//    switch (type) {
-//    case QtInfoMsg:
-//        formattedMessage = QString("Info: %1").arg(msg);
-//        break;
-//    case QtWarningMsg:
-//        formattedMessage = QString("<font color=\"orange\">Warning: </font> %1").arg(msg);
-//        break;
-//    case QtCriticalMsg:
-//        formattedMessage = QString("Critical: %1").arg(msg);
-//        break;
-//    case QtFatalMsg:
-//        formattedMessage = QString("Fatal: %1").arg(msg);
-//        break;
-//    default:
-//        formattedMessage = msg;
-//    }
-//    txt->append(formattedMessage);
-//    // Puedes implementar tu propia lógica aquí
-//}
 
 
 int main(int argc, char *argv[])
@@ -64,13 +36,6 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
-
-//    qInstallMessageHandler(customMessageHandler);
-
-//    qDebug() << "Este es un mensaje de depuración.";
-//    qInfo() << "Este es un mensaje de información.";
-//    qWarning() << "Este es un mensaje de advertencia.";
-//    qCritical() << "Este es un mensaje crítico.";
 
     w.showMaximized();
     return a.exec();
