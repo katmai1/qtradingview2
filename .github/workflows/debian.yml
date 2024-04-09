@@ -22,6 +22,8 @@ jobs:
     - name: Update version
       run: |
         echo "const char* const APP_VERSION = \"$(git describe --tags --abbrev=0)\";" > version.h
+        git config --global user.email "katmai.mobil@gmail.com"
+        git config --global user.name "katmai"
         git add version.h
         git commit -m "Creando nueva version"
         git push
