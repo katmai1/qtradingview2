@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include "qlistwidget.h"
+#include "ui_mainwindow.h"
 #include <QMainWindow>
+#include <QTextEdit>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,10 +22,10 @@ public:
 
     QString filepath_markets;
 
-
     void sendStatus(QString message, int timeout);
     void sendDebug(QString message);
     void addToList(QString market);
+
 
 private slots:
     void saveListMarkets();
@@ -53,5 +56,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QTextEdit *tdebug;
+
 };
 #endif // MAINWINDOW_H

@@ -1,4 +1,4 @@
-QT       += core gui webenginewidgets
+QT       += core gui webenginewidgets widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,7 +23,8 @@ HEADERS += \
     dialogabout.h \
     dialogaddmarket.h \
     dialogoptions.h \
-    mainwindow.h
+    mainwindow.h \
+    uimanager.h
 
 FORMS += \
     dialogabout.ui \

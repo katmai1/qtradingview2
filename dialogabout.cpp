@@ -6,6 +6,7 @@ dialogAbout::dialogAbout(QWidget *parent) :
     ui(new Ui::dialogAbout)
 {
     ui->setupUi(this);
+    qWarning() << "joaan";
 }
 
 dialogAbout::~dialogAbout()

@@ -60,10 +60,9 @@
      <string>&amp;Ver</string>
     </property>
     <addaction name="actionMarkets"/>
+    <addaction name="actionDebug"/>
     <addaction name="separator"/>
     <addaction name="actionFullscreen"/>
-    <addaction name="separator"/>
-    <addaction name="actionDebug"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -192,6 +191,9 @@
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
       <widget class="QTextEdit" name="txtDebug">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(211, 215, 207);</string>
+       </property>
        <property name="readOnly">
         <bool>true</bool>
        </property>
