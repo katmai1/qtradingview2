@@ -21,8 +21,7 @@ jobs:
 
     - name: Update version
       run: |
-        echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-        sed -i 's/1.0.0/${{ env.GIT_TAG }}/g' version.h
+        sed -i 's/1.0.0/${{ github.ref_name }}/g' version.h
         
     - name: create package
       run: |
