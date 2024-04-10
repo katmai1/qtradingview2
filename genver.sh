@@ -3,7 +3,8 @@
 old="$(grep APP_VERSION version.h)"
 new="#define APP_VERSION \"$1\""
 sed -i "s/$old/$new/g" version.h
-qmake QTradingview2.pro -o builds && make & make clean
+qmake QTradingview2.pro -o builds
+cd builds && make && make clean
 
 # falta configurar gitcon mi github y probar de hacer un commit y un tag
 # git describe --tags --abbrev=0

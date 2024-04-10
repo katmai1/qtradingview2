@@ -1,0 +1,9 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="i18n">
+<file alias="QTradingview2_es_ES.qm">/home/q/dev/qtradingview2/builds/.qm/QTradingview2_es_ES.qm</file>
+<file alias="QTradingview2_en_EN.qm">/home/q/dev/qtradingview2/builds/.qm/QTradingview2_en_EN.qm</file>
+<file alias="QTradingview2_it_IT.qm">/home/q/dev/qtradingview2/builds/.qm/QTradingview2_it_IT.qm</file>
+<file alias="QTradingview2_fr_FR.qm">/home/q/dev/qtradingview2/builds/.qm/QTradingview2_fr_FR.qm</file>
+<file alias="QTradingview2_ca_ES.qm">/home/q/dev/qtradingview2/builds/.qm/QTradingview2_ca_ES.qm</file>
+</qresource>
+</RCC>
