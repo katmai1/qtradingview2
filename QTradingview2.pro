@@ -10,35 +10,35 @@ CONFIG += c++17
 
 SOURCES += \
     config.cpp \
-    customwebengineview.cpp \
+    src/customwebengineview.cpp \
     src/dialogabout.cpp \
-    dialogaddmarket.cpp \
-    dialogoptions.cpp \
+    src/dialogaddmarket.cpp \
+    src/dialogoptions.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     config.h \
-    customwebengineview.h \
+    src/customwebengineview.h \
     src/dialogabout.h \
-    dialogaddmarket.h \
-    dialogoptions.h \
+    src/dialogaddmarket.h \
+    src/dialogoptions.h \
     mainwindow.h \
-    uimanager.h \
+    src/uimanager.h \
     version.h
 
 FORMS += \
     src/dialogabout.ui \
-    dialogaddmarket.ui \
-    dialogoptions.ui \
+    src/dialogaddmarket.ui \
+    src/dialogoptions.ui \
     mainwindow.ui
 
 TRANSLATIONS += \
-    QTradingview2_es_ES.ts \
-    QTradingview2_en_EN.ts \
-    QTradingview2_it_IT.ts \
-    QTradingview2_fr_FR.ts \
-    QTradingview2_ca_ES.ts
+    langs/QTradingview2_es_ES.ts \
+    langs/QTradingview2_en_EN.ts \
+    langs/QTradingview2_it_IT.ts \
+    langs/QTradingview2_fr_FR.ts \
+    langs/QTradingview2_ca_ES.ts
 
 CONFIG += lrelease
 CONFIG += embed_translations
