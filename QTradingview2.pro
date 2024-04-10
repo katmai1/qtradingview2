@@ -10,7 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     config.cpp \
-    src/customwebengineview.cpp \
+    customwebengineview.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
     src/dialogoptions.cpp \
@@ -19,7 +19,7 @@ SOURCES += \
 
 HEADERS += \
     config.h \
-    src/customwebengineview.h \
+    customwebengineview.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
     src/dialogoptions.h \
