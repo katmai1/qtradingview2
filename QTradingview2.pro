@@ -11,7 +11,7 @@ CONFIG += c++17
 SOURCES += \
     config.cpp \
     customwebengineview.cpp \
-    dialogabout.cpp \
+    src/dialogabout.cpp \
     dialogaddmarket.cpp \
     dialogoptions.cpp \
     main.cpp \
@@ -20,7 +20,7 @@ SOURCES += \
 HEADERS += \
     config.h \
     customwebengineview.h \
-    dialogabout.h \
+    src/dialogabout.h \
     dialogaddmarket.h \
     dialogoptions.h \
     mainwindow.h \
@@ -28,7 +28,7 @@ HEADERS += \
     version.h
 
 FORMS += \
-    dialogabout.ui \
+    src/dialogabout.ui \
     dialogaddmarket.ui \
     dialogoptions.ui \
     mainwindow.ui
