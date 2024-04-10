@@ -18,11 +18,6 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
-
-    - name: Update version
-      run: |
-        version = $(echo "${{ github.ref }}" | cut -d 'v' -f 2)
-        sed -i 's/1.0.0/$version/g' version.h
         
     - name: create package
       run: |
