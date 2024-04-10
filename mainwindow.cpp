@@ -1,7 +1,7 @@
 #include "mainwindow.h"
-#include "dialogabout.h"
-#include "dialogaddmarket.h"
-#include "dialogoptions.h"
+#include "src/dialogabout.h"
+#include "src/dialogaddmarket.h"
+#include "src/dialogoptions.h"
 #include "qdir.h"
 #include "ui_mainwindow.h"
 #include "QFile"
@@ -11,7 +11,7 @@
 #include <QtWidgets>
 #include <QTextEdit>
 #include <QDebug>
-#include "uimanager.h"
+#include "src/uimanager.h"
 #include "version.h"
 
 
