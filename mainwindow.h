@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "qlistwidget.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTextEdit>
