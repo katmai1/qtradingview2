@@ -10,6 +10,7 @@ class MarketsList
 public:
     MarketsList(const QString &filenName, QListWidget *listWidget) : m_filename(filenName), m_list(listWidget) {}
     void saveList();
+    void loadList();
 
 private:
     QString m_filename;

@@ -107,23 +107,6 @@ void MainWindow::saveListMarkets()
 {
     MarketsList ml(filepath_markets, this->ui->listMarkets);
     ml.saveList();
-
-    // extraemos todos los items a un lista
-    int total = this->ui->listMarkets->count();
-    //creamos el fichero...
-    QFile file(filepath_markets);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&file);
-        // guardamos cada item al archivo...
-        for (int i = 0; i < total; ++i) {
-            QListWidgetItem* item = this->ui->listMarkets->item(i);
-            out << item->text() << "\n";
-        }
-        file.close();
-    } else {
-        // Manejar el error si no se pudo abrir el archivo.
-    }
-    qInfo() << "Lista de mercados guardada";
 }
 
 
