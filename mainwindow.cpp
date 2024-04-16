@@ -13,6 +13,7 @@
 #include <QDebug>
 #include "src/uimanager.h"
 #include "version.h"
+#include "src/marketslist.h"
 
 
 //// Función personalizada para manejar los mensajes de depuración
@@ -104,6 +105,9 @@ void MainWindow::addToList(QString market) {
 // guarda lista de markets en fichero
 void MainWindow::saveListMarkets()
 {
+    MarketsList ml(filepath_markets, this->ui->listMarkets);
+    ml.saveList();
+
     // extraemos todos los items a un lista
     int total = this->ui->listMarkets->count();
     //creamos el fichero...

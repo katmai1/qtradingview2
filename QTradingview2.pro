@@ -15,7 +15,8 @@ SOURCES += \
     src/dialogaddmarket.cpp \
     src/dialogoptions.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    src/marketslist.cpp
 
 HEADERS += \
     config.h \
@@ -24,6 +25,7 @@ HEADERS += \
     src/dialogaddmarket.h \
     src/dialogoptions.h \
     mainwindow.h \
+    src/marketslist.h \
     src/uimanager.h \
     version.h
 
