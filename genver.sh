@@ -19,20 +19,13 @@ then
     # compile version
     qmake QTradingview2.pro -o builds
     cd builds && make && make clean
-    
+
+    # git
+    git add version.h
+    git commit -m "Creating version v$new_version..."
+    git tag "v$new_version"
+    git push origin "v$new_version"
+
 else
     echo "Exiting..."
 fi
-
-# old="$(grep APP_VERSION version.h)"
-# new="#define APP_VERSION \"$1\""
-# sed -i "s/$old/$new/g" version.h
-# qmake QTradingview2.pro -o builds
-# cd builds && make && make clean
-
-# falta configurar gitcon mi github y probar de hacer un commit y un tag
-# git describe --tags --abbrev=0
-# git add version.h
-# git commit -m "Creando version $1..."
-# git tag "v$1"
-# git push origin "v$1"
