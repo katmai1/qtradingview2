@@ -21,7 +21,7 @@ then
     cd builds && make && make clean
 
     # git
-    git add builds/QTradingview2
+    git add QTradingview2
     git add ../version.h
     git commit -m "Creating version v$new_version..."
     git tag "v$new_version"
