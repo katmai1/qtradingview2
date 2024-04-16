@@ -69,10 +69,18 @@
          <property name="text">
           <string comment="binsance">Binance</string>
          </property>
+         <property name="icon">
+          <iconset resource="../recursos.qrc">
+           <normaloff>:/exchanges/icons/binance.png</normaloff>:/exchanges/icons/binance.png</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string comment="kuku">Kucoin</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../recursos.qrc">
+           <normaloff>:/exchanges/icons/kucoin.svg</normaloff>:/exchanges/icons/kucoin.svg</iconset>
          </property>
         </item>
        </widget>
@@ -92,7 +100,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../recursos.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

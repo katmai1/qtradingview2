@@ -3,4 +3,8 @@
         <file alias="logo">icons/logo.png</file>
         <file alias="star">icons/star.svg</file>
     </qresource>
+    <qresource prefix="/exchanges">
+        <file>icons/binance.png</file>
+        <file>icons/kucoin.svg</file>
+    </qresource>
 </RCC>

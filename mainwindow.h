@@ -22,22 +22,20 @@ public:
     QString filepath_markets;
 
     void sendStatus(QString message, int timeout);
-    void sendDebug(QString message);
     void addToList(QString market);
 
 
 private slots:
     void saveListMarkets();
 
-    void on_bt_delete_clicked();
-
     void loadListMarkets(QListWidget *list, QString path);
 
     void on_actionjavascript_triggered();
 
+    // context menu
     void ShowContextMenuMarkets(const QPoint& pos);
-
     void on_contextLoadMarket();
+    void on_contextDeleteMarket();
 
     void on_actionTest_triggered();
 

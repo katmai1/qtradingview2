@@ -3,7 +3,7 @@
 #include "src/dialogaddmarket.h"
 #include "src/dialogoptions.h"
 #include "qdir.h"
-#include "ui_mainwindow.h"
+//#include "ui_mainwindow.h"
 #include "QFile"
 #include "QDir"
 #include "QObject"
@@ -18,6 +18,7 @@
 //// Función personalizada para manejar los mensajes de depuración
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    Q_UNUSED(context);
     QTextEdit *txt = UIManager::getInstance()->getTextEdit();
     QString formattedMessage;
     switch (type) {
@@ -78,19 +79,14 @@ void MainWindow::ShowContextMenuMarkets(const QPoint& pos) // this is a slot
     // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
     QMenu myMenu;
     myMenu.addAction("Abrir...", this, SLOT(on_contextLoadMarket()));
-    myMenu.addAction("Eliminar", this, SLOT(on_bt_delete_clicked()));
+    myMenu.addAction("Eliminar", this, SLOT(on_contextDeleteMarket()));
 
     myMenu.exec(globalPos);
 }
 
 // SatusBar
-void MainWindow::sendStatus(QString message, int timeout=10000) {
+void MainWindow::sendStatus(QString message, int timeout=5000) {
     this->ui->statusbar->showMessage(message, timeout);
-}
-
-// SendDebug
-void MainWindow::sendDebug(QString message) {
-    this->ui->txtDebug->insertPlainText(message + "\n");
 }
 
 // añade market a la lista
@@ -123,7 +119,7 @@ void MainWindow::saveListMarkets()
     } else {
         // Manejar el error si no se pudo abrir el archivo.
     }
-    this->sendDebug("Lista de mercados guardada");
+    qInfo() << "Lista de mercados guardada";
 }
 
 
@@ -158,7 +154,7 @@ void MainWindow::on_contextLoadMarket()
 }
 
 // elimina seleccionados de favoritos
-void MainWindow::on_bt_delete_clicked()
+void MainWindow::on_contextDeleteMarket()
 {
     QList<QListWidgetItem *> lista = this->ui->listMarkets->selectedItems();
     for (QListWidgetItem *item : lista ) {  delete item;    }
