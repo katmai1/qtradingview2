@@ -7,7 +7,7 @@ on:
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
-  BIN_FILE:		${{ github.workspace }}/builds/Linux_x64/release/QTradingview2
+  BIN_FILE:		${{ github.workspace }}/builds/QTradingview2
   DEB_DIR:		${{ github.workspace }}/deploy
   
 jobs:
@@ -18,10 +18,6 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
-
-    - name: Update version
-      run: |
-        sed -i 's/1.0.0/${{ github.ref_name }}/g' version.h
         
     - name: create package
       run: |

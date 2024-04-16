@@ -1,10 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "qlistwidget.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTextEdit>
+#include "src/marketslist.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -23,22 +23,18 @@ public:
     QString filepath_markets;
 
     void sendStatus(QString message, int timeout);
-    void sendDebug(QString message);
     void addToList(QString market);
 
 
 private slots:
-    void saveListMarkets();
-
-    void on_bt_delete_clicked();
-
-    void loadListMarkets(QListWidget *list, QString path);
+    void loadListMarkets();
 
     void on_actionjavascript_triggered();
 
+    // context menu
     void ShowContextMenuMarkets(const QPoint& pos);
-
     void on_contextLoadMarket();
+    void on_contextDeleteMarket();
 
     void on_actionTest_triggered();
 
@@ -57,6 +53,5 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;
-
 };
 #endif // MAINWINDOW_H

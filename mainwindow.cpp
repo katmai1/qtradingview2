@@ -3,7 +3,7 @@
 #include "src/dialogaddmarket.h"
 #include "src/dialogoptions.h"
 #include "qdir.h"
-#include "ui_mainwindow.h"
+//#include "ui_mainwindow.h"
 #include "QFile"
 #include "QDir"
 #include "QObject"
@@ -13,11 +13,13 @@
 #include <QDebug>
 #include "src/uimanager.h"
 #include "version.h"
+#include "src/marketslist.h"
 
 
 //// Función personalizada para manejar los mensajes de depuración
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    Q_UNUSED(context);
     QTextEdit *txt = UIManager::getInstance()->getTextEdit();
     QString formattedMessage;
     switch (type) {
@@ -52,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     filepath_markets = this->ui->webview->path_completo + "/markets.txt";
 
     // carga listas
-    this->loadListMarkets(this->ui->listMarkets, filepath_markets);
+    this->loadListMarkets();
 
     // declara menus contextuales
     this->ui->listMarkets->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -78,72 +80,34 @@ void MainWindow::ShowContextMenuMarkets(const QPoint& pos) // this is a slot
     // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
     QMenu myMenu;
     myMenu.addAction("Abrir...", this, SLOT(on_contextLoadMarket()));
-    myMenu.addAction("Eliminar", this, SLOT(on_bt_delete_clicked()));
+    myMenu.addAction("Eliminar", this, SLOT(on_contextDeleteMarket()));
 
     myMenu.exec(globalPos);
 }
 
 // SatusBar
-void MainWindow::sendStatus(QString message, int timeout=10000) {
+void MainWindow::sendStatus(QString message, int timeout=5000) {
     this->ui->statusbar->showMessage(message, timeout);
-}
-
-// SendDebug
-void MainWindow::sendDebug(QString message) {
-    this->ui->txtDebug->insertPlainText(message + "\n");
 }
 
 // añade market a la lista
 void MainWindow::addToList(QString market) {
-    QList<QListWidgetItem *> lista = this->ui->listMarkets->findItems(market, Qt::MatchExactly);
-    if (lista.count() > 0) {
+
+    MarketsList ml(filepath_markets, this->ui->listMarkets);
+    if (ml.existMarket(market)) {
         QMessageBox::warning(nullptr, "Error", "Este mercado ya está en la lista...");
     }
     else {
-        this->ui->listMarkets->addItem(market);
-        this->saveListMarkets();
+        ml.addMarket(market);
+        ml.saveList();
     }
 }
-
-// guarda lista de markets en fichero
-void MainWindow::saveListMarkets()
-{
-    // extraemos todos los items a un lista
-    int total = this->ui->listMarkets->count();
-    //creamos el fichero...
-    QFile file(filepath_markets);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&file);
-        // guardamos cada item al archivo...
-        for (int i = 0; i < total; ++i) {
-            QListWidgetItem* item = this->ui->listMarkets->item(i);
-            out << item->text() << "\n";
-        }
-        file.close();
-    } else {
-        // Manejar el error si no se pudo abrir el archivo.
-    }
-    this->sendDebug("Lista de mercados guardada");
-}
-
 
 // carga una lista, debemos pasarle un listwidget y una ruta al fichero
-void MainWindow::loadListMarkets(QListWidget *list, QString path)
+void MainWindow::loadListMarkets()
 {
-    list->clear();
-    QFile file(path);
-
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&file);
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            list->addItem(line);
-        }
-        file.close();
-    } else {
-        // Manejar el error si no se pudo abrir el archivo.
-    }
-    this->sendStatus("Lista cargada");
+    MarketsList ml(filepath_markets, this->ui->listMarkets);
+    ml.loadList();
 }
 
 // ejecuta javascript
@@ -158,11 +122,13 @@ void MainWindow::on_contextLoadMarket()
 }
 
 // elimina seleccionados de favoritos
-void MainWindow::on_bt_delete_clicked()
+void MainWindow::on_contextDeleteMarket()
 {
+    MarketsList ml(filepath_markets, this->ui->listMarkets);
+
     QList<QListWidgetItem *> lista = this->ui->listMarkets->selectedItems();
     for (QListWidgetItem *item : lista ) {  delete item;    }
-    this->saveListMarkets();
+    ml.saveList();
 
 }
 
@@ -184,8 +150,9 @@ void MainWindow::on_actionAbout_triggered()
 // abre market seleccionado con doble click
 void MainWindow::on_listMarkets_itemDoubleClicked(QListWidgetItem *item)
 {
-    QString symbol = item->text();
-    this->ui->webview->loadChart(symbol);
+    QString pair = item->text();
+    QString exchange = item->toolTip();
+    this->ui->webview->loadChart(pair, exchange);
 }
 
 

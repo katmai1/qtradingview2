@@ -14,7 +14,7 @@ public:
     QString path_completo;
     QDir directorio;
 
-    void loadChart(QString symbol);
+    void loadChart(QString pair, QString exchange);
 
 public slots:
     void testJavascript();

@@ -10,20 +10,22 @@ CONFIG += c++17
 
 SOURCES += \
     config.cpp \
-    src/customwebengineview.cpp \
+    customwebengineview.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
     src/dialogoptions.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    src/marketslist.cpp
 
 HEADERS += \
     config.h \
-    src/customwebengineview.h \
+    customwebengineview.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
     src/dialogoptions.h \
     mainwindow.h \
+    src/marketslist.h \
     src/uimanager.h \
     version.h
 
