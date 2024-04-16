@@ -61,9 +61,9 @@ void CustomWebEngineView::adBlockJS() {
     this->page()->runJavaScript(code);
 }
 
-void CustomWebEngineView::loadChart(QString symbol) {
-    QStringList s = symbol.split(":");
-    QStringList market = s[0].split("/");
-    QString url = "https://es.tradingview.com/chart/?symbol=" + s[1] + ":" + market[0] + market[1];
+void CustomWebEngineView::loadChart(QString pair, QString exchange) {
+//    QStringList s = symbol.split(":");
+    QStringList market = pair.split("/");
+    QString url = "https://es.tradingview.com/chart/?symbol=" + exchange.toUpper() + ":" + market[0] + market[1];
     this->load(QUrl(url));
 }

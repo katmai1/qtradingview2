@@ -4,6 +4,7 @@
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTextEdit>
+#include "src/marketslist.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -26,9 +27,7 @@ public:
 
 
 private slots:
-    void saveListMarkets();
-
-    void loadListMarkets(QListWidget *list, QString path);
+    void loadListMarkets();
 
     void on_actionjavascript_triggered();
 
@@ -54,6 +53,5 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;
-
 };
 #endif // MAINWINDOW_H
