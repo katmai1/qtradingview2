@@ -14,14 +14,15 @@ then
     echo "$new_version"
 
     # replace version on version.h
-    sed -i "s/$old_version/$new_version/g" version.h
+    sed -i "s/$old_version/\"$new_version\"/g" version.h
 
     # compile version
     qmake QTradingview2.pro -o builds
     cd builds && make && make clean
 
     # git
-    git add version.h
+    git add builds/QTradingview2
+    git add ../version.h
     git commit -m "Creating version v$new_version..."
     git tag "v$new_version"
     git push origin "v$new_version"
