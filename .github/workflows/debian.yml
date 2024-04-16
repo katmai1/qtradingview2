@@ -7,7 +7,7 @@ on:
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
-  BIN_FILE:		${{ github.workspace }}/builds/Linux_x64/release/QTradingview2
+  BIN_FILE:		${{ github.workspace }}/builds/QTradingview2
   DEB_DIR:		${{ github.workspace }}/deploy
   
 jobs:
