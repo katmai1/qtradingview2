@@ -71,7 +71,7 @@
          </property>
          <property name="icon">
           <iconset resource="../recursos.qrc">
-           <normaloff>:/exchanges/icons/binance.png</normaloff>:/exchanges/icons/binance.png</iconset>
+           <normaloff>:/exchanges/icons/binance</normaloff>:/exchanges/icons/binance</iconset>
          </property>
         </item>
         <item>
@@ -80,7 +80,7 @@
          </property>
          <property name="icon">
           <iconset resource="../recursos.qrc">
-           <normaloff>:/exchanges/icons/kucoin.svg</normaloff>:/exchanges/icons/kucoin.svg</iconset>
+           <normaloff>:/exchanges/icons/kucoin</normaloff>:/exchanges/icons/kucoin</iconset>
          </property>
         </item>
        </widget>

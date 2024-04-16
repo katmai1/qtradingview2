@@ -4,7 +4,7 @@
         <file alias="star">icons/star.svg</file>
     </qresource>
     <qresource prefix="/exchanges">
-        <file>icons/binance.png</file>
-        <file>icons/kucoin.svg</file>
+        <file>icons/binance</file>
+        <file>icons/kucoin</file>
     </qresource>
 </RCC>
