@@ -16,6 +16,7 @@
 #include "src/marketslist.h"
 
 
+
 //// Función personalizada para manejar los mensajes de depuración
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -61,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
     qInfo() << "Iniciando version: " << APP_VERSION;
+
 }
 
 
