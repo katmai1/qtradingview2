@@ -39,7 +39,6 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
         formattedMessage = msg;
     }
     txt->append(formattedMessage);
-    // Puedes implementar tu propia lógica aquí
 }
 
 // --------------------------------------
@@ -52,8 +51,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // init
     this->ui->dockDebug->setVisible(false);
     filepath_markets = this->ui->webview->path_completo + "/markets.txt";
-
-    // carga listas
     this->loadListMarkets();
 
     // declara menus contextuales
@@ -61,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(this->ui->listMarkets, SIGNAL(customContextMenuRequested(QPoint)),
             this, SLOT(ShowContextMenuMarkets(QPoint)));
 
+    // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
     qInfo() << "Iniciando version: " << APP_VERSION;
 }
@@ -76,13 +74,11 @@ MainWindow::~MainWindow()
 void MainWindow::ShowContextMenuMarkets(const QPoint& pos) // this is a slot
 {
     QPoint globalPos = this->ui->listMarkets->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QMenu myMenu;
-    myMenu.addAction("Abrir...", this, SLOT(on_contextLoadMarket()));
-    myMenu.addAction("Eliminar", this, SLOT(on_contextDeleteMarket()));
+    QMenu menu;
+    menu.addAction("Abrir...", this, SLOT(on_contextLoadMarket()));
+    menu.addAction("Eliminar", this, SLOT(on_contextDeleteMarket()));
 
-    myMenu.exec(globalPos);
+    menu.exec(globalPos);
 }
 
 // SatusBar
@@ -92,7 +88,6 @@ void MainWindow::sendStatus(QString message, int timeout=5000) {
 
 // añade market a la lista
 void MainWindow::addToList(QString market) {
-
     MarketsList ml(filepath_markets, this->ui->listMarkets);
     if (ml.existMarket(market)) {
         QMessageBox::warning(nullptr, "Error", "Este mercado ya está en la lista...");
@@ -110,26 +105,25 @@ void MainWindow::loadListMarkets()
     ml.loadList();
 }
 
-// ejecuta javascript
+// ejecuta javascript de test
 void MainWindow::on_actionjavascript_triggered()
 {
     this->ui->webview->testJavascript();
 }
 
+// envia el item seleccionado a la funcion que carga la grafica
 void MainWindow::on_contextLoadMarket()
 {
     this->on_listMarkets_itemDoubleClicked(this->ui->listMarkets->currentItem());
 }
 
-// elimina seleccionados de favoritos
+// elimina market seleccionado
 void MainWindow::on_contextDeleteMarket()
 {
     MarketsList ml(filepath_markets, this->ui->listMarkets);
-
     QList<QListWidgetItem *> lista = this->ui->listMarkets->selectedItems();
     for (QListWidgetItem *item : lista ) {  delete item;    }
     ml.saveList();
-
 }
 
 // boton de test
@@ -173,7 +167,7 @@ void MainWindow::on_actionFullscreen_triggered(bool checked)
     else { this->showMaximized(); }
 }
 
-
+// filtra los markets
 void MainWindow::on_edFilter_textChanged(const QString &arg1)
 {
     int total = this->ui->listMarkets->count();
@@ -185,7 +179,7 @@ void MainWindow::on_edFilter_textChanged(const QString &arg1)
 }
 
 
-
+// abre dialogo de opciones
 void MainWindow::on_actionOptions_triggered()
 {
     dialogoptions *Options;

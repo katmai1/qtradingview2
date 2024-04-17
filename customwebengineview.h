@@ -3,6 +3,8 @@
 
 #include "qdir.h"
 #include <QWebEngineView>
+#include <QWebEnginePage>
+
 
 class CustomWebEngineView : public QWebEngineView
 {

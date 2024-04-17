@@ -2,6 +2,7 @@
 #include "QWebEngineProfile"
 #include <QDir>
 #include "QProcess"
+#include <QWebEngineSettings>
 
 
 CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(parent)
@@ -18,6 +19,9 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
     profile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
     profile->setCachePath(path_completo);
     profile->setPersistentStoragePath(path_completo);
+    profile->settings()->setAttribute(QWebEngineSettings::JavascriptCanOpenWindows, true);
+    profile->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+    profile->settings()->setAttribute(QWebEngineSettings::AllowWindowActivationFromJavaScript, true);
 
     // crea pagin i assigna
     QWebEnginePage *page = new QWebEnginePage(profile);
