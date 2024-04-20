@@ -2,8 +2,7 @@
 #include "src/dialogabout.h"
 #include "src/dialogaddmarket.h"
 #include "src/dialogoptions.h"
-#include "qdir.h"
-//#include "ui_mainwindow.h"
+
 #include "QFile"
 #include "QDir"
 #include "QObject"
@@ -49,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
+
     // init
     this->ui->dockDebug->setVisible(false);
     filepath_markets = this->ui->webview->path_completo + "/markets.txt";
@@ -62,7 +62,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
     qInfo() << "Iniciando version: " << APP_VERSION;
-
 }
 
 

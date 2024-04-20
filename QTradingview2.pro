@@ -26,6 +26,7 @@ HEADERS += \
     src/dialogoptions.h \
     mainwindow.h \
     src/marketslist.h \
+    src/systray.h \
     src/uimanager.h \
     version.h
 

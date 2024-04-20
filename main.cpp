@@ -4,8 +4,7 @@
 #include <QLocale>
 #include <QTranslator>
 #include <QSettings>
-#include <QSystemTrayIcon>
-#include <QMenu>
+#include "src/systray.h"
 
 
 int main(int argc, char *argv[])
@@ -37,24 +36,11 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Crear una instancia de QSystemTrayIcon
-    QSystemTrayIcon trayIcon;
-
-    // Cargar un ícono para el área de notificación
-    QIcon icon(":/icons/logo"); // Asegúrate de que la ruta del archivo sea correcta
-    trayIcon.setIcon(icon);
-
-    // Crear un menú contextual para el ícono del área de notificación
-    QMenu *menu = new QMenu();
-    menu->addAction("Salir", &a, &QCoreApplication::quit); // Conecta la acción de salir con el cierre de la aplicación
-
-    // Establecer el menú en el ícono del área de notificación
-    trayIcon.setContextMenu(menu);
-
-    // Mostrar el ícono en el área de notificación
-    trayIcon.show();
 
     MainWindow w;
+
+    SystemTrayIcon systemTrayIcon(&w);
+    systemTrayIcon.show();
 
     w.showMaximized();
     return a.exec();
