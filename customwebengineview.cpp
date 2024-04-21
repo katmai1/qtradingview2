@@ -4,15 +4,20 @@
 #include "QProcess"
 #include <QWebEngineSettings>
 
+#include "src/settings.h"
+
 
 CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(parent)
 {
-    // prepara carpeta config
-    QString home_path = getenv("HOME");
-    path_completo = home_path + "/.qtradingview2";
-    directorio.setPath(path_completo);
-    // primer inici
-    if (!directorio.exists()) { this->init_folder(); }
+//    // prepara carpeta config
+//    QString home_path = getenv("HOME");
+//    path_completo = home_path + "/.qtradingview2";
+//    directorio.setPath(path_completo);
+//    // primer inici
+//    if (!directorio.exists()) { this->init_folder(); }
+
+    SettingsManager settings;
+    path_completo = settings.pathDir();
 
     // configura perfil
     QWebEngineProfile *profile = new QWebEngineProfile(QString::fromLatin1("QTradingview.%1").arg(qWebEngineChromiumVersion()));
@@ -66,7 +71,6 @@ void CustomWebEngineView::adBlockJS() {
 }
 
 void CustomWebEngineView::loadChart(QString pair, QString exchange) {
-//    QStringList s = symbol.split(":");
     QStringList market = pair.split("/");
     QString url = "https://es.tradingview.com/chart/?symbol=" + exchange.toUpper() + ":" + market[0] + market[1];
     this->load(QUrl(url));

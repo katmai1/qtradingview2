@@ -3,13 +3,12 @@
 #include "src/dialogaddmarket.h"
 #include "src/dialogoptions.h"
 
-#include "QFile"
-#include "QDir"
 #include "QObject"
 #include "QMessageBox"
 #include <QtWidgets>
 #include <QTextEdit>
 #include <QDebug>
+
 #include "src/uimanager.h"
 #include "version.h"
 #include "src/marketslist.h"

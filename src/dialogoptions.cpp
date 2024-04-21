@@ -2,8 +2,8 @@
 #include "mainwindow.h"
 #include "ui_dialogoptions.h"
 #include <QComboBox>
-#include "config.h"
 #include <QMessageBox>
+#include "src/settings.h"
 
 
 struct ComboItem {
@@ -18,14 +18,15 @@ dialogoptions::dialogoptions(MainWindow *parent) :
 {
     ui->setupUi(this);
 
-    config settings;
+    //config settings;
+    SettingsManager settings;
 
     this->addLanguages();
 
     // seleccion el idioma configurado en el combo
     for(int i = 0; i < this->ui->comboLanguage->count(); ++i) {
         ComboItem item = this->ui->comboLanguage->itemData(i).value<ComboItem>();
-        if (item.extraData == settings.getData("language", "system")) {
+        if (item.extraData == settings.language()) {
             this->ui->comboLanguage->setCurrentIndex(i);
         }
     }
@@ -41,12 +42,12 @@ void dialogoptions::on_buttonBox_accepted()
     // obtiene idioma (ex: ca_ES)
     int currentIndex = this->ui->comboLanguage->currentIndex();
     ComboItem currentItem = this->ui->comboLanguage->itemData(currentIndex).value<ComboItem>();
-    QString language = currentItem.extraData;
+    QString newLanguage = currentItem.extraData;
 
     // compara con el anterior y si es diferent lo guarda
-    QString oldlanguage = settings.getData("language", "system");
-    if (language != oldlanguage) {
-        settings.setValue("language", language);
+    QString oldLanguage = settings.language();
+    if (newLanguage != oldLanguage) {
+        settings.setValue("language", newLanguage);
         QMessageBox::information(nullptr, "Info", "El idioma seleccionado se cargará al reiniciar la aplicación");
     }
 }

@@ -9,7 +9,6 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    config.cpp \
     customwebengineview.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
@@ -19,13 +18,13 @@ SOURCES += \
     src/marketslist.cpp
 
 HEADERS += \
-    config.h \
     customwebengineview.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
     src/dialogoptions.h \
     mainwindow.h \
     src/marketslist.h \
+    src/settings.h \
     src/systray.h \
     src/uimanager.h \
     version.h

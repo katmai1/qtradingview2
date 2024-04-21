@@ -2,7 +2,8 @@
 #define DIALOGOPTIONS_H
 
 #include <QDialog>
-#include "config.h"
+#include "src/settings.h"
+
 
 class MainWindow;
 namespace Ui {
@@ -24,7 +25,7 @@ private slots:
 private:
     Ui::dialogoptions *ui;
     MainWindow *mwin;
-    config settings;
+    SettingsManager settings;
 };
 
 #endif // DIALOGOPTIONS_H
