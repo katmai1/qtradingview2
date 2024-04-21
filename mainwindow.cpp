@@ -2,8 +2,7 @@
 #include "src/dialogabout.h"
 #include "src/dialogaddmarket.h"
 #include "src/dialogoptions.h"
-#include "qdir.h"
-//#include "ui_mainwindow.h"
+
 #include "QFile"
 #include "QDir"
 #include "QObject"
@@ -14,6 +13,7 @@
 #include "src/uimanager.h"
 #include "version.h"
 #include "src/marketslist.h"
+
 
 
 //// Función personalizada para manejar los mensajes de depuración
@@ -48,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
+
     // init
     this->ui->dockDebug->setVisible(false);
     filepath_markets = this->ui->webview->path_completo + "/markets.txt";

@@ -4,6 +4,7 @@
 #include <QLocale>
 #include <QTranslator>
 #include <QSettings>
+#include "src/systray.h"
 
 
 int main(int argc, char *argv[])
@@ -35,7 +36,11 @@ int main(int argc, char *argv[])
         }
     }
 
+
     MainWindow w;
+
+    SystemTrayIcon systemTrayIcon(&w);
+    systemTrayIcon.show();
 
     w.showMaximized();
     return a.exec();

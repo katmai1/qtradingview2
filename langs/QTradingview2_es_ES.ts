@@ -48,7 +48,7 @@
     <message>
         <location filename="../mainwindow.ui" line="185"/>
         <source>Debug (F12)</source>
-        <translation type="unfinished"></translation>
+        <translation>Depurar (F12)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="207"/>
@@ -73,12 +73,12 @@
     <message>
         <location filename="../mainwindow.ui" line="226"/>
         <source>javascript</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="240"/>
         <source>F4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="245"/>
@@ -88,30 +88,36 @@
     <message>
         <location filename="../mainwindow.ui" line="256"/>
         <source>F12</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>Test</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="266"/>
         <source>Opciones...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>dialogAbout</name>
     <message>
         <location filename="../src/dialogabout.ui" line="14"/>
+        <location filename="../src/dialogabout.ui" line="26"/>
         <source>Acerca de...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/dialogabout.ui" line="26"/>
-        <source>About</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/dialogabout.ui" line="32"/>
+        <source>Version:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogabout.ui" line="52"/>
+        <source>VERSION</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -149,7 +155,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/dialogaddmarket.ui" line="75"/>
+        <location filename="../src/dialogaddmarket.ui" line="79"/>
         <source>Kucoin</source>
         <comment>kuku</comment>
         <translation></translation>
@@ -160,12 +166,12 @@
     <message>
         <location filename="../src/dialogoptions.ui" line="17"/>
         <source>Opciones</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/dialogoptions.ui" line="28"/>
         <source>Idioma</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

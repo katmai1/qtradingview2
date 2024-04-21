@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QTextEdit>
 #include "src/marketslist.h"
+#include "src/systray.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -19,6 +20,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     ~MainWindow();
+    void setSystemTrayWindow(SystemTrayIcon *SystemTrayIcon) {
+        this->trayIcon = SystemTrayIcon;
+    }
 
     QString filepath_markets;
 
@@ -53,5 +57,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;
+    SystemTrayIcon *trayIcon;
 };
 #endif // MAINWINDOW_H

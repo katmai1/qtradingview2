@@ -105,12 +105,18 @@
     <name>dialogAbout</name>
     <message>
         <location filename="../src/dialogabout.ui" line="14"/>
+        <location filename="../src/dialogabout.ui" line="26"/>
         <source>Acerca de...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogabout.ui" line="26"/>
-        <source>About</source>
+        <location filename="../src/dialogabout.ui" line="32"/>
+        <source>Version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogabout.ui" line="52"/>
+        <source>VERSION</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -149,7 +155,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogaddmarket.ui" line="75"/>
+        <location filename="../src/dialogaddmarket.ui" line="79"/>
         <source>Kucoin</source>
         <comment>kuku</comment>
         <translation type="unfinished"></translation>
