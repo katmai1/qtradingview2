@@ -1,44 +1,32 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-#include <QLocale>
 #include <QTranslator>
-#include <QSettings>
+
 #include "src/systray.h"
+#include <src/settings.h>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    // prepara carpeta config
-    QString home_path = getenv("HOME");
-    QString file_config = home_path + "/.qtradingview2/config.ini";
-    QSettings settings(file_config, QSettings::NativeFormat);
+    // declaramos settings y asignamos el valor created a true para que cree la carpeta de configuracion si no existía
+    SettingsManager settings;
+    settings.setValue("created", "true");
 
-    QString language = settings.value("language", "system").toString();
-
+    // configura idioma
     QTranslator translator;
-
-    if (language == "system") {
-        const QStringList uiLanguages = QLocale::system().uiLanguages();
-        for (const QString &locale : uiLanguages) {
-            const QString baseName = "QTradingview2_" + QLocale(locale).name();
-            if (translator.load(":/i18n/" + baseName)) {
-                a.installTranslator(&translator);
-            }
-        }
+    if (translator.load(":/i18n/" + settings.getTranslatorFile())) {
+        a.installTranslator(&translator);
     }
     else {
-        const QString baseName = "QTradingview2_" + language;
-        if (translator.load(":/i18n/" + baseName)) {
-            a.installTranslator(&translator);
-        }
+        qDebug() << "No se ha podido cargar el fichero de traducciones";
     }
-
 
     MainWindow w;
 
+    // configura systray
     SystemTrayIcon systemTrayIcon(&w);
     systemTrayIcon.show();
 

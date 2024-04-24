@@ -3,13 +3,12 @@
 #include "src/dialogaddmarket.h"
 #include "src/dialogoptions.h"
 
-#include "QFile"
-#include "QDir"
 #include "QObject"
 #include "QMessageBox"
 #include <QtWidgets>
 #include <QTextEdit>
 #include <QDebug>
+
 #include "src/uimanager.h"
 #include "version.h"
 #include "src/marketslist.h"
@@ -51,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // init
     this->ui->dockDebug->setVisible(false);
-    filepath_markets = this->ui->webview->path_completo + "/markets.txt";
     this->loadListMarkets();
 
     // declara menus contextuales

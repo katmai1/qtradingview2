@@ -6,7 +6,12 @@
 #include <QListWidget>
 #include <QList>
 
+#include "qglobal.h"
+#include "src/settings.h"
 
+
+// le pasamos como parametro el market en bruto
+// nos devuelve un item con el icono y el tooltip del exchange y como texto el market
 QListWidgetItem *getItem(const QString &market) {
     QStringList data = market.split(":");
     QString pair = data[0].toLower();
@@ -22,50 +27,52 @@ QListWidgetItem *getItem(const QString &market) {
 }
 
 
+// guarda lista en el fichero settings
 void MarketsList::saveList()
 {
-    //creamos el fichero...
-    QFile file(this->m_filename);
 
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&file);
-        // guardamos cada item al archivo...
-        for (int i = 0; i < this->m_list->count(); ++i) {
-            QListWidgetItem* item = this->m_list->item(i);
-            out << item->text().toUpper()+":"+item->toolTip().toUpper() << "\n";
-        }
-        file.close();
-    } else {
-        // Manejar el error si no se pudo abrir el archivo.
+    SettingsManager settings;
+    QStringList lista;
+    for (int i = 0; i < this->m_list->count(); ++i) {
+        QListWidgetItem* item = this->m_list->item(i);
+        lista << item->text().toUpper()+":"+item->toolTip().toUpper();
     }
+    settings.setValue("markets", lista);
+
     qInfo() << "Lista de mercados guardada";
 }
 
+// devuelve true si ese market ya existe
 bool MarketsList::existMarket(QString market)
 {
-    QList<QListWidgetItem *> lista = this->m_list->findItems(market, Qt::MatchExactly);
-    if (lista.count() > 0) {    return true;    }
-    else {  return false;   }
+    // obtiene item del market y hace la busqueda
+    QListWidgetItem *item = getItem(market);
+    QList<QListWidgetItem *> lista = this->m_list->findItems(item->text(), Qt::MatchExactly);
+
+    // si la busqueda tiene algun resultado y ademas el exchange coincide devuelve true
+    if (lista.count() > 0) {
+        for (QListWidgetItem *market : lista) {
+            qInfo() << market->text();
+            if (market->toolTip() == item->toolTip()) { return true;    }
+        }
+    }
+    return false;
 }
 
+// añade market a la lista
 void MarketsList::addMarket(QString market)
 {
     QListWidgetItem *item = getItem(market);
     this->m_list->addItem(item);
 }
 
-void MarketsList::loadList() {
-    this->m_list->clear();
-    QFile file(this->m_filename);
 
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&file);
-        while (!in.atEnd()) {
-            QString market = in.readLine();
-            this->addMarket(market);
-        }
-        file.close();
-    } else {
-        qWarning() << "Error al cargar el fichero markets";
+// carga lista desde fichero settings
+void MarketsList::loadList() {
+    SettingsManager settings;
+    this->m_list->clear();
+    QStringList lista = settings.getListMarkets();
+    foreach (const QString &market, lista) {
+        this->addMarket(market);
     }
 }
