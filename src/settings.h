@@ -31,17 +31,17 @@ public:
     // devuelve el fichero para el translator de qt
     QString getTranslatorFile() {
         QString language = this->language();
+        QString baseName;
+        qDebug() << QLocale::system().uiLanguages();
         if (language == "system") {
             const QStringList uiLanguages = QLocale::system().uiLanguages();
             for (const QString &locale : uiLanguages) {
-                QString const baseName = "QTradingview2_" + QLocale(locale).name();
-                return baseName;
+                baseName = "QTradingview2_" + QLocale(locale).name();
             }
-        }
-        else {
-            QString const baseName = "QTradingview2_" + language;
             return baseName;
         }
+        baseName = "QTradingview2_" + language;
+        return baseName;
     }
 
     // devuelve el lenguage registrado
@@ -56,6 +56,9 @@ public:
         return fileInfo.absolutePath();
     }
 
+    QStringList getListMarkets() {
+        return m_settings->value("markets", "BTC/USDT:BINANCE").toStringList();
+    }
 private:
     QSettings *m_settings;
 };
