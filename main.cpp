@@ -18,11 +18,10 @@ int main(int argc, char *argv[])
     // configura idioma
     QTranslator translator;
     if (translator.load(":/i18n/" + settings.getTranslatorFile())) {
-        qDebug() << "idioma cargado";
         a.installTranslator(&translator);
     }
     else {
-        qDebug() << "idioma no cargado?";
+        qDebug() << "No se ha podido cargar el fichero de traducciones";
     }
 
     MainWindow w;

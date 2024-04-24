@@ -55,16 +55,15 @@ void dialogoptions::on_buttonBox_accepted()
 // carga idiomas en el combo
 void dialogoptions::addLanguages()
 {
+    SettingsManager settings;
+    // añade opcion sistema
     ComboItem system = {"Sistema", "system"};
-    ComboItem english = {"Inglés", "en_EN"};
-    ComboItem spanish = {"Español", "es_ES"};
-    ComboItem french = {"Francés", "fr_FR"};
-    ComboItem italiano = {"Italiano", "it_IT"};
-    ComboItem catalan = {"Catalan", "ca_ES"};
     this->ui->comboLanguage->addItem(system.name, QVariant::fromValue(system));
-    this->ui->comboLanguage->addItem(english.name, QVariant::fromValue(english));
-    this->ui->comboLanguage->addItem(spanish.name, QVariant::fromValue(spanish));
-    this->ui->comboLanguage->addItem(french.name, QVariant::fromValue(french));
-    this->ui->comboLanguage->addItem(italiano.name, QVariant::fromValue(italiano));
-    this->ui->comboLanguage->addItem(catalan.name, QVariant::fromValue(catalan));
+    // carga lista de idiomas disponibles y los añade
+    QList<Languages> languages = settings.availableLanguages();
+    foreach (const Languages &lang, languages) {
+        ComboItem idioma = {lang.name, lang.locale};
+        this->ui->comboLanguage->addItem(idioma.name, QVariant::fromValue(idioma));
+
+    }
 }

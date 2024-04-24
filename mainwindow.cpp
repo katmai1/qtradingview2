@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // init
     this->ui->dockDebug->setVisible(false);
-    filepath_markets = this->ui->webview->path_completo + "/markets.txt";
     this->loadListMarkets();
 
     // declara menus contextuales

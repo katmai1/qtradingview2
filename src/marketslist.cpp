@@ -66,23 +66,6 @@ void MarketsList::addMarket(QString market)
     this->m_list->addItem(item);
 }
 
-//// carga lista desde fichero txt
-//void MarketsList::loadList_old() {
-//    this->m_list->clear();
-//    QFile file(this->m_filename);
-
-//    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-//        QTextStream in(&file);
-//        while (!in.atEnd()) {
-//            QString market = in.readLine();
-//            this->addMarket(market);
-//        }
-//        file.close();
-//    } else {
-//        qWarning() << "Error al cargar el fichero markets";
-//    }
-//}
-
 
 // carga lista desde fichero settings
 void MarketsList::loadList() {

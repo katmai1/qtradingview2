@@ -38,15 +38,17 @@ public:
     QString getTranslatorFile() {
         QString language = this->language();
         QString baseName;
-        qDebug() << QLocale::system().uiLanguages();
-        qDebug() << this->existLanguage(QLocale::system().name());
+
+        // si es el idioma del sistema
         if (language == "system") {
-            const QStringList uiLanguages = QLocale::system().uiLanguages();
-            for (const QString &locale : uiLanguages) {
-                baseName = "QTradingview2_" + QLocale(locale).name();
-            }
+            QString locale = QLocale::system().name();
+            // comprueba que sea de los disponibles por la app
+            if (this->existLanguage(locale)) {  baseName = "QTradingview2_" + locale;   }
+            // si no lo és, devuelve el inglés
+            else {  baseName = "QTradingview2_en_EN";   }
             return baseName;
         }
+        // si hay uno seleccionado, devuelve ese
         baseName = "QTradingview2_" + language;
         return baseName;
     }
@@ -63,10 +65,12 @@ public:
         return fileInfo.absolutePath();
     }
 
+    // devuelve lista de markets
     QStringList getListMarkets() {
         return m_settings->value("markets", "BTC/USDT:BINANCE").toStringList();
     }
 
+    // devuelve lista de idiomas disponibles
     QList<Languages> availableLanguages() {
         QList<Languages> lista;
         lista << Languages{"Inglés", "en_EN"}
@@ -77,6 +81,7 @@ public:
         return lista;
     }
 
+    // le pasamos el locale de un idioma y devuelve true si es uno de los disponibles
     bool existLanguage(QString locale) {
         QList<Languages> languages = this->availableLanguages();
         foreach (const Languages &lang, languages) {

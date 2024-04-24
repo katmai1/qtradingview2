@@ -9,21 +9,14 @@
 
 CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(parent)
 {
-//    // prepara carpeta config
-//    QString home_path = getenv("HOME");
-//    path_completo = home_path + "/.qtradingview2";
-//    directorio.setPath(path_completo);
-//    // primer inici
-//    if (!directorio.exists()) { this->init_folder(); }
 
     SettingsManager settings;
-    path_completo = settings.pathDir();
 
     // configura perfil
     QWebEngineProfile *profile = new QWebEngineProfile(QString::fromLatin1("QTradingview.%1").arg(qWebEngineChromiumVersion()));
     profile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
-    profile->setCachePath(path_completo);
-    profile->setPersistentStoragePath(path_completo);
+    profile->setCachePath(settings.pathDir());
+    profile->setPersistentStoragePath(settings.pathDir());
     profile->settings()->setAttribute(QWebEngineSettings::JavascriptCanOpenWindows, true);
     profile->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
     profile->settings()->setAttribute(QWebEngineSettings::AllowWindowActivationFromJavaScript, true);
@@ -37,11 +30,6 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
     this->load(QUrl("https://es.tradingview.com/chart/"));
     this->showMaximized();
     this->show();
-}
-
-
-void CustomWebEngineView::init_folder() {
-    this->directorio.mkpath(path_completo);
 }
 
 

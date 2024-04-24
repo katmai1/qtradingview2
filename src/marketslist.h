@@ -11,7 +11,6 @@ class MarketsList
 public:
     MarketsList(const QString &filenName, QListWidget *listWidget) : m_filename(filenName), m_list(listWidget) {}
     void saveList();
-//    void loadList_old();
     void loadList();
     bool existMarket(QString market);
     void addMarket(QString market);
