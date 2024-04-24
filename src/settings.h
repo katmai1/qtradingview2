@@ -7,6 +7,12 @@
 #include <QFileInfo>
 
 
+struct Languages {
+    QString name;
+    QString locale;
+};
+
+
 class SettingsManager {
 public:
     SettingsManager() {
@@ -33,6 +39,7 @@ public:
         QString language = this->language();
         QString baseName;
         qDebug() << QLocale::system().uiLanguages();
+        qDebug() << this->existLanguage(QLocale::system().name());
         if (language == "system") {
             const QStringList uiLanguages = QLocale::system().uiLanguages();
             for (const QString &locale : uiLanguages) {
@@ -59,6 +66,25 @@ public:
     QStringList getListMarkets() {
         return m_settings->value("markets", "BTC/USDT:BINANCE").toStringList();
     }
+
+    QList<Languages> availableLanguages() {
+        QList<Languages> lista;
+        lista << Languages{"Inglés", "en_EN"}
+              << Languages{"Español", "es_ES"}
+              << Languages{"Catalan", "ca_ES"}
+              << Languages{"Italiano", "it_IT"}
+              << Languages{"Francés", "fr_FR"};
+        return lista;
+    }
+
+    bool existLanguage(QString locale) {
+        QList<Languages> languages = this->availableLanguages();
+        foreach (const Languages &lang, languages) {
+            if (lang.locale == locale) {    return true;   }
+        }
+        return false;
+    }
+
 private:
     QSettings *m_settings;
 };
