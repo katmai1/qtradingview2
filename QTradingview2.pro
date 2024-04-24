@@ -26,6 +26,7 @@ HEADERS += \
     src/marketslist.h \
     src/settings.h \
     src/systray.h \
+    src/ticker.h \
     src/uimanager.h \
     version.h
 

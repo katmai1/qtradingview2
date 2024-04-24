@@ -13,6 +13,7 @@
 #include "version.h"
 #include "src/marketslist.h"
 
+#include "src/ticker.h"
 
 
 //// Función personalizada para manejar los mensajes de depuración
@@ -128,7 +129,8 @@ void MainWindow::on_contextDeleteMarket()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    qDebug() << "Pruebaaa";
+    HttpManager *ticker = new HttpManager(this);
+    ticker->getPrice("eth", "usd");
 }
 
 // abre dialog about
