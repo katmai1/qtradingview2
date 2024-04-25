@@ -39,6 +39,7 @@ private slots:
     void ShowContextMenuMarkets(const QPoint& pos);
     void on_contextLoadMarket();
     void on_contextDeleteMarket();
+    void on_contextGetPrice();
 
     void on_actionTest_triggered();
 

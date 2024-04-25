@@ -1,4 +1,4 @@
-QT       += core gui webenginewidgets widgets
+QT       += core gui webenginewidgets widgets network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,6 +23,10 @@ HEADERS += \
     src/dialogaddmarket.h \
     src/dialogoptions.h \
     mainwindow.h \
+    src/exchanges/exchange_base.h \
+    src/exchanges/binance.h \
+    src/exchanges/kucoin.h \
+    src/exmanager.h \
     src/marketslist.h \
     src/settings.h \
     src/systray.h \

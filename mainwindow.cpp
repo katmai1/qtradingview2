@@ -13,6 +13,8 @@
 #include "version.h"
 #include "src/marketslist.h"
 
+//#include "src/ticker.h"
+#include "src/exmanager.h"
 
 
 //// Función personalizada para manejar los mensajes de depuración
@@ -76,6 +78,7 @@ void MainWindow::ShowContextMenuMarkets(const QPoint& pos) // this is a slot
     QMenu menu;
     menu.addAction("Abrir...", this, SLOT(on_contextLoadMarket()));
     menu.addAction("Eliminar", this, SLOT(on_contextDeleteMarket()));
+    menu.addAction("Obtener precio", this, SLOT(on_contextGetPrice()));
 
     menu.exec(globalPos);
 }
@@ -125,10 +128,30 @@ void MainWindow::on_contextDeleteMarket()
     ml.saveList();
 }
 
+void MainWindow::on_contextGetPrice()
+{
+    MarketsList ml(filepath_markets, this->ui->listMarkets);
+    QList<QListWidgetItem *> lista = this->ui->listMarkets->selectedItems();
+    for (QListWidgetItem *item : lista ) {
+        QString pair = item->text();
+        QString exchange = item->toolTip();
+        QStringList market = pair.split("/");
+        ExManager exman;
+        ExchangeBase* ex = exman.setExchange(exchange.toLower());
+        qDebug() << ex->getPrice(market[0], market[1]);
+        delete ex;
+
+
+    }
+}
+
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    qDebug() << "Pruebaaa";
+    ExManager exman;
+    ExchangeBase* ex = exman.setExchange("kucoin");
+    qDebug() << ex->getPrice("btc", "usdt");
+    delete ex;
 }
 
 // abre dialog about
