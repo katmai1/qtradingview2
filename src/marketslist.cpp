@@ -41,21 +41,21 @@ void MarketsList::saveList()
 }
 
 // devuelve true si ese market ya existe
-bool MarketsList::existMarket(QString market)
-{
-    // obtiene item del market y hace la busqueda
-    QListWidgetItem *item = getItem(market);
-    QList<QListWidgetItem *> lista = this->m_list->findItems(item->text(), Qt::MatchExactly);
+//bool MarketsList::existMarket(QString market)
+//{
+//    // obtiene item del market y hace la busqueda
+//    QListWidgetItem *item = getItem(market);
+//    QList<QListWidgetItem *> lista = this->m_list->findItems(item->text(), Qt::MatchExactly);
 
-    // si la busqueda tiene algun resultado y ademas el exchange coincide devuelve true
-    if (lista.count() > 0) {
-        for (QListWidgetItem *market : lista) {
-            qInfo() << market->text();
-            if (market->toolTip() == item->toolTip()) { return true;    }
-        }
-    }
-    return false;
-}
+//    // si la busqueda tiene algun resultado y ademas el exchange coincide devuelve true
+//    if (lista.count() > 0) {
+//        for (QListWidgetItem *market : lista) {
+//            qInfo() << market->text();
+//            if (market->toolTip() == item->toolTip()) { return true;    }
+//        }
+//    }
+//    return false;
+//}
 
 // añade market a la lista
 void MarketsList::addMarket(QString market)

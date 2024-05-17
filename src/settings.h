@@ -6,6 +6,8 @@
 #include <QLocale>
 #include <QFileInfo>
 
+#include "src/marketslist.h"
+
 
 struct Languages {
     QString name;
@@ -65,7 +67,7 @@ public:
         return fileInfo.absolutePath();
     }
 
-    // devuelve lista de markets
+    // devuelve lista de markets, si no existe devuelve BTC/USDT de Binance
     QStringList getListMarkets() {
         return m_settings->value("markets", "BTC/USDT:BINANCE").toStringList();
     }
@@ -86,6 +88,16 @@ public:
         QList<Languages> languages = this->availableLanguages();
         foreach (const Languages &lang, languages) {
             if (lang.locale == locale) {    return true;   }
+        }
+        return false;
+    }
+
+    // devuelve true si ese market ya existe
+    bool existMarket(QString market)
+    {
+        QStringList lista = this->getListMarkets();
+        foreach (QString item, lista) {
+            if (item == market) {   return true;  }
         }
         return false;
     }

@@ -13,14 +13,13 @@
 class MarketsList
 {
 public:
-    MarketsList(const QString &fileName, QListWidget *listWidget) : m_filename(fileName), m_list(listWidget) {}
+    MarketsList(QListWidget *listWidget) : m_list(listWidget) {}
     void saveList();
     void loadList();
-    bool existMarket(QString market);
+//    bool existMarket(QString market);
     void addMarket(QString market);
 
 private:
-    QString m_filename;
     QListWidget *m_list;
 };
 

@@ -115,7 +115,7 @@ void MainWindow::loadMarket(QListWidgetItem *item) {
 }
 
 void MainWindow::saveMarketsList() {
-    MarketsList ml(filepath_markets, this->ui->listMarkets);
+    MarketsList ml(this->ui->listMarkets);
     ml.saveList();
 }
 
@@ -123,20 +123,15 @@ void MainWindow::saveMarketsList() {
 // ************************************************************************************************
 // añade market a la lista
 void MainWindow::addToList(QString market) {
-    MarketsList ml(filepath_markets, this->ui->listMarkets);
-    if (ml.existMarket(market)) {
-        QMessageBox::warning(nullptr, "Error", "Este mercado ya está en la lista...");
-    }
-    else {
-        ml.addMarket(market);
-        ml.saveList();
-    }
+    MarketsList ml(this->ui->listMarkets);
+    ml.addMarket(market);
+    ml.saveList();
 }
 
 // carga una lista, debemos pasarle un listwidget y una ruta al fichero
 void MainWindow::loadListMarkets()
 {
-    MarketsList ml(filepath_markets, this->ui->listMarkets);
+    MarketsList ml(this->ui->listMarkets);
     ml.loadList();
 }
 
