@@ -1,6 +1,5 @@
 #ifndef SYSTRAY_H
 #define SYSTRAY_H
-#include "qmainwindow.h"
 #include <QApplication>
 #include <QWidget>
 #include <QSystemTrayIcon>

@@ -7,6 +7,7 @@
 
 #include "src/marketslist.h"
 #include "src/systray.h"
+#include "src/settings.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -52,6 +53,10 @@ private slots:
 
     void on_actionOptions_triggered();
 
+    void on_actionDebug_triggered(bool checked);
+
+    void on_actionMarkets_triggered(bool checked);
+
 public slots:
     void loadMarket(QListWidgetItem *item);
     void saveMarketsList();
@@ -61,6 +66,7 @@ private:
     QTextEdit *tdebug;
     SystemTrayIcon *trayIcon;
     MenuContextual *menuCtx;
+    SettingsManager *settings;
 };
 
 #endif // MAINWINDOW_H

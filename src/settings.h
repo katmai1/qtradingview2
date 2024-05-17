@@ -27,13 +27,18 @@ public:
     }
 
     // Método para obtener un valor de configuración
-    QVariant getValue(const QString &key, const QVariant &defaultValue = QVariant()) const {
-        return m_settings->value(key, defaultValue);
+    QVariant getValue(const QString &key, const QVariant &defaultValue = QVariant(), const QString &group = "Options") const {
+        m_settings->beginGroup(group);
+        QVariant res = m_settings->value(key, defaultValue);
+        m_settings->endGroup();
+        return res;
     }
 
     // Método para establecer un valor de configuración
-    void setValue(const QString &key, const QVariant &value) {
+    void setValue(const QString &key, const QVariant &value, const QString &group = "Options") {
+        m_settings->beginGroup(group);
         m_settings->setValue(key, value);
+        m_settings->endGroup();
     }
 
     // devuelve el fichero para el translator de qt

@@ -46,13 +46,11 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 // ************************************************************************************************
 // Main Window
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), settings(new SettingsManager())
 {
     ui->setupUi(this);
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
 
-    // init
-    this->ui->dockDebug->setVisible(false);
     this->loadListMarkets();
 
     // declara menus contextuales
@@ -63,12 +61,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
     qInfo() << "Iniciando version: " << APP_VERSION;
+
+    // init
+    this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
+    this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
 }
 
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete settings;
 }
 
 // SatusBar
@@ -121,6 +124,21 @@ void MainWindow::saveMarketsList() {
 
 
 // ************************************************************************************************
+// Save view options checked value in settings
+void MainWindow::on_actionDebug_triggered(bool checked) {   settings->setValue("debug", checked, "View");    }
+
+void MainWindow::on_actionMarkets_triggered(bool checked)   { settings->setValue("markets", checked, "View"); }
+
+void MainWindow::on_actionFullscreen_triggered(bool checked) {
+    if (checked) {  this->showFullScreen();    }
+    else {  this->showMaximized();  }
+    settings->setValue("fullscreen", checked, "View");
+}
+
+
+// ************************************************************************************************
+
+// ************************************************************************************************
 // añade market a la lista
 void MainWindow::addToList(QString market) {
     MarketsList ml(this->ui->listMarkets);
@@ -160,14 +178,6 @@ void MainWindow::on_listMarkets_itemDoubleClicked(QListWidgetItem *item)
     this->ui->webview->loadChart(pair, exchange);
 }
 
-
-// pantalla completa
-void MainWindow::on_actionFullscreen_triggered(bool checked)
-{
-    if (checked) { this->showFullScreen(); }
-    else { this->showMaximized(); }
-}
-
 // filtra los markets
 void MainWindow::on_edFilter_textChanged(const QString &arg1)
 {
@@ -178,3 +188,4 @@ void MainWindow::on_edFilter_textChanged(const QString &arg1)
         item->setHidden(!matches);
     }
 }
+
