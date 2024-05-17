@@ -13,11 +13,11 @@
 #include "version.h"
 #include "src/marketslist.h"
 
-//#include "src/ticker.h"
 #include "src/exmanager.h"
 
 
-//// Función personalizada para manejar los mensajes de depuración
+// ************************************************************************************************
+// Función personalizada para manejar los mensajes de depuración
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     Q_UNUSED(context);
@@ -42,7 +42,8 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
     txt->append(formattedMessage);
 }
 
-// --------------------------------------
+
+// ************************************************************************************************
 // Main Window
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -55,9 +56,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->loadListMarkets();
 
     // declara menus contextuales
-    this->ui->listMarkets->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this->ui->listMarkets, SIGNAL(customContextMenuRequested(QPoint)),
-            this, SLOT(ShowContextMenuMarkets(QPoint)));
+    menuCtx = new MenuContextual(ui->listMarkets);
+    connect(menuCtx, &MenuContextual::sigLoadMarket, this, &MainWindow::loadMarket);
+    connect(menuCtx, &MenuContextual::sigSaveMarketsList, this, &MainWindow::saveMarketsList);
 
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
@@ -70,24 +71,56 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-// menu contextual de la lista de markets
-void MainWindow::ShowContextMenuMarkets(const QPoint& pos) // this is a slot
-{
-    QPoint globalPos = this->ui->listMarkets->mapToGlobal(pos);
-    QMenu menu;
-    menu.addAction("Abrir...", this, SLOT(on_contextLoadMarket()));
-    menu.addAction("Eliminar", this, SLOT(on_contextDeleteMarket()));
-    menu.addAction("Obtener precio", this, SLOT(on_contextGetPrice()));
-
-    menu.exec(globalPos);
-}
-
 // SatusBar
 void MainWindow::sendStatus(QString message, int timeout=5000) {
     this->ui->statusbar->showMessage(message, timeout);
 }
 
+
+// ************************************************************************************************
+// Abre dialogs
+
+// abre dialog about
+void MainWindow::on_actionAbout_triggered()
+{
+    dialogAbout *about;
+    about = new dialogAbout(this);
+    about->setModal(true);
+    about->show();
+}
+
+// abre el dialogo addMarket
+void MainWindow::on_btAdd_clicked()
+{
+    dialogAddMarket *addMarket;
+    addMarket = new dialogAddMarket(this);
+    addMarket->setModal(true);
+    addMarket->show();
+}
+
+// abre dialogo de opciones
+void MainWindow::on_actionOptions_triggered()
+{
+    dialogoptions *Options;
+    Options = new dialogoptions(this);
+    Options->show();
+}
+
+
+// ************************************************************************************************
+// Slots
+
+void MainWindow::loadMarket(QListWidgetItem *item) {
+    this->on_listMarkets_itemDoubleClicked(item);
+}
+
+void MainWindow::saveMarketsList() {
+    MarketsList ml(filepath_markets, this->ui->listMarkets);
+    ml.saveList();
+}
+
+
+// ************************************************************************************************
 // añade market a la lista
 void MainWindow::addToList(QString market) {
     MarketsList ml(filepath_markets, this->ui->listMarkets);
@@ -113,38 +146,6 @@ void MainWindow::on_actionjavascript_triggered()
     this->ui->webview->testJavascript();
 }
 
-// envia el item seleccionado a la funcion que carga la grafica
-void MainWindow::on_contextLoadMarket()
-{
-    this->on_listMarkets_itemDoubleClicked(this->ui->listMarkets->currentItem());
-}
-
-// elimina market seleccionado
-void MainWindow::on_contextDeleteMarket()
-{
-    MarketsList ml(filepath_markets, this->ui->listMarkets);
-    QList<QListWidgetItem *> lista = this->ui->listMarkets->selectedItems();
-    for (QListWidgetItem *item : lista ) {  delete item;    }
-    ml.saveList();
-}
-
-void MainWindow::on_contextGetPrice()
-{
-    MarketsList ml(filepath_markets, this->ui->listMarkets);
-    QList<QListWidgetItem *> lista = this->ui->listMarkets->selectedItems();
-    for (QListWidgetItem *item : lista ) {
-        QString pair = item->text();
-        QString exchange = item->toolTip();
-        QStringList market = pair.split("/");
-        ExManager exman;
-        ExchangeBase* ex = exman.setExchange(exchange.toLower());
-        qDebug() << ex->getPrice(market[0], market[1]);
-        delete ex;
-
-
-    }
-}
-
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
@@ -154,31 +155,14 @@ void MainWindow::on_actionTest_triggered()
     delete ex;
 }
 
-// abre dialog about
-void MainWindow::on_actionAbout_triggered()
-{
-    dialogAbout *about;
-    about = new dialogAbout(this);
-    about->setModal(true);
-    about->show();
-}
 
 // abre market seleccionado con doble click
 void MainWindow::on_listMarkets_itemDoubleClicked(QListWidgetItem *item)
 {
+    qDebug() << "cargando market...";
     QString pair = item->text();
     QString exchange = item->toolTip();
     this->ui->webview->loadChart(pair, exchange);
-}
-
-
-// abre el dialogo addMarket
-void MainWindow::on_btAdd_clicked()
-{
-    dialogAddMarket *addMarket;
-    addMarket = new dialogAddMarket(this);
-    addMarket->setModal(true);
-    addMarket->show();
 }
 
 
@@ -199,13 +183,3 @@ void MainWindow::on_edFilter_textChanged(const QString &arg1)
         item->setHidden(!matches);
     }
 }
-
-
-// abre dialogo de opciones
-void MainWindow::on_actionOptions_triggered()
-{
-    dialogoptions *Options;
-    Options = new dialogoptions(this);
-    Options->show();
-}
-

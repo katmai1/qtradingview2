@@ -4,6 +4,7 @@
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTextEdit>
+
 #include "src/marketslist.h"
 #include "src/systray.h"
 
@@ -35,17 +36,13 @@ private slots:
 
     void on_actionjavascript_triggered();
 
-    // context menu
-    void ShowContextMenuMarkets(const QPoint& pos);
-    void on_contextLoadMarket();
-    void on_contextDeleteMarket();
-    void on_contextGetPrice();
+    // doble click item in marketslist
+    void on_listMarkets_itemDoubleClicked(QListWidgetItem *item);
 
+    // otros
     void on_actionTest_triggered();
 
     void on_actionAbout_triggered();
-
-    void on_listMarkets_itemDoubleClicked(QListWidgetItem *item);
 
     void on_btAdd_clicked();
 
@@ -55,9 +52,15 @@ private slots:
 
     void on_actionOptions_triggered();
 
+public slots:
+    void loadMarket(QListWidgetItem *item);
+    void saveMarketsList();
+
 private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;
     SystemTrayIcon *trayIcon;
+    MenuContextual *menuCtx;
 };
+
 #endif // MAINWINDOW_H

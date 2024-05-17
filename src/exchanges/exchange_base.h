@@ -50,6 +50,7 @@ public:
     }
 
     virtual double parsePriceFromJson(const QByteArray &jsonData) {
+        Q_UNUSED(jsonData);
         return -1.0;
     };
 
