@@ -51,6 +51,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
 
+    // init
+    this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
+    this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
+    this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
+    this->ui->actionStatusbar->setChecked(settings->getValue("statusbar", false, "View").toBool());
+
     this->loadListMarkets();
 
     // declara menus contextuales
@@ -62,9 +68,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     qInstallMessageHandler(customMessageHandler);
     qInfo() << "Iniciando version: " << APP_VERSION;
 
-    // init
-    this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
-    this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
 }
 
 
@@ -129,6 +132,8 @@ void MainWindow::on_actionDebug_triggered(bool checked) {   settings->setValue("
 
 void MainWindow::on_actionMarkets_triggered(bool checked)   { settings->setValue("markets", checked, "View"); }
 
+void MainWindow::on_actionStatusbar_triggered(bool checked) {   settings->setValue("statusbar", checked, "View");   }
+
 void MainWindow::on_actionFullscreen_triggered(bool checked) {
     if (checked) {  this->showFullScreen();    }
     else {  this->showMaximized();  }
@@ -188,4 +193,3 @@ void MainWindow::on_edFilter_textChanged(const QString &arg1)
         item->setHidden(!matches);
     }
 }
-
