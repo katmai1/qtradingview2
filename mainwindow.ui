@@ -63,6 +63,7 @@
     <addaction name="actionDebug"/>
     <addaction name="separator"/>
     <addaction name="actionFullscreen"/>
+    <addaction name="actionStatusbar"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -231,7 +232,7 @@
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Mercados</string>
@@ -270,6 +271,17 @@
   <action name="actionOptions">
    <property name="text">
     <string>Opciones...</string>
+   </property>
+  </action>
+  <action name="actionStatusbar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Barra de estado</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
    </property>
   </action>
  </widget>
@@ -362,6 +374,22 @@
     <hint type="destinationlabel">
      <x>-1</x>
      <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionStatusbar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>statusbar</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>588</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>588</y>
     </hint>
    </hints>
   </connection>

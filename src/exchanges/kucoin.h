@@ -28,27 +28,6 @@ public:
         return this->fetchPrice(url);
     }
 
-//    double getPrice(const QString &symbol) override {
-//        QNetworkRequest request;
-//        request.setUrl(QUrl("https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=" + symbol));
-
-//        QNetworkReply *reply = manager->get(request);
-
-//        QEventLoop loop;
-//        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-//        loop.exec();
-
-//        if (reply->error() == QNetworkReply::NoError) {
-//            QByteArray data = reply->readAll();
-//            double price = parsePriceFromJson(data);
-//            reply->deleteLater();
-//            return price;
-//        } else {
-//            qDebug() << "Error:" << reply->errorString();
-//            reply->deleteLater();
-//            return -1.0; // Indicador de error
-//        }
-//    }
 
 private:
 
