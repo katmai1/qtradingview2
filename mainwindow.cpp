@@ -167,10 +167,14 @@ void MainWindow::on_actionjavascript_triggered()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    ExManager exman;
-    ExchangeBase* ex = exman.setExchange("kucoin");
-    qDebug() << ex->getPrice("btc", "usdt");
-    delete ex;
+    this->ui->webview->page()->toHtml([this](const QString &html) {
+        QFile file(settings->pathDir() + "/web.html");
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&file);
+            out << html;
+            file.close();
+        }
+    });
 }
 
 
@@ -193,3 +197,16 @@ void MainWindow::on_edFilter_textChanged(const QString &arg1)
         item->setHidden(!matches);
     }
 }
+
+void MainWindow::on_actionSaveHTML_triggered()
+{
+    this->ui->webview->page()->toHtml([this](const QString &html) {
+        QFile file(settings->pathDir() + "/web.html");
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&file);
+            out << html;
+            file.close();
+        }
+    });
+}
+
