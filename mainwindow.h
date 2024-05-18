@@ -59,6 +59,8 @@ private slots:
 
     void on_actionStatusbar_triggered(bool checked);
 
+    void on_actionSaveHTML_triggered();
+
 public slots:
     void loadMarket(QListWidgetItem *item);
     void saveMarketsList();
