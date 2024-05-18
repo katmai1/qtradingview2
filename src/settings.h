@@ -74,7 +74,7 @@ public:
 
     // devuelve lista de markets, si no existe devuelve BTC/USDT de Binance
     QStringList getListMarkets() {
-        return m_settings->value("markets", "BTC/USDT:BINANCE").toStringList();
+        return this->getValue("markets", "BTC/USDT:BINANCE").toStringList();
     }
 
     // devuelve lista de idiomas disponibles
