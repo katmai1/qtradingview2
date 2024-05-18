@@ -81,6 +81,7 @@
     <addaction name="separator"/>
     <addaction name="actionjavascript"/>
     <addaction name="actionTest"/>
+    <addaction name="actionSaveHTML"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -284,6 +285,11 @@
     <string>F10</string>
    </property>
   </action>
+  <action name="actionSaveHTML">
+   <property name="text">
+    <string>Save HTML</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -384,8 +390,8 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>588</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
