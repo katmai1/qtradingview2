@@ -40,22 +40,6 @@ void MarketsList::saveList()
     qInfo() << "Lista de mercados guardada";
 }
 
-// devuelve true si ese market ya existe
-//bool MarketsList::existMarket(QString market)
-//{
-//    // obtiene item del market y hace la busqueda
-//    QListWidgetItem *item = getItem(market);
-//    QList<QListWidgetItem *> lista = this->m_list->findItems(item->text(), Qt::MatchExactly);
-
-//    // si la busqueda tiene algun resultado y ademas el exchange coincide devuelve true
-//    if (lista.count() > 0) {
-//        for (QListWidgetItem *market : lista) {
-//            qInfo() << market->text();
-//            if (market->toolTip() == item->toolTip()) { return true;    }
-//        }
-//    }
-//    return false;
-//}
 
 // añade market a la lista
 void MarketsList::addMarket(QString market)
@@ -86,15 +70,18 @@ MenuContextual::MenuContextual(QListWidget *parent) : QObject(parent)
     QAction *actionLoadChart = new QAction("Load chart...", this);
     QAction *actionDeleteMarket = new QAction("Delete...", this);
     QAction *actionGetPrice = new QAction("Get price", this);
+    QAction *actionAddPosition = new QAction("Add to portfolio...", this);
 
     connect(actionLoadChart, &QAction::triggered, this, &MenuContextual::loadChart);
     connect(actionDeleteMarket, &QAction::triggered, this, &MenuContextual::deleteMarket);
     connect(actionGetPrice, &QAction::triggered, this, &MenuContextual::getPrice);
+    connect(actionAddPosition, &QAction::triggered, this, &MenuContextual::addPosition);
 
     menu->addAction(actionLoadChart);
     menu->addAction(actionDeleteMarket);
     menu->addSeparator();
     menu->addAction(actionGetPrice);
+    menu->addAction(actionAddPosition);
 
     parent->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(parent, &QListWidget::customContextMenuRequested, this, &MenuContextual::showMenu);
@@ -109,6 +96,11 @@ void MenuContextual::showMenu(const QPoint &pos)
 {
     QPoint globalPos = listWidget->mapToGlobal(pos);
     menu->exec(globalPos);
+}
+
+void MenuContextual::addPosition() {
+    QListWidgetItem *item = listWidget->currentItem();
+    emit sigAddPosition(item);
 }
 
 void MenuContextual::loadChart()

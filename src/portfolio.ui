@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Portfolio</class>
+ <widget class="QDialog" name="Portfolio">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>751</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Portfolio</string>
+  </property>
+  <property name="locale">
+   <locale language="Spanish" country="Spain"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="columnCount">
+      <number>6</number>
+     </property>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>53</number>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>116</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Exchange</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Mercado</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Beneficio</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cantidad</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio de compra</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio actual</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnAdd">
+       <property name="text">
+        <string>Añadir...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnDelete">
+       <property name="text">
+        <string>Eliminar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnRefresh">
+       <property name="text">
+        <string>Actualizar</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -61,8 +61,11 @@ private slots:
 
     void on_actionSaveHTML_triggered();
 
+    void on_actionPortfolio_triggered();
+
 public slots:
     void loadMarket(QListWidgetItem *item);
+    void addPosition(QListWidgetItem *item);
     void saveMarketsList();
 
 private:

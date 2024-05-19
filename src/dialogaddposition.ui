@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dialogAddPosition</class>
+ <widget class="QDialog" name="dialogAddPosition">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>283</width>
+    <height>179</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Mercado</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="edMarket">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>20</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>BTC/USDT</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="cmbExchange">
+       <item>
+        <property name="text">
+         <string>Binance</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../recursos.qrc">
+          <normaloff>:/exchanges/icons/binance</normaloff>:/exchanges/icons/binance</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BingX</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../recursos.qrc">
+          <normaloff>:/exchanges/icons/bingx</normaloff>:/exchanges/icons/bingx</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Kucoin</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../recursos.qrc">
+          <normaloff>:/exchanges/icons/kucoin</normaloff>:/exchanges/icons/kucoin</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Exchange</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Cantidad</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Precio de compra</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="spinAmount">
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="decimals">
+        <number>8</number>
+       </property>
+       <property name="maximum">
+        <double>999999999.990000009536743</double>
+       </property>
+       <property name="stepType">
+        <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDoubleSpinBox" name="spinBuyPrice">
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="decimals">
+        <number>8</number>
+       </property>
+       <property name="maximum">
+        <double>99999999.989999994635582</double>
+       </property>
+       <property name="stepType">
+        <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../recursos.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>dialogAddPosition</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>178</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>dialogAddPosition</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>273</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>178</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

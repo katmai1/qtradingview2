@@ -35,6 +35,7 @@ public:
 
 signals:
     void sigLoadMarket(QListWidgetItem *item);
+    void sigAddPosition(QListWidgetItem *item);
     void sigSaveMarketsList();
 
 private slots:
@@ -42,6 +43,7 @@ private slots:
     void loadChart();
     void deleteMarket();
     void getPrice();
+    void addPosition();
 
 private:
     QListWidget *listWidget;
