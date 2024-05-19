@@ -11,7 +11,7 @@ LIBS += -lcpprest -lboost_system -lssl -lcrypto -lpthread -lboost_thread
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 VERSION_MAJOR = 1
 VERSION_MINOR = 6
-VERSION_PATCH = 2
+VERSION_PATCH = 3
 
 DEFINES += VERSION_MAJOR=$$VERSION_MAJOR VERSION_MINOR=$$VERSION_MINOR VERSION_PATCH=$$VERSION_PATCH
 
@@ -74,6 +74,7 @@ RESOURCES += \
 
 DISTFILES += \
     genver.sh \
+    update_git.py \
     update_version.py
 
 ## Ruta al intérprete de Python y al script
