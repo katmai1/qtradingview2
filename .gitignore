@@ -81,9 +81,10 @@ Thumbs.db
 /builds/Linux_x64/release/favoritos.txt
 .vscode/settings.json
 builds/Linux_x64/release/qmake_qmake_qm_files_rc.py
-*.py
 builds/Linux_x64/release/QTradingview2
 *.tmp
 builds/Linux_x64/release/QTradingview2
 builds/Linux_x64/release/QTradingview2
 builds/Linux_x64/release/QTradingview2
+.qtc_clangd/*
+qmake_qmake_qm_files.qrc

@@ -10,8 +10,8 @@ LIBS += -lcpprest -lboost_system -lssl -lcrypto -lpthread -lboost_thread
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 VERSION_MAJOR = 1
-VERSION_MINOR = 4
-VERSION_PATCH = 8
+VERSION_MINOR = 1
+VERSION_PATCH = 1
 
 DEFINES += VERSION_MAJOR=$$VERSION_MAJOR VERSION_MINOR=$$VERSION_MINOR VERSION_PATCH=$$VERSION_PATCH
 
@@ -72,4 +72,19 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     recursos.qrc
 
-DISTFILES +=
+DISTFILES += \
+    update_version.py
+
+## Ruta al intérprete de Python y al script
+#PYTHON = python3
+#UPDATE_VERSION_SCRIPT = update_version.py
+
+## Condición para ejecutar el script solo en modo release
+#release {
+#    message("Ejecutando script de actualización de versión con $$UPDATE_VERSION_SCRIPT...")
+
+#    # Definición del objetivo personalizado
+#    update_version.commands = $$PYTHON $$UPDATE_VERSION_SCRIPT QTradingview2.pro
+#    QMAKE_EXTRA_TARGETS += update_version
+#    PRE_TARGETDEPS += update_version
+#}
