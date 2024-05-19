@@ -72,7 +72,7 @@ Thumbs.db
 *.exe
 
 *.qmake.stash
-/builds/Linux_x64/release/.qtc_clangd/
+/builds/Linux_x64/*
 /dist/
 /builds/Linux_x64/debug/
 /builds/Linux_x64/profile/
@@ -88,3 +88,4 @@ builds/Linux_x64/release/QTradingview2
 builds/Linux_x64/release/QTradingview2
 .qtc_clangd/*
 qmake_qmake_qm_files.qrc
+builds/.qtc_clangd/*

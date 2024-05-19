@@ -2,7 +2,7 @@ import sys
 import subprocess
 
 
-def increment_version(pro_file):
+def update_git(pro_file):
     try:
         with open(pro_file, 'r') as file:
             lines = file.readlines()
@@ -31,32 +31,17 @@ def increment_version(pro_file):
             else:
                 new_lines.append(line)
 
-        if version_major is None or version_minor is None or version_patch is None:
-            print("No se encontraron todas las versiones (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH) en el archivo.")
-            return False
+        # Hacer un commit con los cambios
+        subprocess.run(["git", "add", pro_file])
+        subprocess.run(["chmod", "+x", "builds/QTradingview2"])
+        subprocess.run(["git", "add", "builds/QTradingview2"])
+        subprocess.run(["git", "commit", "-m", "Actualización de versión"])
 
-        # Incrementar la versión
-        version_patch += 1
-        if version_patch >= 10:
-            version_patch = 0
-            version_minor += 1
-            if version_minor >= 10:
-                version_minor = 0
-                version_major += 1
+        # Crear un tag con el nuevo número de versión
+        subprocess.run(["git", "tag", f"v{version_major}.{version_minor}.{version_patch}"])
+        subprocess.run(["git", "push", "origin", f"v{version_major}.{version_minor}.{version_patch}"])
 
-        for i in range(len(new_lines)):
-            if new_lines[i].startswith('VERSION_MAJOR'):
-                new_lines[i] = f'VERSION_MAJOR = {version_major}\n'
-            elif new_lines[i].startswith('VERSION_MINOR'):
-                new_lines[i] = f'VERSION_MINOR = {version_minor}\n'
-            elif new_lines[i].startswith('VERSION_PATCH'):
-                new_lines[i] = f'VERSION_PATCH = {version_patch}\n'
-
-        with open(pro_file, 'w') as file:
-            file.writelines(new_lines)
-
-        print(f"Incremento de la versión a {version_major}.{version_minor}.{version_patch}")
-
+        print("Commit y tag creados exitosamente")
         return True
 
     except Exception as e:
@@ -65,9 +50,9 @@ def increment_version(pro_file):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Uso: python3 update_version.py <ruta_al_archivo_pro>")
+        print("Uso: python3 update_git.py <ruta_al_archivo_pro>")
         sys.exit(1)
 
     pro_file = sys.argv[1]
-    if not increment_version(pro_file):
+    if not update_git(pro_file):
         sys.exit(1)
