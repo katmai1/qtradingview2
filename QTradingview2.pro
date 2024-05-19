@@ -4,20 +4,25 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
+LIBS += -lcpprest -lboost_system -lssl -lcrypto -lpthread -lboost_thread
+
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cryptolib/cryptolib.cpp \
     customwebengineview.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
     src/dialogoptions.cpp \
     main.cpp \
     mainwindow.cpp \
-    src/marketslist.cpp
+    src/marketslist.cpp \
+    src/portfolio.cpp
 
 HEADERS += \
+    cryptolib/cryptolib.h \
     customwebengineview.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
@@ -28,6 +33,7 @@ HEADERS += \
     src/exchanges/kucoin.h \
     src/exmanager.h \
     src/marketslist.h \
+    src/portfolio.h \
     src/settings.h \
     src/systray.h \
     src/uimanager.h \
@@ -37,7 +43,8 @@ FORMS += \
     src/dialogabout.ui \
     src/dialogaddmarket.ui \
     src/dialogoptions.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    src/portfolio.ui
 
 TRANSLATIONS += \
     langs/QTradingview2_es_ES.ts \

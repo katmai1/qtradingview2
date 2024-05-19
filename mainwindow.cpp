@@ -8,12 +8,13 @@
 #include <QtWidgets>
 #include <QTextEdit>
 #include <QDebug>
+#include <QString>
 
 #include "src/uimanager.h"
 #include "version.h"
 #include "src/marketslist.h"
 
-#include "src/exmanager.h"
+#include "cryptolib/cryptolib.h"
 
 
 // ************************************************************************************************
@@ -167,14 +168,10 @@ void MainWindow::on_actionjavascript_triggered()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    this->ui->webview->page()->toHtml([this](const QString &html) {
-        QFile file(settings->pathDir() + "/web.html");
-        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            QTextStream out(&file);
-            out << html;
-            file.close();
-        }
-    });
+    auto ex = getExchange("binance");
+    double valor = ex->getPrice("BTC/USDT");
+    QString formatted = QString::number(valor, 'f', 8);
+    qDebug() << formatted;
 }
 
 
