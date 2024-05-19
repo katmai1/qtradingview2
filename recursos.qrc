@@ -6,5 +6,6 @@
     <qresource prefix="/exchanges">
         <file>icons/binance</file>
         <file>icons/kucoin</file>
+        <file>icons/bingx</file>
     </qresource>
 </RCC>

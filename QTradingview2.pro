@@ -15,6 +15,7 @@ SOURCES += \
     customwebengineview.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
+    src/dialogaddposition.cpp \
     src/dialogoptions.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     customwebengineview.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
+    src/dialogaddposition.h \
     src/dialogoptions.h \
     mainwindow.h \
     src/exchanges/exchange_base.h \
@@ -42,6 +44,7 @@ HEADERS += \
 FORMS += \
     src/dialogabout.ui \
     src/dialogaddmarket.ui \
+    src/dialogaddposition.ui \
     src/dialogoptions.ui \
     mainwindow.ui \
     src/portfolio.ui

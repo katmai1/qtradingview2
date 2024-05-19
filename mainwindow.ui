@@ -64,6 +64,7 @@
     <addaction name="separator"/>
     <addaction name="actionFullscreen"/>
     <addaction name="actionStatusbar"/>
+    <addaction name="actionPortfolio"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -288,6 +289,14 @@
   <action name="actionSaveHTML">
    <property name="text">
     <string>Save HTML</string>
+   </property>
+  </action>
+  <action name="actionPortfolio">
+   <property name="text">
+    <string>Portfolio...</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
  </widget>

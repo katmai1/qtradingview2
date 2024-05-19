@@ -37,11 +37,11 @@ void CustomWebEngineView::testJavascript() {
     // const adWrapper = document.querySelector('div[class^=toast-positioning-wrapper-]');
     QString code = R"delim(
         const hideAds = setInterval(() => {
-            const adWrapper = document.querySelector('div[class^=ad]');
+            const adWrapper = document.querySelector("div[class^='wrap-']");
             if (adWrapper) {
                 adWrapper.querySelector('button').click();
             }
-        }, 10000);
+        }, 5000);
     )delim";
     this->page()->runJavaScript(code);
 }

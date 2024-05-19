@@ -13,7 +13,8 @@
 #include "src/uimanager.h"
 #include "version.h"
 #include "src/marketslist.h"
-
+#include "src/portfolio.h"
+#include "src/dialogaddposition.h"
 #include "cryptolib/cryptolib.h"
 
 
@@ -63,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // declara menus contextuales
     menuCtx = new MenuContextual(ui->listMarkets);
     connect(menuCtx, &MenuContextual::sigLoadMarket, this, &MainWindow::loadMarket);
+    connect(menuCtx, &MenuContextual::sigAddPosition, this, &MainWindow::addPosition);
     connect(menuCtx, &MenuContextual::sigSaveMarketsList, this, &MainWindow::saveMarketsList);
 
     // redirige mensajes debug
@@ -113,12 +115,37 @@ void MainWindow::on_actionOptions_triggered()
     Options->show();
 }
 
+void MainWindow::on_actionPortfolio_triggered()
+{
+    Portfolio *portfolio;
+    portfolio = new Portfolio(this);
+    portfolio->show();
+}
 
 // ************************************************************************************************
 // Slots
 
 void MainWindow::loadMarket(QListWidgetItem *item) {
     this->on_listMarkets_itemDoubleClicked(item);
+}
+
+void MainWindow::addPosition(QListWidgetItem *item) {
+    Portfolio *portfolio;
+    portfolio = new Portfolio(this);
+    portfolio->show();
+
+    dialogAddPosition *addPosition;
+    QString market = item->text();
+    QString exchange = item->toolTip();
+
+    auto ex = getExchange(exchange.toLower().toStdString());
+    double lastPrice = ex->getPrice(market.toUpper().toStdString());
+
+    addPosition = new dialogAddPosition(portfolio, exchange, market, lastPrice);
+    addPosition->setModal(true);
+    connect(addPosition, &dialogAddPosition::signalAddPosition, portfolio, &Portfolio::slotAddPosition);
+    addPosition->show();
+
 }
 
 void MainWindow::saveMarketsList() {
@@ -168,10 +195,8 @@ void MainWindow::on_actionjavascript_triggered()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    auto ex = getExchange("binance");
-    double valor = ex->getPrice("BTC/USDT");
-    QString formatted = QString::number(valor, 'f', 8);
-    qDebug() << formatted;
+    QList<Positions> PositionsList = settings->getPositions();
+    qDebug() << PositionsList.count();
 }
 
 
@@ -206,4 +231,3 @@ void MainWindow::on_actionSaveHTML_triggered()
         }
     });
 }
-

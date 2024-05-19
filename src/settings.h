@@ -7,6 +7,7 @@
 #include <QFileInfo>
 
 #include "src/marketslist.h"
+#include "src/portfolio.h"
 
 
 struct Languages {
@@ -105,6 +106,20 @@ public:
             if (item == market) {   return true;  }
         }
         return false;
+    }
+
+    QList<Positions> getPositions() {
+        // Leer el JSON desde QSettings y deserializarlo a una lista de entradas
+        QString jsonStringLoaded = this->getValue("positions", "{}", "Portfolio").toString();
+        QJsonDocument docLoaded = QJsonDocument::fromJson(jsonStringLoaded.toUtf8());
+        QJsonArray jsonArrayLoaded = docLoaded.array();
+        QList<Positions> PositionsList;
+        for (const auto& item : jsonArrayLoaded) {
+            if (item.isObject()) {
+                PositionsList.append(Positions::fromJson(item.toObject()));
+            }
+        }
+        return PositionsList;
     }
 
 private:

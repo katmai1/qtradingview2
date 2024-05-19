@@ -76,6 +76,15 @@
         </item>
         <item>
          <property name="text">
+          <string>BingX</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../recursos.qrc">
+           <normaloff>:/exchanges/icons/bingx</normaloff>:/exchanges/icons/bingx</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string comment="kuku">Kucoin</string>
          </property>
          <property name="icon">
