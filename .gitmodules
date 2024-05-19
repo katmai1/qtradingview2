@@ -1,0 +1,3 @@
+[submodule "cryptolib"]
+	path = cryptolib
+	url = git@github.com:katmai1/cryptolib.git

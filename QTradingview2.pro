@@ -9,6 +9,11 @@ LIBS += -lcpprest -lboost_system -lssl -lcrypto -lpthread -lboost_thread
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+VERSION_MAJOR = 1
+VERSION_MINOR = 4
+VERSION_PATCH = 8
+
+DEFINES += VERSION_MAJOR=$$VERSION_MAJOR VERSION_MINOR=$$VERSION_MINOR VERSION_PATCH=$$VERSION_PATCH
 
 SOURCES += \
     cryptolib/cryptolib.cpp \
