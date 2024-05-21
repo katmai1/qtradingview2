@@ -69,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
-    qInfo() << "Iniciando version: " << APP_VERSION;
+    qInfo() << "Iniciando version: " << QString("v%1.%2.%3").arg(VERSION_MAJOR).arg(VERSION_MINOR).arg(VERSION_PATCH);
 
 }
 
