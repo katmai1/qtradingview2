@@ -15,6 +15,13 @@ VERSION_PATCH = 6
 
 DEFINES += VERSION_MAJOR=$$VERSION_MAJOR VERSION_MINOR=$$VERSION_MINOR VERSION_PATCH=$$VERSION_PATCH
 
+# Calcula la versión completa
+VERSION_FULL = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}
+
+# Agrega la versión completa como una definición para que esté disponible en todo el proyecto
+DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
+
+
 SOURCES += \
     cryptolib/cryptolib.cpp \
     customwebengineview.cpp \
@@ -35,16 +42,11 @@ HEADERS += \
     src/dialogaddposition.h \
     src/dialogoptions.h \
     mainwindow.h \
-    src/exchanges/exchange_base.h \
-    src/exchanges/binance.h \
-    src/exchanges/kucoin.h \
-    src/exmanager.h \
     src/marketslist.h \
     src/portfolio.h \
     src/settings.h \
     src/systray.h \
-    src/uimanager.h \
-    version.h
+    src/uimanager.h
 
 FORMS += \
     src/dialogabout.ui \

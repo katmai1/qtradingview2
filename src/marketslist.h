@@ -16,7 +16,6 @@ public:
     MarketsList(QListWidget *listWidget) : m_list(listWidget) {}
     void saveList();
     void loadList();
-//    bool existMarket(QString market);
     void addMarket(QString market);
 
 private:
@@ -42,7 +41,6 @@ private slots:
     void showMenu(const QPoint &pos);
     void loadChart();
     void deleteMarket();
-    void getPrice();
     void addPosition();
 
 private:

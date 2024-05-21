@@ -11,7 +11,6 @@
 #include <QString>
 
 #include "src/uimanager.h"
-#include "version.h"
 #include "src/marketslist.h"
 #include "src/portfolio.h"
 #include "src/dialogaddposition.h"
@@ -69,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
-    qInfo() << "Iniciando version: " << QString("v%1.%2.%3").arg(VERSION_MAJOR).arg(VERSION_MINOR).arg(VERSION_PATCH);
+    qInfo() << "Iniciando version: " << QString("v%1").arg(VERSION_FULL);
 
 }
 

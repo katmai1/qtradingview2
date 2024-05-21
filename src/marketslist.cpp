@@ -1,11 +1,6 @@
 #include "marketslist.h"
-#include "qdebug.h"
-
 #include <QList>
-
-#include "qglobal.h"
 #include "src/settings.h"
-#include "src/exmanager.h"
 
 
 
@@ -69,18 +64,15 @@ MenuContextual::MenuContextual(QListWidget *parent) : QObject(parent)
     menu = new QMenu(parent);
     QAction *actionLoadChart = new QAction("Load chart...", this);
     QAction *actionDeleteMarket = new QAction("Delete...", this);
-    QAction *actionGetPrice = new QAction("Get price", this);
     QAction *actionAddPosition = new QAction("Add to portfolio...", this);
 
     connect(actionLoadChart, &QAction::triggered, this, &MenuContextual::loadChart);
     connect(actionDeleteMarket, &QAction::triggered, this, &MenuContextual::deleteMarket);
-    connect(actionGetPrice, &QAction::triggered, this, &MenuContextual::getPrice);
     connect(actionAddPosition, &QAction::triggered, this, &MenuContextual::addPosition);
 
     menu->addAction(actionLoadChart);
     menu->addAction(actionDeleteMarket);
     menu->addSeparator();
-    menu->addAction(actionGetPrice);
     menu->addAction(actionAddPosition);
 
     parent->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -114,15 +106,4 @@ void MenuContextual::deleteMarket()
     QListWidgetItem *item = listWidget->currentItem();
     delete item;
     emit sigSaveMarketsList();
-}
-
-void MenuContextual::getPrice() {
-    QListWidgetItem *item = listWidget->currentItem();
-    QString pair = item->text();
-    QString exchange = item->toolTip();
-    QStringList market = pair.split("/");
-    ExManager exman;
-    ExchangeBase* ex = exman.setExchange(exchange.toLower());
-    qDebug() << ex->getPrice(market[0], market[1]);
-    delete ex;
 }
