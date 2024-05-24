@@ -3,7 +3,6 @@
 #include "ui_portfolio.h"
 
 #include "src/settings.h"
-#include "cryptolib/cryptolib.h"
 #include "src/dialogaddposition.h"
 #include "src/exmanager.h"
 
@@ -54,15 +53,12 @@ void Portfolio::on_btnRefresh_clicked(const bool loadOnly)
                 this->insertTrade(row, trade, 0, 0, 0);
             }
             else {
-                ExManager exman;
-                ExchangeBase *ex = exman.setExchange(trade.exchange.toLower());
-                auto ex2 = getExchange(trade.exchange.toLower().toStdString());
-
+                ExchangeBase* ex = getExchangeClass(trade.exchange.toLower());
                 double lastPrice = ex->getPrice(trade.market);
-                double profit = ex2->getProfit(trade.amount, trade.buyPrice, lastPrice);
-                double profitPercent = ex2->getProfitPercent(trade.amount, trade.buyPrice, lastPrice);
 
-                qDebug() << lastPrice;
+                double profit = calcProfit(trade.amount, trade.buyPrice, lastPrice);
+                double profitPercent = calcProfitPercent(trade.amount, trade.buyPrice, lastPrice);
+
                 this->insertTrade(row, trade, lastPrice, profit, profitPercent);
             }
             row++;

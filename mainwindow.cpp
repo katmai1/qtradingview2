@@ -14,7 +14,6 @@
 #include "src/marketslist.h"
 #include "src/portfolio.h"
 #include "src/dialogaddposition.h"
-#include "cryptolib/cryptolib.h"
 #include "src/exmanager.h"
 
 
@@ -138,8 +137,8 @@ void MainWindow::addPosition(QListWidgetItem *item) {
     QString market = item->text();
     QString exchange = item->toolTip();
 
-    auto ex = getExchange(exchange.toLower().toStdString());
-    double lastPrice = ex->getPrice(market.toUpper().toStdString());
+    ExchangeBase *ex = getExchangeClass(exchange.toLower());
+    double lastPrice = ex->getPrice(market.toUpper());
 
     addPosition = new dialogAddPosition(portfolio, exchange, market, lastPrice);
     addPosition->setModal(true);
@@ -196,8 +195,7 @@ void MainWindow::on_actionjavascript_triggered()
 void MainWindow::on_actionTest_triggered()
 {
     try {
-        ExManager exman;
-        ExchangeBase *ex = exman.setExchange("bingx");
+        ExchangeBase *ex = getExchangeClass("bingx");
         qDebug() << ex->getPrice("KAS/USDT");
         delete ex;
     }

@@ -31,6 +31,7 @@ SOURCES += \
     src/dialogoptions.cpp \
     main.cpp \
     mainwindow.cpp \
+    src/exmanager.cpp \
     src/marketslist.cpp \
     src/portfolio.cpp
 
