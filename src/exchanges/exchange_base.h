@@ -13,14 +13,21 @@ class ExchangeBase : public QObject{
     Q_OBJECT
 
 public:
-    virtual ~ExchangeBase() {};
+    explicit ExchangeBase(QObject *parent = nullptr) : QObject(parent) {}
 
-    virtual double getPrice(const QString &symbol, const QString &base) {
+    virtual ~ExchangeBase() {}
+
+    double getPrice(const QString &market) {
+        QStringList marketParts = market.split("/");
+        return _getPrice(marketParts.value(0).toUpper(), marketParts.value(1).toUpper());
+    }
+
+    virtual double _getPrice(const QString &symbol, const QString &base) {
         QString market = symbol.toUpper() + "/" + base.toUpper();
         qInfo() << "No se puede obtener precio del market "<< market
-                    << " sin haber definido antes un exchange valido";
+                << " sin haber definido antes un exchange valido";
         return -1.0;
-    };
+    }
 
     virtual void test() {
         qDebug() << "funcion de test de la clase ExchangeBase";
@@ -58,6 +65,4 @@ private:
     QNetworkAccessManager *manager;
 
 };
-
-
 #endif // EXCHANGE_BASE_H

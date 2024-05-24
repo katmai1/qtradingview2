@@ -7,22 +7,20 @@
 #include <QJsonArray>
 #include <QDebug>
 
-#include "src/exchanges/exchange_base.h"
+#include "exchange_base.h"
 
 
-class KucoinAPI : public ExchangeBase {
+class Kucoin : public ExchangeBase {
 
 
 public:
-//    explicit KucoinAPI(QObject *parent = nullptr) : QObject(parent) {
-//        manager = new QNetworkAccessManager(this);
-//    }
+    explicit Kucoin(QObject *parent = nullptr) : ExchangeBase(parent) {}
 
     void test() override {
         qDebug() << "test kucoin";
     }
 
-    double getPrice(const QString &symbol, const QString &base) override {
+    double _getPrice(const QString &symbol, const QString &base) override {
         QString market = symbol.toUpper() + "-" + base.toUpper();
         QUrl url = "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=" + market;
         return this->fetchPrice(url);

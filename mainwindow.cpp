@@ -11,11 +11,10 @@
 #include <QString>
 
 #include "src/uimanager.h"
-#include "version.h"
 #include "src/marketslist.h"
 #include "src/portfolio.h"
 #include "src/dialogaddposition.h"
-#include "cryptolib/cryptolib.h"
+#include "src/exmanager.h"
 
 
 // ************************************************************************************************
@@ -69,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
-    qInfo() << "Iniciando version: " << QString("v%1.%2.%3").arg(VERSION_MAJOR).arg(VERSION_MINOR).arg(VERSION_PATCH);
+    qInfo() << "Iniciando version: " << QString("v%1").arg(VERSION_FULL);
 
 }
 
@@ -138,8 +137,8 @@ void MainWindow::addPosition(QListWidgetItem *item) {
     QString market = item->text();
     QString exchange = item->toolTip();
 
-    auto ex = getExchange(exchange.toLower().toStdString());
-    double lastPrice = ex->getPrice(market.toUpper().toStdString());
+    ExchangeBase *ex = getExchangeClass(exchange.toLower());
+    double lastPrice = ex->getPrice(market.toUpper());
 
     addPosition = new dialogAddPosition(portfolio, exchange, market, lastPrice);
     addPosition->setModal(true);
@@ -195,8 +194,13 @@ void MainWindow::on_actionjavascript_triggered()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    QList<Positions> PositionsList = settings->getPositions();
-    qDebug() << PositionsList.count();
+    try {
+        ExchangeBase *ex = getExchangeClass("bingx");
+        qDebug() << ex->getPrice("KAS/USDT");
+        delete ex;
+    }
+    catch (QException e) { qDebug() << e.what(); }
+
 }
 
 

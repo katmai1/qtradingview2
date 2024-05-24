@@ -1,6 +1,5 @@
 #include "dialogabout.h"
 #include "ui_dialogabout.h"
-#include "version.h"
 
 
 dialogAbout::dialogAbout(QWidget *parent) :
@@ -8,7 +7,7 @@ dialogAbout::dialogAbout(QWidget *parent) :
     ui(new Ui::dialogAbout)
 {
     ui->setupUi(this);
-    ui->labelVersion->setText(APP_VERSION);
+    ui->labelVersion->setText(VERSION_FULL);
 }
 
 dialogAbout::~dialogAbout()

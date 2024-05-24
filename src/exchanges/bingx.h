@@ -1,5 +1,5 @@
-#ifndef BINANCE_H
-#define BINANCE_H
+#ifndef BINGX_H
+#define BINGX_H
 
 #include <QtNetwork>
 #include <QJsonDocument>
@@ -10,33 +10,35 @@
 #include "exchange_base.h"
 
 
-class Binance : public ExchangeBase {
+class Bingx : public ExchangeBase {
+
 
 public:
-    explicit Binance(QObject *parent = nullptr) : ExchangeBase(parent) {}
+    explicit Bingx(QObject *parent = nullptr) : ExchangeBase(parent) {}
 
     void test() override {
-        qDebug() << "test binace";
+        qDebug() << "test bingx";
     }
 
     double _getPrice(const QString &symbol, const QString &base) override {
-        QString market = symbol.toUpper() + base.toUpper();
-        QUrl url = "https://api.binance.com/api/v3/ticker/price?symbol=" + market;
+        QString market = symbol.toUpper() + "-" + base.toUpper();
+        QUrl url = "https://open-api.bingx.com/openApi/swap/v1/ticker/price?symbol=" + market;
         return this->fetchPrice(url);
     }
+
 
 private:
 
     double parsePriceFromJson(const QByteArray &jsonData) override {
         QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
         QJsonObject jsonObj = jsonDoc.object();
-        if (jsonObj.contains("price")) {
-            return jsonObj["price"].toString().toDouble();
+        if (jsonObj.contains("data")) {
+            return jsonObj["data"].toObject()["price"].toString().toDouble();
         } else {
-            qDebug() << "Error: Invalid response from Binance API";
+            qDebug() << "Error: Invalid response from Kucoin API";
             return -1.0; // Indicador de error
         }
     }
 };
 
-#endif // BINANCE_H
+#endif // BINGX_H

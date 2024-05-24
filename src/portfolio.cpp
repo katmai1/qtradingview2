@@ -3,8 +3,8 @@
 #include "ui_portfolio.h"
 
 #include "src/settings.h"
-#include "cryptolib/cryptolib.h"
 #include "src/dialogaddposition.h"
+#include "src/exmanager.h"
 
 
 Portfolio::Portfolio(QWidget *parent) :
@@ -53,18 +53,18 @@ void Portfolio::on_btnRefresh_clicked(const bool loadOnly)
                 this->insertTrade(row, trade, 0, 0, 0);
             }
             else {
-                auto ex = getExchange(trade.exchange.toLower().toStdString());
+                ExchangeBase* ex = getExchangeClass(trade.exchange.toLower());
+                double lastPrice = ex->getPrice(trade.market);
 
-                double lastPrice = ex->getPrice(trade.market.toStdString());
-                double profit = ex->getProfit(trade.amount, trade.buyPrice, lastPrice);
-                double profitPercent = ex->getProfitPercent(trade.amount, trade.buyPrice, lastPrice);
+                double profit = calcProfit(trade.amount, trade.buyPrice, lastPrice);
+                double profitPercent = calcProfitPercent(trade.amount, trade.buyPrice, lastPrice);
 
                 this->insertTrade(row, trade, lastPrice, profit, profitPercent);
             }
             row++;
         }
 
-    } catch (const std::exception& e) { std::cout << e.what();   }
+    } catch (const QException& e) { qDebug() << e.what();   }
 
 }
 
