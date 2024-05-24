@@ -4,8 +4,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
-LIBS += -lcpprest -lboost_system -lssl -lcrypto -lpthread -lboost_thread
-
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -23,7 +21,6 @@ DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
 
 
 SOURCES += \
-    cryptolib/cryptolib.cpp \
     customwebengineview.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
@@ -36,7 +33,6 @@ SOURCES += \
     src/portfolio.cpp
 
 HEADERS += \
-    cryptolib/cryptolib.h \
     customwebengineview.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
@@ -84,17 +80,3 @@ DISTFILES += \
     genver.sh \
     update_git.py \
     update_version.py
-
-## Ruta al intérprete de Python y al script
-#PYTHON = python3
-#UPDATE_VERSION_SCRIPT = update_version.py
-
-## Condición para ejecutar el script solo en modo release
-#release {
-#    message("Ejecutando script de actualización de versión con $$UPDATE_VERSION_SCRIPT...")
-
-#    # Definición del objetivo personalizado
-#    update_version.commands = $$PYTHON $$UPDATE_VERSION_SCRIPT QTradingview2.pro
-#    QMAKE_EXTRA_TARGETS += update_version
-#    PRE_TARGETDEPS += update_version
-#}
