@@ -42,6 +42,11 @@ HEADERS += \
     src/dialogaddposition.h \
     src/dialogoptions.h \
     mainwindow.h \
+    src/exchanges/binance.h \
+    src/exchanges/bingx.h \
+    src/exchanges/exchange_base.h \
+    src/exchanges/kucoin.h \
+    src/exmanager.h \
     src/marketslist.h \
     src/portfolio.h \
     src/settings.h \

@@ -15,6 +15,7 @@
 #include "src/portfolio.h"
 #include "src/dialogaddposition.h"
 #include "cryptolib/cryptolib.h"
+#include "src/exmanager.h"
 
 
 // ************************************************************************************************
@@ -194,8 +195,14 @@ void MainWindow::on_actionjavascript_triggered()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    QList<Positions> PositionsList = settings->getPositions();
-    qDebug() << PositionsList.count();
+    try {
+        ExManager exman;
+        ExchangeBase *ex = exman.setExchange("bingx");
+        qDebug() << ex->getPrice("KAS/USDT");
+        delete ex;
+    }
+    catch (QException e) { qDebug() << e.what(); }
+
 }
 
 

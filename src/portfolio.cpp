@@ -5,6 +5,7 @@
 #include "src/settings.h"
 #include "cryptolib/cryptolib.h"
 #include "src/dialogaddposition.h"
+#include "src/exmanager.h"
 
 
 Portfolio::Portfolio(QWidget *parent) :
@@ -53,12 +54,15 @@ void Portfolio::on_btnRefresh_clicked(const bool loadOnly)
                 this->insertTrade(row, trade, 0, 0, 0);
             }
             else {
-                auto ex = getExchange(trade.exchange.toLower().toStdString());
+                ExManager exman;
+                ExchangeBase *ex = exman.setExchange(trade.exchange.toLower());
+                auto ex2 = getExchange(trade.exchange.toLower().toStdString());
 
-                double lastPrice = ex->getPrice(trade.market.toStdString());
-                double profit = ex->getProfit(trade.amount, trade.buyPrice, lastPrice);
-                double profitPercent = ex->getProfitPercent(trade.amount, trade.buyPrice, lastPrice);
+                double lastPrice = ex->getPrice(trade.market);
+                double profit = ex2->getProfit(trade.amount, trade.buyPrice, lastPrice);
+                double profitPercent = ex2->getProfitPercent(trade.amount, trade.buyPrice, lastPrice);
 
+                qDebug() << lastPrice;
                 this->insertTrade(row, trade, lastPrice, profit, profitPercent);
             }
             row++;
