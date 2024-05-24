@@ -64,7 +64,7 @@ void Portfolio::on_btnRefresh_clicked(const bool loadOnly)
             row++;
         }
 
-    } catch (const std::exception& e) { std::cout << e.what();   }
+    } catch (const QException& e) { qDebug() << e.what();   }
 
 }
 
