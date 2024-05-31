@@ -13,9 +13,9 @@ public:
     explicit CustomWebEngineView(QWidget *parent = nullptr);
 
     void loadChart(QString pair, QString exchange);
-
+    void testJavascript(QString texto);
 public slots:
-    void testJavascript();
+
     void adBlockJS();
 
 };

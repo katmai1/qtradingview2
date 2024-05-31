@@ -188,7 +188,12 @@ void MainWindow::loadListMarkets()
 // ejecuta javascript de test
 void MainWindow::on_actionjavascript_triggered()
 {
-    this->ui->webview->testJavascript();
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Ingresar Texto"),
+        tr("Por favor, ingresa un texto:"), QLineEdit::Normal,
+        "", &ok);
+    qDebug() << text;
+    this->ui->webview->testJavascript(text);
 }
 
 // boton de test

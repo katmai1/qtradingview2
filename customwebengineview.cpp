@@ -33,17 +33,9 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
 }
 
 
-void CustomWebEngineView::testJavascript() {
-    // const adWrapper = document.querySelector('div[class^=toast-positioning-wrapper-]');
-    QString code = R"delim(
-        const hideAds = setInterval(() => {
-            const adWrapper = document.querySelector("div[class^='wrap-']");
-            if (adWrapper) {
-                adWrapper.querySelector('button').click();
-            }
-        }, 5000);
-    )delim";
-    this->page()->runJavaScript(code);
+void CustomWebEngineView::testJavascript(QString texto) {
+    QString code = R"delim(texto)delim";
+    this->page()->runJavaScript(texto);
 }
 
 void CustomWebEngineView::adBlockJS() {
