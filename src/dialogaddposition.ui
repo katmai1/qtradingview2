@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>dialogAddPosition</class>
  <widget class="QDialog" name="dialogAddPosition">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>283</width>
+    <width>284</width>
     <height>179</height>
    </rect>
   </property>

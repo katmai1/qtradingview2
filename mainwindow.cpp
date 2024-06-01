@@ -94,7 +94,7 @@ void MainWindow::on_actionAbout_triggered()
 {
     dialogAbout *about;
     about = new dialogAbout(this);
-    about->setModal(true);
+    //about->setModal(true);
     about->show();
 }
 
@@ -103,7 +103,7 @@ void MainWindow::on_btAdd_clicked()
 {
     dialogAddMarket *addMarket;
     addMarket = new dialogAddMarket(this);
-    addMarket->setModal(true);
+    //addMarket->setModal(true);
     addMarket->show();
 }
 
@@ -144,7 +144,7 @@ void MainWindow::addPosition(QListWidgetItem *item) {
     double lastPrice = ex->getPrice(market.toUpper());
 
     addPosition = new dialogAddPosition(portfolio, exchange, market, lastPrice);
-    addPosition->setModal(true);
+    //addPosition->setModal(true);
     connect(addPosition, &dialogAddPosition::signalAddPosition, portfolio, &Portfolio::slotAddPosition);
     addPosition->show();
 
@@ -203,13 +203,9 @@ void MainWindow::on_actionjavascript_triggered()
 // test button
 void MainWindow::on_actionTest_triggered()
 {
-    try {
-        ExchangeBase *ex = getExchangeClass("bingx");
-        qDebug() << ex->getPrice("KAS/USDT");
-        delete ex;
-    }
-    catch (QException e) { qDebug() << e.what(); }
-
+    ExchangeBase *ex = getExchangeClass("binance");
+    qDebug() << ex->getPrice("BTC/USDT");
+    delete ex;
 }
 
 

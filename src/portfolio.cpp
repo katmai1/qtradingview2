@@ -141,7 +141,7 @@ void Portfolio::on_btnAdd_clicked()
 {
     dialogAddPosition *addPosition;
     addPosition = new dialogAddPosition(this);
-    addPosition->setModal(true);
+    //addPosition->setModal(true);
     connect(addPosition, &dialogAddPosition::signalAddPosition, this, &Portfolio::slotAddPosition);
     addPosition->show();
 }

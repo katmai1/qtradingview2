@@ -22,6 +22,13 @@ public:
         return _getPrice(marketParts.value(0).toUpper(), marketParts.value(1).toUpper());
     }
 
+    virtual void test() {
+        qDebug() << "funcion de test de la clase ExchangeBase";
+    }
+
+private:
+    QNetworkAccessManager *manager;
+
     virtual double _getPrice(const QString &symbol, const QString &base) {
         QString market = symbol.toUpper() + "/" + base.toUpper();
         qInfo() << "No se puede obtener precio del market "<< market
@@ -29,40 +36,37 @@ public:
         return -1.0;
     }
 
-    virtual void test() {
-        qDebug() << "funcion de test de la clase ExchangeBase";
-    }
+protected:
+    QUrl url;
 
-    double fetchPrice(QUrl url) {
+    void setPathUrl(const QString path) {   url.setPath(url.path() + "/" + path);   }
+
+    // fetch query to api and return raw data
+    QJsonObject fetchQuery(const QUrl url) {
+        // crea el query y lo envia
         manager = new QNetworkAccessManager(this);
         QNetworkRequest request;
         request.setUrl(url);
-
         QNetworkReply *reply = manager->get(request);
-
         QEventLoop loop;
         connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
         loop.exec();
 
+        // comprueba si da error o no y devuelve un json
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray data = reply->readAll();
-            double price = parsePriceFromJson(data);
-            reply->deleteLater();
-            return price;
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
+            QJsonObject json = jsonDoc.object();
+            json["qt2_status"] = "ok";
+            return json;
         } else {
-            qDebug() << "Error:" << reply->errorString();
+            QJsonObject json;
+            json["qt2_url"] = url.toString();
+            json["qt2_status"] = "error";
+            json["qt2_error"] = reply->errorString();
             reply->deleteLater();
-            return -1.0; // Indicador de error
+            return json;
         }
     }
-
-    virtual double parsePriceFromJson(const QByteArray &jsonData) {
-        Q_UNUSED(jsonData);
-        return -1.0;
-    };
-
-private:
-    QNetworkAccessManager *manager;
-
 };
 #endif // EXCHANGE_BASE_H
