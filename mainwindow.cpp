@@ -52,12 +52,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
 
-    // init
+    // activa widgets visibles segun ultima sesion
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
     this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
     this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
     this->ui->actionStatusbar->setChecked(settings->getValue("statusbar", false, "View").toBool());
 
+    // carga markets list
     this->loadListMarkets();
 
     // declara menus contextuales
@@ -122,12 +123,14 @@ void MainWindow::on_actionPortfolio_triggered()
 }
 
 // ************************************************************************************************
-// Slots
+// Slots del menu contextual
 
+// load selected market
 void MainWindow::loadMarket(QListWidgetItem *item) {
     this->on_listMarkets_itemDoubleClicked(item);
 }
 
+// open dialog to add position to portfolio
 void MainWindow::addPosition(QListWidgetItem *item) {
     Portfolio *portfolio;
     portfolio = new Portfolio(this);
@@ -147,6 +150,7 @@ void MainWindow::addPosition(QListWidgetItem *item) {
 
 }
 
+// save markets list
 void MainWindow::saveMarketsList() {
     MarketsList ml(this->ui->listMarkets);
     ml.saveList();
@@ -171,21 +175,21 @@ void MainWindow::on_actionFullscreen_triggered(bool checked) {
 // ************************************************************************************************
 
 // ************************************************************************************************
-// añade market a la lista
+// add market to list
 void MainWindow::addToList(QString market) {
     MarketsList ml(this->ui->listMarkets);
     ml.addMarket(market);
     ml.saveList();
 }
 
-// carga una lista, debemos pasarle un listwidget y una ruta al fichero
+// load markets list
 void MainWindow::loadListMarkets()
 {
     MarketsList ml(this->ui->listMarkets);
     ml.loadList();
 }
 
-// ejecuta javascript de test
+// execute a custom js code
 void MainWindow::on_actionjavascript_triggered()
 {
     bool ok;
@@ -196,7 +200,7 @@ void MainWindow::on_actionjavascript_triggered()
     this->ui->webview->testJavascript(text);
 }
 
-// boton de test
+// test button
 void MainWindow::on_actionTest_triggered()
 {
     try {
@@ -209,7 +213,7 @@ void MainWindow::on_actionTest_triggered()
 }
 
 
-// abre market seleccionado con doble click
+// double click event on market list
 void MainWindow::on_listMarkets_itemDoubleClicked(QListWidgetItem *item)
 {
     qDebug() << "cargando market...";
@@ -218,7 +222,7 @@ void MainWindow::on_listMarkets_itemDoubleClicked(QListWidgetItem *item)
     this->ui->webview->loadChart(pair, exchange);
 }
 
-// filtra los markets
+// filtrer markets
 void MainWindow::on_edFilter_textChanged(const QString &arg1)
 {
     int total = this->ui->listMarkets->count();
@@ -229,6 +233,7 @@ void MainWindow::on_edFilter_textChanged(const QString &arg1)
     }
 }
 
+// save HTML code into web.html file
 void MainWindow::on_actionSaveHTML_triggered()
 {
     this->ui->webview->page()->toHtml([this](const QString &html) {

@@ -1,6 +1,6 @@
 #include "customwebengineview.h"
 #include "QWebEngineProfile"
-#include <QDir>
+//#include <QDir>
 #include "QProcess"
 #include <QWebEngineSettings>
 
@@ -34,7 +34,7 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
 
 
 void CustomWebEngineView::testJavascript(QString texto) {
-    QString code = R"delim(texto)delim";
+    //QString code = R"delim(texto)delim";
     this->page()->runJavaScript(texto);
 }
 
