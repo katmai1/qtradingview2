@@ -15,7 +15,7 @@ class Kucoin : public ExchangeBase {
 
 public:
     explicit Kucoin(QObject *parent = nullptr) : ExchangeBase(parent) {
-        url = QUrl("https://api.kucoin.com/api/v2");
+        url = QUrl("https://api.kucoin.com/api/v1");
     }
 
     void test() override {
@@ -23,6 +23,7 @@ public:
     }
 
     QStringList getMarketsList() override {
+        url = QUrl("https://api.kucoin.com/api/v2");
         setPathUrl("symbols");
         QJsonObject json = this->fetchQuery(url);
         QStringList markets;
