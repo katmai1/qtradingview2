@@ -16,7 +16,7 @@ public:
     void testJavascript(QString texto);
 public slots:
 
-    void adBlockJS();
+    void adBlockJS(bool ok);
 
 };
 

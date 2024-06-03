@@ -38,7 +38,8 @@ void CustomWebEngineView::testJavascript(QString texto) {
     this->page()->runJavaScript(texto);
 }
 
-void CustomWebEngineView::adBlockJS() {
+void CustomWebEngineView::adBlockJS(bool ok) {
+    if (!ok) {  qDebug() << "algun error al cargar la pagina...";    }
     QString code = R"delim(
         const adBlock = setInterval(() => {
             const adBlock = document.querySelector("article[class^='toast-']");

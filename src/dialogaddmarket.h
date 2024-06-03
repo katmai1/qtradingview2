@@ -19,7 +19,9 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
-    void on_editEx_textChanged(const QString &arg1);
+//    void on_editEx_textChanged(const QString &arg1);
+
+    void on_comboEx_currentTextChanged(const QString &arg1);
 
 private:
     Ui::dialogAddMarket *ui;

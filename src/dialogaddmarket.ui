@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>240</height>
+    <height>336</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,9 +39,19 @@
          <string/>
         </property>
         <property name="placeholderText">
-         <string>BTC/USDT</string>
+         <string>Filtrar...</string>
         </property>
         <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListView" name="listMarkets">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="alternatingRowColors">
          <bool>true</bool>
         </property>
        </widget>
@@ -123,8 +133,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>247</x>
-     <y>230</y>
+     <x>256</x>
+     <y>326</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -140,7 +150,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>310</x>
-     <y>230</y>
+     <y>326</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
