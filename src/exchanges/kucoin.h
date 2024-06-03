@@ -15,11 +15,26 @@ class Kucoin : public ExchangeBase {
 
 public:
     explicit Kucoin(QObject *parent = nullptr) : ExchangeBase(parent) {
-        url = QUrl("https://api.kucoin.com/api/v1");
+        url = QUrl("https://api.kucoin.com/api/v2");
     }
 
     void test() override {
         qDebug() << "test kucoin";
+    }
+
+    QStringList getMarketsList() override {
+        setPathUrl("symbols");
+        QJsonObject json = this->fetchQuery(url);
+        QStringList markets;
+        if (json["qt2_status"] == "ok") {
+            QJsonArray symbols = json["data"].toArray();
+            for (const QJsonValue &value : symbols) {
+                QJsonObject obj = value.toObject();
+                markets << obj["symbol"].toString().replace("-", "/");
+            }
+        }
+        else {  qDebug() << json["qt2_error"];  }
+        return markets;
     }
 
 private:

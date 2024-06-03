@@ -203,8 +203,8 @@ void MainWindow::on_actionjavascript_triggered()
 // test button
 void MainWindow::on_actionTest_triggered()
 {
-    ExchangeBase *ex = getExchangeClass("binance");
-    qDebug() << ex->getPrice("BTC/USDT");
+    ExchangeBase *ex = getExchangeClass("kucoin");
+    qDebug() << ex->getMarketsList();
     delete ex;
 }
 

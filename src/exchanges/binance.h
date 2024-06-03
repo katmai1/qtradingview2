@@ -18,13 +18,19 @@ public:
     }
 
     void test() override {
-        setPathUrl("ticker/price");
-        QUrlQuery query;
-        query.addQueryItem("symbol", "BTCUTxxx");
-        url.setQuery(query);
+        setPathUrl("exchangeInfo");
+//        QUrlQuery query;
+//        query.addQueryItem("symbol", "BTCUTxxx");
+//        url.setQuery(query);
         QJsonObject json = this->fetchQuery(url);
         if (json["qt2_status"] == "ok") {
-            qDebug() << json;
+            QJsonArray symbols = json["symbols"].toArray();
+            QStringList markets;
+            for (const QJsonValue &value : symbols) {
+                QJsonObject obj = value.toObject();
+                markets << obj["baseAsset"].toString() + "/" + obj["quoteAsset"].toString();
+            }
+            qDebug() << markets;
         }
         else {
             qDebug() << json["qt2_error"];
@@ -32,6 +38,20 @@ public:
 
     }
 
+    QStringList getMarketsList() override {
+        setPathUrl("exchangeInfo");
+        QJsonObject json = this->fetchQuery(url);
+        QStringList markets;
+        if (json["qt2_status"] == "ok") {
+            QJsonArray symbols = json["symbols"].toArray();
+            for (const QJsonValue &value : symbols) {
+                QJsonObject obj = value.toObject();
+                markets << obj["baseAsset"].toString() + "/" + obj["quoteAsset"].toString();
+            }
+        }
+        else {  qDebug() << json["qt2_error"];  }
+        return markets;
+    }
 
 private:
     double _getPrice(const QString &symbol, const QString &base) override {

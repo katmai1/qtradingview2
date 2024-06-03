@@ -22,6 +22,12 @@ public:
         return _getPrice(marketParts.value(0).toUpper(), marketParts.value(1).toUpper());
     }
 
+    virtual QStringList getMarketsList() {
+        QStringList marketsList;
+        qDebug() << "funcion getMarketsList de la clase ExchangeBase";
+        return marketsList;
+    }
+
     virtual void test() {
         qDebug() << "funcion de test de la clase ExchangeBase";
     }
