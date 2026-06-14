@@ -13,11 +13,14 @@ public:
     explicit CustomWebEngineView(QWidget *parent = nullptr);
 
     void loadChart(QString pair, QString exchange);
+    QString currentSymbol() const { return m_symbol; }
 
 public slots:
     void testJavascript();
     void adBlockJS();
 
+private:
+    QString m_symbol;
 };
 
 #endif // CUSTOMWEBENGINEVIEW_H

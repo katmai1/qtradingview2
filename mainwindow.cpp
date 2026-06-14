@@ -195,9 +195,7 @@ void MainWindow::on_actionjavascript_triggered()
 void MainWindow::on_actionTest_triggered()
 {
     try {
-        ExchangeBase *ex = getExchangeClass("bingx");
-        qDebug() << ex->getPrice("KAS/USDT");
-        delete ex;
+        qDebug() << this->ui->webview->currentSymbol();
     }
     catch (QException e) { qDebug() << e.what(); }
 

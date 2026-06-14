@@ -89,3 +89,4 @@ builds/Linux_x64/release/QTradingview2
 .qtc_clangd/*
 qmake_qmake_qm_files.qrc
 builds/.qtc_clangd/*
+/build
