@@ -22,17 +22,8 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
     profile->settings()->setAttribute(QWebEngineSettings::AllowWindowActivationFromJavaScript, true);
 
     // crea pagin i assigna
-    m_page = new CustomWebEnginePage(profile);
+    m_page = new CustomWebEnginePage(profile, this);
     connect(m_page, &QWebEnginePage::loadFinished, this, &CustomWebEngineView::adBlockJS);
-
-    // // asigna m_symbol del market cargado, el symbol completo
-    // connect(this, &QWebEngineView::urlChanged, this, [this](const QUrl &url) {
-    //     QUrlQuery query(url);
-    //     QString sym = QUrl::fromPercentEncoding(query.queryItemValue("symbol").toUtf8());
-    //     if (!sym.isEmpty() && sym != m_symbol)
-    //         qDebug() << "Symbol desde URL:" << sym;
-    //         m_symbol = sym;
-    // });
 
     this->setPage(m_page);
 

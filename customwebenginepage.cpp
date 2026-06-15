@@ -2,8 +2,8 @@
 #include <QRegularExpression>
 #include <QTimer>
 
-CustomWebEnginePage::CustomWebEnginePage(QObject *parent)
-    : QWebEnginePage{parent}
+CustomWebEnginePage::CustomWebEnginePage(QWebEngineProfile *profile, QObject *parent)
+    : QWebEnginePage{profile, parent}
 {}
 
 
@@ -13,13 +13,6 @@ void CustomWebEnginePage::javaScriptConsoleMessage(
     int lineNumber,
     const QString &sourceID)
 {
-    // if (message.contains("symbol=")) {
-    //     QRegularExpression re("symbol=([A-Z]+:[A-Z0-9.]+)");
-    //     QRegularExpressionMatch match = re.match(message);
-    //     if (match.hasMatch()) {
-    //         emit symbolChanged(match.captured(1));
-    //     }
-    // }
     if (message.contains("Check your sub/unsub")) {
         QTimer::singleShot(300, this, [this]() {
             runJavaScript("document.title", [this](const QVariant &result) {

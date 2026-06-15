@@ -7,7 +7,7 @@ class CustomWebEnginePage : public QWebEnginePage
 {
     Q_OBJECT
 public:
-    explicit CustomWebEnginePage(QObject *parent = nullptr);
+    explicit CustomWebEnginePage(QWebEngineProfile *profile, QObject *parent = nullptr);
 
 signals:
     void symbolChanged(const QString &symbol);
