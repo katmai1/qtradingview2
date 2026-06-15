@@ -6,6 +6,7 @@
 #include "src/systray.h"
 #include <src/settings.h>
 
+// programa principal
 
 int main(int argc, char *argv[])
 {
