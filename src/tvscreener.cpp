@@ -29,6 +29,29 @@ void TvScreener::fetchMarket(const QString& market, int offset, int limit) {
     connect(reply, &QNetworkReply::finished, this, &TvScreener::onReplyFinished);
 }
 
+void TvScreener::fetchCrypto(const QString& exchange) {
+    QJsonObject payload {
+        {"columns", QJsonArray{"name", "description", "close", "volume", "market_cap_basic"}},
+        {"range",   QJsonArray{0, 500}},
+        {"sort",    QJsonObject{{"sortBy", "volume"}, {"sortOrder", "desc"}}},
+        {"filter",  QJsonArray{
+                       QJsonObject{
+                           {"left",      "exchange"},
+                           {"operation", "equal"},
+                           {"right",     exchange}
+                       }
+                   }}
+    };
+
+    QUrl url("https://scanner.tradingview.com/crypto/scan");
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply* reply = m_nam->post(request, QJsonDocument(payload).toJson());
+    reply->setProperty("market", QString("crypto_%1").arg(exchange));
+    connect(reply, &QNetworkReply::finished, this, &TvScreener::onReplyFinished);
+}
+
 void TvScreener::onReplyFinished() {
     auto* reply = qobject_cast<QNetworkReply*>(sender());
     reply->deleteLater();

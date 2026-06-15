@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
     this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
     this->ui->actionStatusbar->setChecked(settings->getValue("statusbar", false, "View").toBool());
+    DbManager::getInstance().init("qtradingview2.db");
 
     this->loadListMarkets();
 
@@ -74,14 +75,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // screener...
     screener = new TvScreener(this);
-    QObject::connect(screener, &TvScreener::dataReady,
-                     [](const QString& market, const QList<Stock>& stocks, int total) {
-                        qDebug() << market << "→" << total << "símbolos totales," << stocks.size() << "recibidos";
-                        DbManager::getInstance().saveStocks(market, stocks);
-                     });
 
-    QObject::connect(screener, &TvScreener::errorOccurred,
-                     [](const QString& err) { qDebug() << "Error:" << err; });
+    connect(screener, &TvScreener::dataReady, [](const QString& market, const QList<Stock>& stocks, int total) {
+        qDebug() << "Loaded %1" << total;
+        // check if is stock or crypto
+        if (market.startsWith("crypto_")) {
+            QString exchange = market.mid(7); // quita "crypto_"
+            DbManager::getInstance().saveCrypto(exchange, stocks);
+        } else {
+            DbManager::getInstance().saveStocks(market, stocks);
+        }
+    });
+
+    connect(screener, &TvScreener::errorOccurred, [](const QString& err) { qDebug() << "Error:" << err; });
 
     //screener->fetchMarket("france");
 
@@ -209,10 +215,9 @@ void MainWindow::on_actionjavascript_triggered()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    DbManager::getInstance().init("qtradingview2.db");
-    QList stocks = DbManager::getInstance().loadStocks("france");
+    QList stocks = DbManager::getInstance().loadCrypto("BINANCE");
     for (const auto& s : stocks) {
-        qDebug() << s.ticker;
+        qDebug() << s.description;
     }
 
 }

@@ -25,6 +25,7 @@ class TvScreener : public QObject
 public:
     explicit TvScreener(QObject* parent = nullptr);
     void fetchMarket(const QString& market, int offset = 0, int limit = 500);
+    void fetchCrypto(const QString& exchange = "BINANCE");
 
 signals:
     void dataReady(const QString& market, const QList<Stock>& stocks, int totalCount);
