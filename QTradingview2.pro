@@ -1,4 +1,4 @@
-QT       += core gui webenginewidgets widgets network
+QT       += core gui webenginewidgets widgets network sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,6 +23,7 @@ DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
 SOURCES += \
     customwebenginepage.cpp \
     customwebengineview.cpp \
+    dbmanager.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
     src/dialogaddposition.cpp \
@@ -31,11 +32,13 @@ SOURCES += \
     mainwindow.cpp \
     src/exmanager.cpp \
     src/marketslist.cpp \
-    src/portfolio.cpp
+    src/portfolio.cpp \
+    src/tvscreener.cpp
 
 HEADERS += \
     customwebenginepage.h \
     customwebengineview.h \
+    dbmanager.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
     src/dialogaddposition.h \
@@ -50,6 +53,7 @@ HEADERS += \
     src/portfolio.h \
     src/settings.h \
     src/systray.h \
+    src/tvscreener.h \
     src/uimanager.h
 
 FORMS += \

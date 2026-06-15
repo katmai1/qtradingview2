@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "src/tvscreener.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTextEdit>
@@ -74,6 +75,7 @@ private:
     SystemTrayIcon *trayIcon;
     MenuContextual *menuCtx;
     SettingsManager *settings;
+    TvScreener* screener;
 };
 
 #endif // MAINWINDOW_H
