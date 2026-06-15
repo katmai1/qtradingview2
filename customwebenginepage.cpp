@@ -2,10 +2,9 @@
 #include <QRegularExpression>
 #include <QTimer>
 
-CustomWebEnginePage::CustomWebEnginePage(QWebEngineProfile *profile, QObject *parent)
-    : QWebEnginePage{profile, parent}
-{}
-
+// CustomWebEnginePage::CustomWebEnginePage(QObject *parent)
+//     : QWebEnginePage{createProfile(parent), parent}
+// {}
 
 void CustomWebEnginePage::javaScriptConsoleMessage(
     JavaScriptConsoleMessageLevel level,

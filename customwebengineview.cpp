@@ -4,33 +4,15 @@
 #include "QProcess"
 #include <QWebEngineSettings>
 
-#include "src/settings.h"
-
 
 CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(parent)
 {
 
-    SettingsManager settings;
-
-    // configura perfil
-    QWebEngineProfile *profile = new QWebEngineProfile(QString::fromLatin1("QTradingview.%1").arg(qWebEngineChromiumVersion()));
-    profile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
-    profile->setCachePath(settings.pathDir());
-    profile->setPersistentStoragePath(settings.pathDir());
-    profile->settings()->setAttribute(QWebEngineSettings::JavascriptCanOpenWindows, true);
-    profile->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
-    profile->settings()->setAttribute(QWebEngineSettings::AllowWindowActivationFromJavaScript, true);
-
     // crea pagin i assigna
-    m_page = new CustomWebEnginePage(profile, this);
+    m_page = new CustomWebEnginePage(this);
     connect(m_page, &QWebEnginePage::loadFinished, this, &CustomWebEngineView::adBlockJS);
 
     this->setPage(m_page);
-
-    connect(m_page, &CustomWebEnginePage::symbolChanged, this, [this](const QString &sym) {
-        m_symbol = sym;
-        qDebug() << "Symbol:" << m_symbol;
-    });
 
     this->load(QUrl("https://es.tradingview.com/chart/"));
     this->showMaximized();
