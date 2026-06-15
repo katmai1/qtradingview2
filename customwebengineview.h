@@ -3,6 +3,7 @@
 
 #include <QWebEngineView>
 #include <QWebEnginePage>
+#include "customwebenginepage.h"
 
 
 class CustomWebEngineView : public QWebEngineView
@@ -21,6 +22,7 @@ public slots:
 
 private:
     QString m_symbol;
+    CustomWebEnginePage *m_page = nullptr;
 };
 
 #endif // CUSTOMWEBENGINEVIEW_H

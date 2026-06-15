@@ -21,6 +21,7 @@ DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
 
 
 SOURCES += \
+    customwebenginepage.cpp \
     customwebengineview.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
     src/portfolio.cpp
 
 HEADERS += \
+    customwebenginepage.h \
     customwebengineview.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
