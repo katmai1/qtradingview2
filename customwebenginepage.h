@@ -16,6 +16,20 @@ public:
     explicit CustomWebEnginePage(QObject *parent = nullptr) : QWebEnginePage(createProfile(parent), parent)
     {
         setupCookies();
+
+        // run adblock
+        connect(this, &QWebEnginePage::loadFinished, this, [this](bool ok) {
+            if (!ok) return;
+            qDebug() << "AdBlock running";
+            runJavaScript(R"delim(
+            const adBlock = setInterval(() => {
+                const adBlock = document.querySelector("article[class^='toast-']");
+                if (adBlock) {
+                    adBlock.querySelector('button').click();
+                }
+            }, 5000);
+        )delim");
+        });
     }
 
 private:
@@ -40,12 +54,6 @@ private:
 
 signals:
     void symbolChanged(const QString &symbol);
-
-protected:
-    void javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level,
-                                  const QString &message,
-                                  int lineNumber,
-                                  const QString &sourceID) override;
 
 };
 

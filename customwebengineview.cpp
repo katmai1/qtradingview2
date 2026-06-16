@@ -10,7 +10,7 @@ CustomWebEngineView::CustomWebEngineView(QWidget *parent) : QWebEngineView(paren
 
     // crea pagin i assigna
     m_page = new CustomWebEnginePage(this);
-    connect(m_page, &QWebEnginePage::loadFinished, this, &CustomWebEngineView::adBlockJS);
+    // connect(m_page, &QWebEnginePage::loadFinished, this, &CustomWebEngineView::adBlockJS);
 
     this->setPage(m_page);
 
@@ -34,17 +34,17 @@ void CustomWebEngineView::testJavascript() {
 }
 
 
-void CustomWebEngineView::adBlockJS() {
-    QString code = R"delim(
-        const adBlock = setInterval(() => {
-            const adBlock = document.querySelector("article[class^='toast-']");
-            if (adBlock) {
-                adBlock.querySelector('button').click();
-            }
-        }, 5000);
-    )delim";
-    this->page()->runJavaScript(code);
-}
+// void CustomWebEngineView::adBlockJS() {
+//     QString code = R"delim(
+//         const adBlock = setInterval(() => {
+//             const adBlock = document.querySelector("article[class^='toast-']");
+//             if (adBlock) {
+//                 adBlock.querySelector('button').click();
+//             }
+//         }, 5000);
+//     )delim";
+//     this->page()->runJavaScript(code);
+// }
 
 void CustomWebEngineView::loadChart(QString pair, QString exchange) {
     QStringList market = pair.split("/");

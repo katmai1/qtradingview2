@@ -18,7 +18,6 @@ public:
 
 public slots:
     void testJavascript();
-    void adBlockJS();
 
 private:
     QString m_symbol;

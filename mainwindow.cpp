@@ -88,9 +88,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     });
 
     connect(screener, &TvScreener::errorOccurred, [](const QString& err) { qDebug() << "Error:" << err; });
-
-    //screener->fetchMarket("france");
-
 }
 
 
