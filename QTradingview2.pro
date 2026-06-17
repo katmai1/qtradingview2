@@ -26,13 +26,11 @@ SOURCES += \
     dbmanager.cpp \
     src/dialogabout.cpp \
     src/dialogaddmarket.cpp \
-    src/dialogaddposition.cpp \
     src/dialogoptions.cpp \
     main.cpp \
     mainwindow.cpp \
     src/exmanager.cpp \
     src/marketslist.cpp \
-    src/portfolio.cpp \
     src/tvscreener.cpp
 
 HEADERS += \
@@ -41,7 +39,6 @@ HEADERS += \
     dbmanager.h \
     src/dialogabout.h \
     src/dialogaddmarket.h \
-    src/dialogaddposition.h \
     src/dialogoptions.h \
     mainwindow.h \
     src/exchanges/binance.h \
@@ -50,7 +47,6 @@ HEADERS += \
     src/exchanges/kucoin.h \
     src/exmanager.h \
     src/marketslist.h \
-    src/portfolio.h \
     src/settings.h \
     src/systray.h \
     src/tvscreener.h \
@@ -59,10 +55,8 @@ HEADERS += \
 FORMS += \
     src/dialogabout.ui \
     src/dialogaddmarket.ui \
-    src/dialogaddposition.ui \
     src/dialogoptions.ui \
-    mainwindow.ui \
-    src/portfolio.ui
+    mainwindow.ui
 
 TRANSLATIONS += \
     langs/QTradingview2_es_ES.ts \

@@ -3,7 +3,7 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModality::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -52,19 +52,19 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuView">
     <property name="title">
      <string>&amp;Ver</string>
     </property>
-    <addaction name="actionMarkets"/>
+    <addaction name="actionStocks"/>
     <addaction name="actionDebug"/>
     <addaction name="separator"/>
     <addaction name="actionFullscreen"/>
     <addaction name="actionStatusbar"/>
-    <addaction name="actionPortfolio"/>
+    <addaction name="actionMarkets"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -109,14 +109,14 @@
    <property name="minimumSize">
     <size>
      <width>130</width>
-     <height>164</height>
+     <height>169</height>
     </size>
    </property>
    <property name="features">
-    <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetClosable|QDockWidget::DockWidgetFeature::DockWidgetFloatable|QDockWidget::DockWidgetFeature::DockWidgetMovable</set>
    </property>
    <property name="allowedAreas">
-    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+    <set>Qt::DockWidgetArea::LeftDockWidgetArea|Qt::DockWidgetArea::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
     <string>Mercados</string>
@@ -154,7 +154,7 @@
         <bool>true</bool>
        </property>
        <property name="selectionMode">
-        <enum>QAbstractItemView::SingleSelection</enum>
+        <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
        </property>
        <property name="sortingEnabled">
         <bool>true</bool>
@@ -179,10 +179,10 @@
     </sizepolicy>
    </property>
    <property name="features">
-    <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetFloatable</set>
+    <set>QDockWidget::DockWidgetFeature::DockWidgetClosable|QDockWidget::DockWidgetFeature::DockWidgetFloatable</set>
    </property>
    <property name="allowedAreas">
-    <set>Qt::BottomDockWidgetArea</set>
+    <set>Qt::DockWidgetArea::BottomDockWidgetArea</set>
    </property>
    <property name="windowTitle">
     <string>Debug (F12)</string>
@@ -297,6 +297,14 @@
    </property>
    <property name="shortcut">
     <string>F2</string>
+   </property>
+  </action>
+  <action name="actionStocks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Stocks</string>
    </property>
   </action>
  </widget>

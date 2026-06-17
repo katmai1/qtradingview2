@@ -12,8 +12,6 @@
 
 #include "src/uimanager.h"
 #include "src/marketslist.h"
-#include "src/portfolio.h"
-#include "src/dialogaddposition.h"
 #include "src/exmanager.h"
 #include "src/tvscreener.h"
 #include "dbmanager.h"
@@ -66,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // declara menus contextuales
     menuCtx = new MenuContextual(ui->listMarkets);
     connect(menuCtx, &MenuContextual::sigLoadMarket, this, &MainWindow::loadMarket);
-    connect(menuCtx, &MenuContextual::sigAddPosition, this, &MainWindow::addPosition);
     connect(menuCtx, &MenuContextual::sigSaveMarketsList, this, &MainWindow::saveMarketsList);
 
     // redirige mensajes debug
@@ -132,37 +129,12 @@ void MainWindow::on_actionOptions_triggered()
     Options->show();
 }
 
-void MainWindow::on_actionPortfolio_triggered()
-{
-    Portfolio *portfolio;
-    portfolio = new Portfolio(this);
-    portfolio->show();
-}
 
 // ************************************************************************************************
 // Slots
 
 void MainWindow::loadMarket(QListWidgetItem *item) {
     this->on_listMarkets_itemDoubleClicked(item);
-}
-
-void MainWindow::addPosition(QListWidgetItem *item) {
-    Portfolio *portfolio;
-    portfolio = new Portfolio(this);
-    portfolio->show();
-
-    dialogAddPosition *addPosition;
-    QString market = item->text();
-    QString exchange = item->toolTip();
-
-    ExchangeBase *ex = getExchangeClass(exchange.toLower());
-    double lastPrice = ex->getPrice(market.toUpper());
-
-    addPosition = new dialogAddPosition(portfolio, exchange, market, lastPrice);
-    addPosition->setModal(true);
-    connect(addPosition, &dialogAddPosition::signalAddPosition, portfolio, &Portfolio::slotAddPosition);
-    addPosition->show();
-
 }
 
 void MainWindow::saveMarketsList() {
