@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QNetworkAccessManager>
 #include <QJsonArray>
+#include <QWebEngineProfile>
+#include <QNetworkCookie>
 
 
 struct Stock {
@@ -23,7 +25,8 @@ class TvScreener : public QObject
     Q_OBJECT
 
 public:
-    explicit TvScreener(QObject* parent = nullptr);
+    explicit TvScreener(QWebEngineProfile* profile, QObject* parent = nullptr);
+
     void fetchMarket(const QString& market, int offset = 0, int limit = 500);
     void fetchCrypto(const QString& exchange = "BINANCE");
 
@@ -36,6 +39,7 @@ private slots:
 
 private:
     QNetworkAccessManager* m_nam;
+    QNetworkCookieJar* m_cookieJar;
 };
 
 #endif // TVSCREENER_H

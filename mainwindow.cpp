@@ -56,9 +56,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionStocks, &QAction::toggled, dockStock, &QDockWidget::setVisible);
     connect(dockStock, &QDockWidget::visibilityChanged, ui->actionStocks, &QAction::setChecked);
 
-    // load docks
+    // load views
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
-    // this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
     this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
     this->ui->actionStatusbar->setChecked(settings->getValue("statusbar", false, "View").toBool());
 
@@ -70,10 +69,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     qInfo() << "Iniciando version: " << QString("v%1").arg(VERSION_FULL);
 
     // screener...
-    screener = new TvScreener(this);
+    auto* profile = qobject_cast<CustomWebEnginePage*>(ui->webview->page())->profile();
+    screener = new TvScreener(profile, this);
 
     connect(screener, &TvScreener::dataReady, [](const QString& market, const QList<Stock>& stocks, int total) {
-        qDebug() << "Loaded %1" << total;
+        qDebug() << "Loaded " << total;
         // check if is stock or crypto
         if (market.startsWith("crypto_")) {
             QString exchange = market.mid(7); // quita "crypto_"
@@ -141,11 +141,7 @@ void MainWindow::on_actionjavascript_triggered()
 // boton de test
 void MainWindow::on_actionTest_triggered()
 {
-    QList stocks = DbManager::getInstance().loadCrypto("BINANCE");
-    for (const auto& s : stocks) {
-        qDebug() << s.description;
-    }
-
+    screener->fetchMarket("france");
 }
 
 void MainWindow::on_actionSaveHTML_triggered()

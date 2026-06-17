@@ -5,9 +5,27 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QUrl>
+#include <QWebEngineProfile>
+#include <QWebEngineCookieStore>
+#include <QNetworkCookieJar>
 
 
-TvScreener::TvScreener(QObject* parent) : QObject(parent), m_nam(new QNetworkAccessManager(this)) {}
+TvScreener::TvScreener(QWebEngineProfile* profile, QObject* parent)
+    : QObject(parent),
+    m_nam(new QNetworkAccessManager(this))
+{
+    m_cookieJar = new QNetworkCookieJar(this);
+    m_nam->setCookieJar(m_cookieJar);
+
+    // Copiar cookies del perfil WebEngine al cookieJar del screener
+    profile->cookieStore()->loadAllCookies();
+    connect(profile->cookieStore(), &QWebEngineCookieStore::cookieAdded,
+            this, [this](const QNetworkCookie& cookie) {
+                if (cookie.domain().contains("tradingview.com"))
+                    m_cookieJar->insertCookie(cookie);
+            });
+
+}
 
 
 void TvScreener::fetchMarket(const QString& market, int offset, int limit) {
