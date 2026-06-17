@@ -25,12 +25,10 @@ SOURCES += \
     customwebengineview.cpp \
     dbmanager.cpp \
     src/dialogabout.cpp \
-    src/dialogaddmarket.cpp \
     src/dialogoptions.cpp \
     main.cpp \
     mainwindow.cpp \
-    src/exmanager.cpp \
-    src/marketslist.cpp \
+    src/stockdockwidget.cpp \
     src/tvscreener.cpp
 
 HEADERS += \
@@ -38,25 +36,19 @@ HEADERS += \
     customwebengineview.h \
     dbmanager.h \
     src/dialogabout.h \
-    src/dialogaddmarket.h \
     src/dialogoptions.h \
     mainwindow.h \
-    src/exchanges/binance.h \
-    src/exchanges/bingx.h \
-    src/exchanges/exchange_base.h \
-    src/exchanges/kucoin.h \
-    src/exmanager.h \
-    src/marketslist.h \
     src/settings.h \
+    src/stockdockwidget.h \
     src/systray.h \
     src/tvscreener.h \
     src/uimanager.h
 
 FORMS += \
     src/dialogabout.ui \
-    src/dialogaddmarket.ui \
     src/dialogoptions.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    src/stockdockwidget.ui
 
 TRANSLATIONS += \
     langs/QTradingview2_es_ES.ts \

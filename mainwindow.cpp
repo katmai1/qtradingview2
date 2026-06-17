@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "src/dialogabout.h"
-#include "src/dialogaddmarket.h"
 #include "src/dialogoptions.h"
 
 #include "QObject"
@@ -11,8 +10,6 @@
 #include <QString>
 
 #include "src/uimanager.h"
-#include "src/marketslist.h"
-#include "src/exmanager.h"
 #include "src/tvscreener.h"
 #include "dbmanager.h"
 
@@ -52,19 +49,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
 
-    // init
+    // load dock stocks
+    dockStock = new StockDockWidget(this);
+    addDockWidget(Qt::LeftDockWidgetArea, dockStock);
+    ui->actionStocks->setChecked(settings->getValue("stock", false, "View").toBool());
+    connect(ui->actionStocks, &QAction::toggled, dockStock, &QDockWidget::setVisible);
+    connect(dockStock, &QDockWidget::visibilityChanged, ui->actionStocks, &QAction::setChecked);
+
+    // load docks
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
-    this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
+    // this->ui->dockMarkets->setVisible(settings->getValue("markets", false, "View").toBool());
     this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
     this->ui->actionStatusbar->setChecked(settings->getValue("statusbar", false, "View").toBool());
+
+    // init db
     DbManager::getInstance().init("qtradingview2.db");
-
-    this->loadListMarkets();
-
-    // declara menus contextuales
-    menuCtx = new MenuContextual(ui->listMarkets);
-    connect(menuCtx, &MenuContextual::sigLoadMarket, this, &MainWindow::loadMarket);
-    connect(menuCtx, &MenuContextual::sigSaveMarketsList, this, &MainWindow::saveMarketsList);
 
     // redirige mensajes debug
     qInstallMessageHandler(customMessageHandler);
@@ -112,15 +111,6 @@ void MainWindow::on_actionAbout_triggered()
     about->show();
 }
 
-// abre el dialogo addMarket
-void MainWindow::on_btAdd_clicked()
-{
-    dialogAddMarket *addMarket;
-    addMarket = new dialogAddMarket(this);
-    addMarket->setModal(true);
-    addMarket->show();
-}
-
 // abre dialogo de opciones
 void MainWindow::on_actionOptions_triggered()
 {
@@ -131,23 +121,8 @@ void MainWindow::on_actionOptions_triggered()
 
 
 // ************************************************************************************************
-// Slots
-
-void MainWindow::loadMarket(QListWidgetItem *item) {
-    this->on_listMarkets_itemDoubleClicked(item);
-}
-
-void MainWindow::saveMarketsList() {
-    MarketsList ml(this->ui->listMarkets);
-    ml.saveList();
-}
-
-
-// ************************************************************************************************
 // Save view options checked value in settings
 void MainWindow::on_actionDebug_triggered(bool checked) {   settings->setValue("debug", checked, "View");    }
-
-void MainWindow::on_actionMarkets_triggered(bool checked)   { settings->setValue("markets", checked, "View"); }
 
 void MainWindow::on_actionStatusbar_triggered(bool checked) {   settings->setValue("statusbar", checked, "View");   }
 
@@ -155,24 +130,6 @@ void MainWindow::on_actionFullscreen_triggered(bool checked) {
     if (checked) {  this->showFullScreen();    }
     else {  this->showMaximized();  }
     settings->setValue("fullscreen", checked, "View");
-}
-
-
-// ************************************************************************************************
-
-// ************************************************************************************************
-// añade market a la lista
-void MainWindow::addToList(QString market) {
-    MarketsList ml(this->ui->listMarkets);
-    ml.addMarket(market);
-    ml.saveList();
-}
-
-// carga una lista, debemos pasarle un listwidget y una ruta al fichero
-void MainWindow::loadListMarkets()
-{
-    MarketsList ml(this->ui->listMarkets);
-    ml.loadList();
 }
 
 // ejecuta javascript de test
@@ -191,27 +148,6 @@ void MainWindow::on_actionTest_triggered()
 
 }
 
-
-// abre market seleccionado con doble click
-void MainWindow::on_listMarkets_itemDoubleClicked(QListWidgetItem *item)
-{
-    qDebug() << "cargando market...";
-    QString pair = item->text();
-    QString exchange = item->toolTip();
-    this->ui->webview->loadChart(pair, exchange);
-}
-
-// filtra los markets
-void MainWindow::on_edFilter_textChanged(const QString &arg1)
-{
-    int total = this->ui->listMarkets->count();
-    for (int i = 0; i < total; ++i) {
-        QListWidgetItem* item = this->ui->listMarkets->item(i);
-        const bool matches = item->text().contains(arg1.toUpper(), Qt::CaseInsensitive);
-        item->setHidden(!matches);
-    }
-}
-
 void MainWindow::on_actionSaveHTML_triggered()
 {
     this->ui->webview->page()->toHtml([this](const QString &html) {
@@ -222,4 +158,10 @@ void MainWindow::on_actionSaveHTML_triggered()
             file.close();
         }
     });
+}
+
+// Al cerrar
+void MainWindow::closeEvent(QCloseEvent* event) {
+    settings->setValue("stock", dockStock->isVisible(), "View");
+    event->accept();
 }
