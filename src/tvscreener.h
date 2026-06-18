@@ -13,6 +13,7 @@ struct Stock {
     QString ticker;
     QString name;
     QString description;
+    QString isin;
     double  close;
     double  volume;
     double  marketCap;

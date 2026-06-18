@@ -34,7 +34,7 @@ void TvScreener::fetchMarket(const QString& market, int offset, int limit) {
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     QJsonObject payload {
-        {"columns", QJsonArray{"name", "description", "close", "volume", "market_cap_basic", "sector"}},
+        {"columns", QJsonArray{"name", "description", "isin", "close", "volume", "market_cap_basic", "sector"}},
         {"range",   QJsonArray{offset, limit}},
         {"sort",    QJsonObject{{"sortBy", "market_cap_basic"}, {"sortOrder", "desc"}}}
     };
@@ -93,10 +93,11 @@ void TvScreener::onReplyFinished() {
             .ticker    = obj["s"].toString(),
             .name      = d[0].toString(),
             .description = d[1].toString(),
-            .close     = d[2].toDouble(),
-            .volume    = d[3].toDouble(),
-            .marketCap = d[4].toDouble(),
-            .sector    = d[5].toString()
+            .isin      = d[2].toString(),
+            .close     = d[3].toDouble(),
+            .volume    = d[4].toDouble(),
+            .marketCap = d[5].toDouble(),
+            .sector    = d[6].toString(),
         });
     }
 

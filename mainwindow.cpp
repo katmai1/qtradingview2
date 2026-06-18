@@ -46,8 +46,17 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), settings(new SettingsManager())
 {
+    // load ui
     ui->setupUi(this);
+
+    // redirect debug messages to dockdebug
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
+    qInstallMessageHandler(customMessageHandler);
+
+    qInfo() << "Iniciando version: " << QString("v%1").arg(VERSION_FULL);
+
+    // init db
+    DbManager::getInstance().init("qtradingview2.db");
 
     // load dock stocks
     dockStock = new StockDockWidget(this);
@@ -60,13 +69,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
     this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
     this->ui->actionStatusbar->setChecked(settings->getValue("statusbar", false, "View").toBool());
-
-    // init db
-    DbManager::getInstance().init("qtradingview2.db");
-
-    // redirige mensajes debug
-    qInstallMessageHandler(customMessageHandler);
-    qInfo() << "Iniciando version: " << QString("v%1").arg(VERSION_FULL);
 
     // screener...
     auto* profile = qobject_cast<CustomWebEnginePage*>(ui->webview->page())->profile();
@@ -142,6 +144,10 @@ void MainWindow::on_actionjavascript_triggered()
 void MainWindow::on_actionTest_triggered()
 {
     screener->fetchMarket("france");
+    QList stk = DbManager::getInstance().loadStocks("france");
+    for (const auto& stock : stk) {
+        qDebug() << stock.ticker << stock.isin;
+    }
 }
 
 void MainWindow::on_actionSaveHTML_triggered()

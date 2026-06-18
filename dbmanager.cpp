@@ -33,6 +33,7 @@ void DbManager::createTables() {
             ticker     TEXT NOT NULL,
             name       TEXT,
             description TEXT,
+            isin        TEXT,
             close      REAL,
             volume     REAL,
             market_cap REAL,
@@ -56,18 +57,38 @@ void DbManager::createTables() {
             UNIQUE(exchange, ticker)
         )
     )");
+
+    migrateStocks();
 }
+
+void DbManager::migrateStocks() {
+    QSqlQuery q;
+
+    // Obtener columnas actuales
+    q.exec("PRAGMA table_info(stocks)");
+    QStringList existing;
+    while (q.next())
+        existing << q.value(1).toString(); // nombre de columna
+
+    // Añadir solo las que faltan
+    if (!existing.contains("isin")) {
+        q.exec("ALTER TABLE stocks ADD COLUMN isin TEXT");
+        qInfo() << "ISIN column added";
+    }
+}
+
 
 void DbManager::saveStocks(const QString& market, const QList<Stock>& stocks) {
     m_db.transaction();
 
     QSqlQuery q;
     q.prepare(R"(
-        INSERT INTO stocks (market, ticker, name, description, close, volume, market_cap, sector)
-        VALUES (:market, :ticker, :name, :description, :close, :volume, :market_cap, :sector)
+        INSERT INTO stocks (market, ticker, name, description, isin, close, volume, market_cap, sector)
+        VALUES (:market, :ticker, :name, :description, :isin, :close, :volume, :market_cap, :sector)
         ON CONFLICT(market, ticker) DO UPDATE SET
             name       = excluded.name,
             description = excluded.description,
+            isin       = excluded.isin,
             close      = excluded.close,
             volume     = excluded.volume,
             market_cap = excluded.market_cap,
@@ -80,6 +101,7 @@ void DbManager::saveStocks(const QString& market, const QList<Stock>& stocks) {
         q.bindValue(":ticker",     s.ticker);
         q.bindValue(":name",       s.name);
         q.bindValue(":description", s.description);
+        q.bindValue(":isin",        s.isin);
         q.bindValue(":close",      s.close);
         q.bindValue(":volume",     s.volume);
         q.bindValue(":market_cap", s.marketCap);
@@ -122,7 +144,7 @@ void DbManager::saveCrypto(const QString& exchange, const QList<Stock>& stocks) 
 QList<Stock> DbManager::loadStocks(const QString& market) {
     QList<Stock> result;
     QSqlQuery q;
-    q.prepare("SELECT ticker, name, description, close, volume, market_cap, sector FROM stocks WHERE market = :market");
+    q.prepare("SELECT ticker, name, description, isin, close, volume, market_cap, sector FROM stocks WHERE market = :market");
     q.bindValue(":market", market);
     q.exec();
 
@@ -131,10 +153,11 @@ QList<Stock> DbManager::loadStocks(const QString& market) {
             .ticker      = q.value(0).toString(),
             .name        = q.value(1).toString(),
             .description = q.value(2).toString(),
-            .close       = q.value(3).toDouble(),
-            .volume      = q.value(4).toDouble(),
-            .marketCap   = q.value(5).toDouble(),
-            .sector      = q.value(6).toString()
+            .isin        = q.value(3).toString(),
+            .close       = q.value(4).toDouble(),
+            .volume      = q.value(5).toDouble(),
+            .marketCap   = q.value(6).toDouble(),
+            .sector      = q.value(7).toString()
         });
     }
     return result;

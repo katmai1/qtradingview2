@@ -9,6 +9,7 @@ public:
 
     void saveStocks(const QString& market, const QList<Stock>& stocks);
     void saveCrypto(const QString& exchange, const QList<Stock>& stocks);
+    void migrateStocks();
 
     QList<Stock> loadStocks(const QString& market);
     QList<Stock> loadCrypto(const QString& exchange);
