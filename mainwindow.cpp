@@ -15,33 +15,6 @@
 
 
 // ************************************************************************************************
-// Función personalizada para manejar los mensajes de depuración
-void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    Q_UNUSED(context);
-    QTextEdit *txt = UIManager::getInstance()->getTextEdit();
-    QString formattedMessage;
-    switch (type) {
-    case QtInfoMsg:
-        formattedMessage = QString("<font color=\"blue\">Info: </font> %1").arg(msg);
-        break;
-    case QtWarningMsg:
-        formattedMessage = QString("<font color=\"orange\">Warning: </font> %1").arg(msg);
-        break;
-    case QtCriticalMsg:
-        formattedMessage = QString("<font color=\"red\">Critical: </font> %1").arg(msg);
-        break;
-    case QtFatalMsg:
-        formattedMessage = QString("<font color=\"red\">Fatal: </font> %1").arg(msg);
-        break;
-    default:
-        formattedMessage = msg;
-    }
-    txt->append(formattedMessage);
-}
-
-
-// ************************************************************************************************
 // Main Window
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), settings(new SettingsManager())

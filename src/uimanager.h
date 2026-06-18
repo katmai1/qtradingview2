@@ -1,20 +1,17 @@
-#ifndef UIMANAGER_H
-#define UIMANAGER_H
+#pragma once
+#include <QObject>
 #include <QTextEdit>
+
+void customMessageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 
 class UIManager {
 public:
-    static UIManager *getInstance() {
-        static UIManager instance;
-        return &instance;
-    }
-
-    QTextEdit *getTextEdit() const { return textEdit; }
-    void setTextEdit(QTextEdit *txtedit) { textEdit = txtedit; }
+    static UIManager* getInstance();
+    void setTextEdit(QTextEdit* textEdit);
+    void appendMessage(const QString& msg);
 
 private:
-    UIManager() : textEdit(nullptr) {} // Initialize textEdit to nullptr
-
-    QTextEdit *textEdit;
+    UIManager() = default;
+    static UIManager* m_instance;
+    QTextEdit* m_textEdit = nullptr;
 };
-#endif // UIMANAGER_H

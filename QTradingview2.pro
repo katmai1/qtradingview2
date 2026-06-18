@@ -29,7 +29,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     src/stockdockwidget.cpp \
-    src/tvscreener.cpp
+    src/tvscreener.cpp \
+    src/uimanager.cpp
 
 HEADERS += \
     customwebenginepage.h \
