@@ -42,6 +42,7 @@ private:
         profile->settings()->setAttribute(QWebEngineSettings::JavascriptCanOpenWindows, true);
         profile->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
         profile->settings()->setAttribute(QWebEngineSettings::AllowWindowActivationFromJavaScript, true);
+        profile->settings()->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
         return profile;
     }
 
