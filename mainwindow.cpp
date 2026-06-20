@@ -39,12 +39,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     addDockWidget(Qt::LeftDockWidgetArea, dockStock);
     connectDock(dockStock, ui->actionStocks, "stock");
 
-    // dockStock->setVisible(settings->getValue("stock", false, "View").toBool());
-    // ui->actionStocks->setChecked(settings->getValue("stock", false, "View").toBool());
-
-    // connect(ui->actionStocks, &QAction::toggled, dockStock, &QDockWidget::setVisible);
-    // connect(dockStock, &QDockWidget::visibilityChanged, ui->actionStocks, &QAction::setChecked);
-
     // load views
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
     this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
@@ -54,15 +48,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     auto* profile = qobject_cast<CustomWebEnginePage*>(ui->webview->page())->profile();
     screener = new TvScreener(profile, this);
 
-    connect(screener, &TvScreener::dataReady, [](const QString& market, const QList<Stock>& stocks, int total) {
-        qDebug() << "Loaded " << total;
-        // check if is stock or crypto
-        if (market.startsWith("crypto_")) {
-            QString exchange = market.mid(7); // quita "crypto_"
-            DbManager::getInstance().saveCrypto(exchange, stocks);
-        } else {
-            DbManager::getInstance().saveStocks(market, stocks);
-        }
+    connect(screener, &TvScreener::stocksReady, [](const QString& market, const QList<Stock>& stocks, int total) {
+        qInfo() << "Recibidas un total de " << total << " acciones.";
+        DbManager::getInstance().saveStocks(market, stocks);
+    });
+
+    connect(screener, &TvScreener::cryptoReady, [](const QString& exchange, const QList<Crypto>& cryptos, int total) {
+        qInfo() << "Recibidas un total de " << total << " cryptos.";
+        DbManager::getInstance().saveCrypto(exchange, cryptos);
     });
 
     connect(screener, &TvScreener::errorOccurred, [](const QString& err) { qDebug() << "Error:" << err; });
@@ -140,11 +133,4 @@ void MainWindow::on_actionSaveHTML_triggered()
             file.close();
         }
     });
-}
-
-// Al cerrar
-void MainWindow::closeEvent(QCloseEvent* event) {
-    qInfo() << "cerrando";
-    m_closing = true;
-    event->accept();
 }

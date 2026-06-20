@@ -20,6 +20,13 @@ struct Stock {
     QString sector;
 };
 
+struct Crypto {
+    QString ticker;
+    QString name;
+    QString description;
+    double  close;
+    double  volume;
+};
 
 class TvScreener : public QObject
 {
@@ -27,12 +34,12 @@ class TvScreener : public QObject
 
 public:
     explicit TvScreener(QWebEngineProfile* profile, QObject* parent = nullptr);
-
     void fetchMarket(const QString& market, int offset = 0, int limit = 500);
     void fetchCrypto(const QString& exchange = "BINANCE");
 
 signals:
-    void dataReady(const QString& market, const QList<Stock>& stocks, int totalCount);
+    void stocksReady(const QString& market, const QList<Stock>& stocks, int totalCount);
+    void cryptoReady(const QString& exchange, const QList<Crypto>& cryptos, int total);
     void errorOccurred(const QString& message);
 
 private slots:

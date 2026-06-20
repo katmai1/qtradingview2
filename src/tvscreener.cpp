@@ -70,10 +70,11 @@ void TvScreener::fetchCrypto(const QString& exchange) {
     connect(reply, &QNetworkReply::finished, this, &TvScreener::onReplyFinished);
 }
 
+// recibe los datos
 void TvScreener::onReplyFinished() {
     auto* reply = qobject_cast<QNetworkReply*>(sender());
     reply->deleteLater();
-
+    // on error
     if (reply->error() != QNetworkReply::NoError) {
         emit errorOccurred(reply->errorString());
         return;
@@ -81,25 +82,43 @@ void TvScreener::onReplyFinished() {
 
     QString market = reply->property("market").toString();
     QJsonObject root = QJsonDocument::fromJson(reply->readAll()).object();
+    int total = root["totalCount"].toInt();
 
-    int totalCount = root["totalCount"].toInt();
-    QList<Stock> stocks;
-
-    for (const QJsonValue& item : root["data"].toArray()) {
-        QJsonObject obj = item.toObject();
-        QJsonArray  d   = obj["d"].toArray();
-
-        stocks.append({
-            .ticker    = obj["s"].toString(),
-            .name      = d[0].toString(),
-            .description = d[1].toString(),
-            .isin      = d[2].toString(),
-            .close     = d[3].toDouble(),
-            .volume    = d[4].toDouble(),
-            .marketCap = d[5].toDouble(),
-            .sector    = d[6].toString(),
-        });
+    // si son cryptos
+    if (market.startsWith("crypto_")) {
+        QString exchange = market.mid(7);
+        QList<Crypto> cryptos;
+        for (const QJsonValue& item : root["data"].toArray()) {
+            QJsonObject obj = item.toObject();
+            QJsonArray  d   = obj["d"].toArray();
+            cryptos.append({
+                .ticker      = obj["s"].toString(),
+                .name        = d[0].toString(),
+                .description = d[1].toString(),
+                .close       = d[2].toDouble(),
+                .volume      = d[3].toDouble(),
+            });
+        }
+        emit cryptoReady(exchange, cryptos, total);
     }
 
-    emit dataReady(market, stocks, totalCount);
+    // si son stocks
+    else {
+        QList<Stock> stocks;
+        for (const QJsonValue& item : root["data"].toArray()) {
+            QJsonObject obj = item.toObject();
+            QJsonArray  d   = obj["d"].toArray();
+            stocks.append({
+                .ticker      = obj["s"].toString(),
+                .name        = d[0].toString(),
+                .description = d[1].toString(),
+                .isin        = d[2].toString(),
+                .close       = d[3].toDouble(),
+                .volume      = d[4].toDouble(),
+                .marketCap   = d[5].toDouble(),
+                .sector      = d[6].toString(),
+            });
+        }
+        emit stocksReady(market, stocks, total);
+    }
 }

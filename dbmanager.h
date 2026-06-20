@@ -8,7 +8,7 @@ public:
     bool init(const QString& path = "qtradingview2.db");
 
     void saveStocks(const QString& market, const QList<Stock>& stocks);
-    void saveCrypto(const QString& exchange, const QList<Stock>& stocks);
+    void saveCrypto(const QString& exchange, const QList<Crypto>& stocks);
     void migrateStocks();
 
     QList<Stock> loadStocks(const QString& market);

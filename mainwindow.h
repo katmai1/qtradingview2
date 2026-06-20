@@ -1,10 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "qevent.h"
 #include "src/tvscreener.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTextEdit>
+#include <QCloseEvent>
 
 #include "src/systray.h"
 #include "src/settings.h"
@@ -47,11 +49,6 @@ private slots:
 
     void on_actionSaveHTML_triggered();
 
-protected:
-    void closeEvent(QCloseEvent* event) override;
-
-public slots:
-
 private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;
@@ -60,6 +57,7 @@ private:
     TvScreener* screener;
     StockDockWidget* dockStock;
 
+    // funcion para conectar docks y gestionar su visibilidad con los settings
     bool m_closing = false;
     inline void connectDock(QDockWidget* dock, QAction* action, const QString& key) {
         bool visible = settings->getValue(key, false, "View").toBool();
@@ -75,6 +73,13 @@ private:
             action->setChecked(visible);
             settings->setValue(key, visible, "View");
         });
+    }
+
+
+    void closeEvent(QCloseEvent* event) {
+        // necesario para connectDock
+        m_closing = true;
+        event->accept();
     }
 };
 
