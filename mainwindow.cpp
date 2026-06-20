@@ -8,10 +8,13 @@
 #include <QTextEdit>
 #include <QDebug>
 #include <QString>
+#include <QCloseEvent>
 
 #include "src/uimanager.h"
 #include "src/tvscreener.h"
 #include "dbmanager.h"
+
+#include <unistd.h>
 
 
 // ************************************************************************************************
@@ -34,9 +37,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // load dock stocks
     dockStock = new StockDockWidget(this);
     addDockWidget(Qt::LeftDockWidgetArea, dockStock);
-    ui->actionStocks->setChecked(settings->getValue("stock", false, "View").toBool());
-    connect(ui->actionStocks, &QAction::toggled, dockStock, &QDockWidget::setVisible);
-    connect(dockStock, &QDockWidget::visibilityChanged, ui->actionStocks, &QAction::setChecked);
+    connectDock(dockStock, ui->actionStocks, "stock");
+
+    // dockStock->setVisible(settings->getValue("stock", false, "View").toBool());
+    // ui->actionStocks->setChecked(settings->getValue("stock", false, "View").toBool());
+
+    // connect(ui->actionStocks, &QAction::toggled, dockStock, &QDockWidget::setVisible);
+    // connect(dockStock, &QDockWidget::visibilityChanged, ui->actionStocks, &QAction::setChecked);
 
     // load views
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
@@ -137,6 +144,7 @@ void MainWindow::on_actionSaveHTML_triggered()
 
 // Al cerrar
 void MainWindow::closeEvent(QCloseEvent* event) {
-    settings->setValue("stock", dockStock->isVisible(), "View");
+    qInfo() << "cerrando";
+    m_closing = true;
     event->accept();
 }

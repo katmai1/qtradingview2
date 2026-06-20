@@ -47,7 +47,8 @@ private slots:
 
     void on_actionSaveHTML_triggered();
 
-    void closeEvent(QCloseEvent* event);
+protected:
+    void closeEvent(QCloseEvent* event) override;
 
 public slots:
 
@@ -58,6 +59,23 @@ private:
     SettingsManager *settings;
     TvScreener* screener;
     StockDockWidget* dockStock;
+
+    bool m_closing = false;
+    inline void connectDock(QDockWidget* dock, QAction* action, const QString& key) {
+        bool visible = settings->getValue(key, false, "View").toBool();
+        dock->setVisible(visible);
+        action->setChecked(visible);
+
+        connect(action, &QAction::toggled, [this, dock, key](bool checked) {
+            dock->setVisible(checked);
+            settings->setValue(key, checked, "View");
+        });
+        connect(dock, &QDockWidget::visibilityChanged, [this, action, key](bool visible) {
+            if (m_closing) return;
+            action->setChecked(visible);
+            settings->setValue(key, visible, "View");
+        });
+    }
 };
 
 #endif // MAINWINDOW_H
