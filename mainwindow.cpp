@@ -10,6 +10,7 @@
 #include <QString>
 #include <QCloseEvent>
 
+#include "src/searchmarket.h"
 #include "src/uimanager.h"
 #include "src/tvscreener.h"
 #include "dbmanager.h"
@@ -48,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     auto* profile = qobject_cast<CustomWebEnginePage*>(ui->webview->page())->profile();
     screener = new TvScreener(profile, this);
 
+    // connects
     connect(screener, &TvScreener::stocksReady, [](const QString& market, const QList<Stock>& stocks, int total) {
         qInfo() << "Recibidas un total de " << total << " acciones.";
         DbManager::getInstance().saveStocks(market, stocks);
@@ -134,3 +136,11 @@ void MainWindow::on_actionSaveHTML_triggered()
         }
     });
 }
+
+
+void MainWindow::on_actionSearch_Stocks_triggered()
+{
+    auto* dlg = new searchMarket(this);
+    dlg->show();
+}
+

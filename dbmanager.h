@@ -12,7 +12,7 @@ public:
     void migrateStocks();
 
     QList<Stock> loadStocks(const QString& market);
-    QList<Stock> loadCrypto(const QString& exchange);
+    QList<Crypto> loadCrypto(const QString& exchange);
 
 private:
     DbManager() = default;

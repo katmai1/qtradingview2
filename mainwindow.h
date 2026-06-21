@@ -49,6 +49,8 @@ private slots:
 
     void on_actionSaveHTML_triggered();
 
+    void on_actionSearch_Stocks_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;

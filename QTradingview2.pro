@@ -28,6 +28,7 @@ SOURCES += \
     src/dialogoptions.cpp \
     main.cpp \
     mainwindow.cpp \
+    src/searchmarket.cpp \
     src/stockdockwidget.cpp \
     src/tvscreener.cpp \
     src/uimanager.cpp
@@ -39,6 +40,7 @@ HEADERS += \
     src/dialogabout.h \
     src/dialogoptions.h \
     mainwindow.h \
+    src/searchmarket.h \
     src/settings.h \
     src/stockdockwidget.h \
     src/systray.h \
@@ -49,6 +51,7 @@ FORMS += \
     src/dialogabout.ui \
     src/dialogoptions.ui \
     mainwindow.ui \
+    src/searchmarket.ui \
     src/stockdockwidget.ui
 
 TRANSLATIONS += \

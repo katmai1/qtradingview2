@@ -64,6 +64,7 @@
     <addaction name="separator"/>
     <addaction name="actionFullscreen"/>
     <addaction name="actionStatusbar"/>
+    <addaction name="actionSearch_Stocks"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -153,20 +154,6 @@
     <string>javascript</string>
    </property>
   </action>
-  <action name="actionMarkets">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Mercados</string>
-   </property>
-   <property name="shortcut">
-    <string>F4</string>
-   </property>
-  </action>
   <action name="actionAbout">
    <property name="text">
     <string>Acerca de...</string>
@@ -229,6 +216,14 @@
    </property>
    <property name="text">
     <string>Stocks</string>
+   </property>
+  </action>
+  <action name="actionSearch_Stocks">
+   <property name="text">
+    <string>Search stocks...</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
    </property>
   </action>
  </widget>

@@ -113,7 +113,7 @@ void DbManager::saveStocks(const QString& market, const QList<Stock>& stocks) {
     qInfo() << "Guardados" << stocks.size() << "stocks de" << market;
 }
 
-void DbManager::saveCrypto(const QString& exchange, const QList<Stock>& stocks) {
+void DbManager::saveCrypto(const QString& exchange, const QList<Crypto>& crypto) {
     m_db.transaction();
     QSqlQuery q;
     q.prepare(R"(
@@ -127,7 +127,7 @@ void DbManager::saveCrypto(const QString& exchange, const QList<Stock>& stocks) 
             updated_at  = CURRENT_TIMESTAMP
     )");
 
-    for (const auto& s : stocks) {
+    for (const auto& s : crypto) {
         q.bindValue(":exchange",    exchange);
         q.bindValue(":ticker",      s.ticker);
         q.bindValue(":name",        s.name);
@@ -138,7 +138,7 @@ void DbManager::saveCrypto(const QString& exchange, const QList<Stock>& stocks) 
     }
 
     m_db.commit();
-    qInfo() << "Crypto guardados:" << stocks.size() << "en" << exchange;
+    qInfo() << "Crypto guardados:" << crypto.size() << "en" << exchange;
 }
 
 QList<Stock> DbManager::loadStocks(const QString& market) {
@@ -163,8 +163,8 @@ QList<Stock> DbManager::loadStocks(const QString& market) {
     return result;
 }
 
-QList<Stock> DbManager::loadCrypto(const QString& exchange = "BINANCE") {
-    QList<Stock> result;
+QList<Crypto> DbManager::loadCrypto(const QString& exchange = "BINANCE") {
+    QList<Crypto> result;
     QSqlQuery q;
     q.prepare("SELECT ticker, name, description, close, volume FROM crypto WHERE exchange = :exchange");
     q.bindValue(":exchange", exchange);
