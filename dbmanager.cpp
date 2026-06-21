@@ -65,6 +65,16 @@ void DbManager::createTables() {
         )
     )");
 
+    // tabla watchlist
+    q.exec(R"(
+        CREATE TABLE IF NOT EXISTS watch (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker      TEXT NOT NULL UNIQUE,
+            type        TEXT NOT NULL,
+            tag         TEXT,
+            notes       TEXT
+        )
+    )");
     migrateStocks();
 }
 
@@ -84,7 +94,7 @@ void DbManager::migrateStocks() {
     }
 }
 
-
+// Stocks and cryptos
 void DbManager::saveStocks(const QString& market, const QList<Stock>& stocks) {
     m_db.transaction();
 

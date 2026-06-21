@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dockWatchList</class>
+ <widget class="QDockWidget" name="dockWatchList">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>256</width>
+    <height>507</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Lista de seguimiento</string>
+  </property>
+  <property name="dockLocation">
+   <enum>Qt::DockWidgetArea::NoDockWidgetArea</enum>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QListWidget" name="watchList"/>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

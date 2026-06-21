@@ -2,6 +2,7 @@
 #include <QSqlDatabase>
 #include "src/tvscreener.h"
 
+
 class DbManager {
 public:
     static DbManager& getInstance();

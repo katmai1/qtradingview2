@@ -32,6 +32,7 @@ private:
     void setupCryptos();
     AssetType m_type;
     TvScreener* m_screener;
+    void add2WL(QString ticker, QString type);
 };
 
 #endif // SEARCHMARKET_H

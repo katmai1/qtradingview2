@@ -1,4 +1,5 @@
 #include "searchmarket.h"
+#include "qsqlquery.h"
 #include "ui_searchmarket.h"
 #include <QStyledItemDelegate>
 #include <QLocale>
@@ -69,6 +70,7 @@ searchMarket::searchMarket(AssetType type, TvScreener* screener, QWidget *parent
         int row = index.row();
         QString ticker = m_model->data(m_model->index(row, 1)).toString();
         emit loadSymbol(ticker);
+        add2WL(ticker, "stock");
         qDebug() << "Doble click en:" << ticker;
     });
 
@@ -155,12 +157,20 @@ void searchMarket::setupCryptos() {
 void searchMarket::on_butonUpdate_released()
 {
     if (m_type == AssetType::Stocks) {
-        m_screener->fetchMarket("germany");
         m_screener->fetchMarket("france");
-        m_screener->fetchMarket("uk");
-        // etc.
     } else {
         m_screener->fetchCrypto("BINANCE");
     }
+}
+
+void searchMarket::add2WL(QString ticker, QString type) {
+
+    auto* q = new QSqlQuery();
+    q->prepare(R"(
+        INSERT OR IGNORE INTO watch (ticker, type, tag, notes) values (:ticker, :type, '', '')
+    )");
+    q->bindValue(":ticker", ticker);
+    q->bindValue(":type", type);
+    q->exec();
 }
 
