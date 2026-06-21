@@ -68,6 +68,7 @@ searchMarket::searchMarket(AssetType type, TvScreener* screener, QWidget *parent
     connect(ui->tableMarkets, &QTableView::doubleClicked, this, [this](const QModelIndex& index) {
         int row = index.row();
         QString ticker = m_model->data(m_model->index(row, 1)).toString();
+        emit loadSymbol(ticker);
         qDebug() << "Doble click en:" << ticker;
     });
 

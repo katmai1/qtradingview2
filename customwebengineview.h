@@ -13,7 +13,7 @@ class CustomWebEngineView : public QWebEngineView
 public:
     explicit CustomWebEngineView(QWidget *parent = nullptr);
 
-    void loadChart(QString pair, QString exchange);
+    void loadChart(QString ticker);
     QString currentSymbol() const { return m_symbol; }
 
 public slots:

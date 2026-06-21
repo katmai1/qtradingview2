@@ -33,21 +33,7 @@ void CustomWebEngineView::testJavascript() {
     this->page()->runJavaScript(code);
 }
 
-
-// void CustomWebEngineView::adBlockJS() {
-//     QString code = R"delim(
-//         const adBlock = setInterval(() => {
-//             const adBlock = document.querySelector("article[class^='toast-']");
-//             if (adBlock) {
-//                 adBlock.querySelector('button').click();
-//             }
-//         }, 5000);
-//     )delim";
-//     this->page()->runJavaScript(code);
-// }
-
-void CustomWebEngineView::loadChart(QString pair, QString exchange) {
-    QStringList market = pair.split("/");
-    QString url = "https://es.tradingview.com/chart/?symbol=" + exchange.toUpper() + ":" + market[0] + market[1];
+void CustomWebEngineView::loadChart(QString ticker) {
+    QString url = "https://es.tradingview.com/chart/?symbol=" + ticker;
     this->load(QUrl(url));
 }

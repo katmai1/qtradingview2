@@ -141,6 +141,9 @@ void MainWindow::on_actionSaveHTML_triggered()
 void MainWindow::on_actionSearch_Stocks_triggered()
 {
     auto* dlg = new searchMarket(AssetType::Stocks, screener, this);
+    connect(dlg, &searchMarket::loadSymbol, this, [this](const QString& ticker) {
+        ui->webview->loadChart(ticker);  // tu función del webview
+    });
     dlg->show();
 }
 

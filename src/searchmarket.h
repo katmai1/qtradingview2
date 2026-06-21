@@ -20,6 +20,9 @@ public:
 private slots:
     void on_butonUpdate_released();
 
+signals:
+    void loadSymbol(const QString& ticker);
+
 private:
     Ui::searchMarket *ui;
     QSqlQueryModel* m_model;
