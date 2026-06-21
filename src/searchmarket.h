@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSqlQueryModel>
+#include "tvscreener.h"
 
 enum class AssetType { Stocks, Crypto };
 namespace Ui {  class searchMarket; }
@@ -13,14 +14,21 @@ class searchMarket : public QDialog
     Q_OBJECT
 
 public:
-    explicit searchMarket(QWidget *parent = nullptr);
+    explicit searchMarket(AssetType type, TvScreener* screener, QWidget *parent = nullptr);
     ~searchMarket();
+
+private slots:
+    void on_butonUpdate_released();
 
 private:
     Ui::searchMarket *ui;
     QSqlQueryModel* m_model;
+    QString m_query;
+    QString m_where;
     void setupStocks();
     void setupCryptos();
+    AssetType m_type;
+    TvScreener* m_screener;
 };
 
 #endif // SEARCHMARKET_H

@@ -49,9 +49,9 @@ void TvScreener::fetchMarket(const QString& market, int offset, int limit) {
 
 void TvScreener::fetchCrypto(const QString& exchange) {
     QJsonObject payload {
-        {"columns", QJsonArray{"name", "description", "close", "volume", "market_cap_basic"}},
+        {"columns", QJsonArray{"name", "description", "close", "24h_vol|5", "turnover"}},
         {"range",   QJsonArray{0, 500}},
-        {"sort",    QJsonObject{{"sortBy", "volume"}, {"sortOrder", "desc"}}},
+        {"sort",    QJsonObject{{"sortBy", "24h_vol|5"}, {"sortOrder", "desc"}}},
         {"filter",  QJsonArray{
                        QJsonObject{
                            {"left",      "exchange"},
@@ -86,10 +86,17 @@ void TvScreener::onReplyFinished() {
 
     // si son cryptos
     if (market.startsWith("crypto_")) {
+        auto array = root["data"].toArray();
+        if (!array.isEmpty()) {
+            qDebug() << "primer objeto completo:"
+                     << QJsonDocument(array[0].toObject()).toJson(QJsonDocument::Indented);
+        }
+
         QString exchange = market.mid(7);
         QList<Crypto> cryptos;
         for (const QJsonValue& item : root["data"].toArray()) {
             QJsonObject obj = item.toObject();
+            // qDebug() << "crypto raw:" << obj["s"].toString() << obj["d"].toArray()[3].toString();
             QJsonArray  d   = obj["d"].toArray();
             cryptos.append({
                 .ticker      = obj["s"].toString(),

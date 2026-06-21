@@ -65,6 +65,7 @@
     <addaction name="actionFullscreen"/>
     <addaction name="actionStatusbar"/>
     <addaction name="actionSearch_Stocks"/>
+    <addaction name="actionSearch_cryptos"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -224,6 +225,14 @@
    </property>
    <property name="shortcut">
     <string>F2</string>
+   </property>
+  </action>
+  <action name="actionSearch_cryptos">
+   <property name="text">
+    <string>Search cryptos...</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
  </widget>

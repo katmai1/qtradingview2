@@ -5,7 +5,7 @@
 class DbManager {
 public:
     static DbManager& getInstance();
-    bool init(const QString& path = "qtradingview2.db");
+    bool init();
 
     void saveStocks(const QString& market, const QList<Stock>& stocks);
     void saveCrypto(const QString& exchange, const QList<Crypto>& stocks);

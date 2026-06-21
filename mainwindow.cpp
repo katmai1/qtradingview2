@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     qInfo() << "Iniciando version: " << QString("v%1").arg(VERSION_FULL);
 
     // init db
-    DbManager::getInstance().init("qtradingview2.db");
+    DbManager::getInstance().init();
 
     // load dock stocks
     dockStock = new StockDockWidget(this);
@@ -140,7 +140,14 @@ void MainWindow::on_actionSaveHTML_triggered()
 
 void MainWindow::on_actionSearch_Stocks_triggered()
 {
-    auto* dlg = new searchMarket(this);
+    auto* dlg = new searchMarket(AssetType::Stocks, screener, this);
+    dlg->show();
+}
+
+
+void MainWindow::on_actionSearch_cryptos_triggered()
+{
+    auto* dlg = new searchMarket(AssetType::Crypto, screener, this);
     dlg->show();
 }
 

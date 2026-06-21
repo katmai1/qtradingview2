@@ -2,15 +2,22 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include <QStandardPaths>
+#include <QDir>
 
 DbManager& DbManager::getInstance() {
     static DbManager instance;
     return instance;
 }
 
-bool DbManager::init(const QString& path) {
+bool DbManager::init() {
+    QString path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+    QDir().mkpath(path);
+    QString dbPath = path + "/qtradingview2.db";
+    qInfo() << "BD en:" << dbPath;
+
     m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName(path);
+    m_db.setDatabaseName(dbPath);
 
     if (!m_db.open()) {
         qWarning() << "Error abriendo BD:" << m_db.lastError().text();

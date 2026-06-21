@@ -51,6 +51,8 @@ private slots:
 
     void on_actionSearch_Stocks_triggered();
 
+    void on_actionSearch_cryptos_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;
