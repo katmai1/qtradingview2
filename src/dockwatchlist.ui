@@ -6,16 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>256</width>
-    <height>507</height>
+    <width>286</width>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Lista de seguimiento</string>
   </property>
   <property name="dockLocation">
-   <enum>Qt::DockWidgetArea::NoDockWidgetArea</enum>
+   <enum>Qt::DockWidgetArea::LeftDockWidgetArea</enum>
   </property>
+  <attribute name="dockWidgetArea">
+   <number>1</number>
+  </attribute>
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>

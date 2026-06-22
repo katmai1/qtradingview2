@@ -59,7 +59,7 @@
     <property name="title">
      <string>&amp;Ver</string>
     </property>
-    <addaction name="actionStocks"/>
+    <addaction name="actionWatch"/>
     <addaction name="actionDebug"/>
     <addaction name="separator"/>
     <addaction name="actionFullscreen"/>
@@ -203,20 +203,15 @@
     <string>Save HTML</string>
    </property>
   </action>
-  <action name="actionPortfolio">
-   <property name="text">
-    <string>Portfolio...</string>
-   </property>
-   <property name="shortcut">
-    <string>F2</string>
-   </property>
-  </action>
-  <action name="actionStocks">
+  <action name="actionWatch">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Stocks</string>
+    <string>Lista de seguimiento</string>
+   </property>
+   <property name="shortcut">
+    <string>F4</string>
    </property>
   </action>
   <action name="actionSearch_Stocks">

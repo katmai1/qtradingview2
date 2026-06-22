@@ -2,6 +2,8 @@
 #define DOCKWATCHLIST_H
 
 #include <QDockWidget>
+#include <QSqlQuery>
+
 
 namespace Ui {
 class dockWatchList;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::dockWatchList *ui;
+
+    void updateList();
 };
 
 #endif // DOCKWATCHLIST_H

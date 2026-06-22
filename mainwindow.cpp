@@ -36,9 +36,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     DbManager::getInstance().init();
 
     // load dock stocks
-    dockStock = new StockDockWidget(this);
-    addDockWidget(Qt::LeftDockWidgetArea, dockStock);
-    connectDock(dockStock, ui->actionStocks, "stock");
+    dockWatch = new dockWatchList(this);
+    addDockWidget(Qt::LeftDockWidgetArea, dockWatch);
+    connectDock(dockWatch, ui->actionWatch, "watchlist");
 
     // load views
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());

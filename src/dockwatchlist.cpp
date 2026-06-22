@@ -6,9 +6,19 @@ dockWatchList::dockWatchList(QWidget *parent)
     , ui(new Ui::dockWatchList)
 {
     ui->setupUi(this);
+    updateList();
 }
 
 dockWatchList::~dockWatchList()
 {
     delete ui;
+}
+
+void dockWatchList::updateList() {
+    auto* q = new QSqlQuery();
+    q->exec("SELECT * FROM watch");
+    while (q->next()) {
+            qInfo() << q->value(1).toString();
+    }
+
 }

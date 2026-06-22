@@ -10,7 +10,7 @@
 
 #include "src/systray.h"
 #include "src/settings.h"
-#include "src/stockdockwidget.h"
+#include "src/dockwatchlist.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -59,7 +59,7 @@ private:
     SystemTrayIcon *trayIcon;
     SettingsManager *settings;
     TvScreener* screener;
-    StockDockWidget* dockStock;
+    dockWatchList* dockWatch;
 
     // funcion para conectar docks y gestionar su visibilidad con los settings
     bool m_closing = false;
