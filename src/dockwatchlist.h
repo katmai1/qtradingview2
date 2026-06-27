@@ -27,6 +27,7 @@ class dockWatchList : public QDockWidget
 public:
     explicit dockWatchList(QWidget *parent = nullptr);
     ~dockWatchList();
+    void updateList();
 
 private slots:
     void onItemDoubleClicked(QListWidgetItem* item);
@@ -37,7 +38,6 @@ signals:
 private:
     Ui::dockWatchList *ui;
 
-    void updateList();
     void refreshList(QList<WatchItem>& lista);
 };
 

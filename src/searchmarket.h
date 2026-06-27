@@ -20,8 +20,11 @@ public:
 private slots:
     void on_butonUpdate_released();
 
+    void on_butAdd2WL_released();
+
 signals:
     void loadSymbol(const QString& ticker);
+    void refreshWatchList();
 
 private:
     Ui::searchMarket *ui;

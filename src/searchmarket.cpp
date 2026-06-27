@@ -66,11 +66,12 @@ searchMarket::searchMarket(AssetType type, TvScreener* screener, QWidget *parent
         setupCryptos();
     }
 
+    // doble click carga grafica
     connect(ui->tableMarkets, &QTableView::doubleClicked, this, [this](const QModelIndex& index) {
         int row = index.row();
         QString ticker = m_model->data(m_model->index(row, 1)).toString();
         emit loadSymbol(ticker);
-        add2WL(ticker, "stock");
+        //add2WL(ticker, "stock");
         qDebug() << "Doble click en:" << ticker;
     });
 
@@ -172,5 +173,14 @@ void searchMarket::add2WL(QString ticker, QString type) {
     q->bindValue(":ticker", ticker);
     q->bindValue(":type", type);
     q->exec();
+}
+
+
+void searchMarket::on_butAdd2WL_released()
+{
+    QModelIndex index = ui->tableMarkets->currentIndex();
+    QString ticker = index.sibling(index.row(), 1).data().toString();
+    add2WL(ticker, "stock");
+    emit refreshWatchList();
 }
 

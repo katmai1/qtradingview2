@@ -39,9 +39,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     dockWatch = new dockWatchList(this);
     addDockWidget(Qt::LeftDockWidgetArea, dockWatch);
     connectDock(dockWatch, ui->actionWatch, "watchlist");
-    connect(dockWatch, &dockWatchList::loadSymbol, this, [this](const QString& ticker) {
-        ui->webview->loadChart(ticker);
-    });
+    connect(dockWatch, &dockWatchList::loadSymbol, this, [this](const QString& ticker) {    ui->webview->loadChart(ticker); });
 
     // load views
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
@@ -147,6 +145,7 @@ void MainWindow::on_actionSearch_Stocks_triggered()
     connect(dlg, &searchMarket::loadSymbol, this, [this](const QString& ticker) {
         ui->webview->loadChart(ticker);  // tu función del webview
     });
+    connect(dlg, &searchMarket::refreshWatchList, dockWatch, &dockWatchList::updateList);
     dlg->show();
 }
 
