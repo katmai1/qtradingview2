@@ -35,10 +35,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // init db
     DbManager::getInstance().init();
 
-    // load dock stocks
+    // load dock watchlist
     dockWatch = new dockWatchList(this);
     addDockWidget(Qt::LeftDockWidgetArea, dockWatch);
     connectDock(dockWatch, ui->actionWatch, "watchlist");
+    connect(dockWatch, &dockWatchList::loadSymbol, this, [this](const QString& ticker) {
+        ui->webview->loadChart(ticker);
+    });
 
     // load views
     this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());

@@ -15,6 +15,9 @@ public:
     QList<Stock> loadStocks(const QString& market);
     QList<Crypto> loadCrypto(const QString& exchange);
 
+    Stock getStockByTicker(const QString& ticker);
+    // Crypto getCryptoByTicker(const QString& ticker);
+
 private:
     DbManager() = default;
     QSqlDatabase m_db;

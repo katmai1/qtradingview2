@@ -198,3 +198,19 @@ QList<Crypto> DbManager::loadCrypto(const QString& exchange = "BINANCE") {
     }
     return result;
 }
+
+Stock DbManager::getStockByTicker(const QString& ticker) {
+    Stock data{};
+
+    auto* q = new QSqlQuery();
+    q->prepare("SELECT * FROM stocks WHERE ticker = :ticker");
+    q->bindValue(":ticker", ticker);
+    if (!q->exec()) {   qWarning() << "getStockByTicker error:" << q->lastError().text();   }
+    if (q->next()) {
+        data.name = q->value(3).toString();
+        qInfo() << q->value(3).toString();
+    }
+    return data;
+}
+
+// Crypto getCryptoByTicker(const QString& ticker){}
