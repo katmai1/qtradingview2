@@ -214,3 +214,15 @@ Stock DbManager::getStockByTicker(const QString& ticker) {
 }
 
 // Crypto getCryptoByTicker(const QString& ticker){}
+
+// elimina entrada de la tabla
+bool DbManager::deleteWLbyTicker(const QString& ticker) {
+    auto* q = new QSqlQuery();
+    q->prepare("DELETE FROM watch WHERE ticker = :ticker");
+    q->bindValue(":ticker", ticker);
+    if (!q->exec()) {
+        qWarning() << "deleteStockByTicker error:" << q->lastError().text();
+        return false;
+    }
+    return q->numRowsAffected() > 0;
+}

@@ -17,6 +17,7 @@ public:
 
     Stock getStockByTicker(const QString& ticker);
     // Crypto getCryptoByTicker(const QString& ticker);
+    bool deleteWLbyTicker(const QString& ticker);
 
 private:
     DbManager() = default;

@@ -31,14 +31,15 @@ public:
 
 private slots:
     void onItemDoubleClicked(QListWidgetItem* item);
+    void onContextMenu(const QPoint& pos);
 
 signals:
     void loadSymbol(const QString& ticker);
 
 private:
     Ui::dockWatchList *ui;
-
     void refreshList(QList<WatchItem>& lista);
+
 };
 
 #endif // DOCKWATCHLIST_H
