@@ -1,6 +1,7 @@
 #include "dockwatchlist.h"
 #include "ui_dockwatchlist.h"
 #include "dbmanager.h"
+#include "watchlistdelegate.h"
 #include <QMenu>
 
 dockWatchList::dockWatchList(QWidget *parent)
@@ -8,6 +9,8 @@ dockWatchList::dockWatchList(QWidget *parent)
     , ui(new Ui::dockWatchList)
 {
     ui->setupUi(this);
+    ui->watchList->setItemDelegate(new WatchListDelegate(this));
+
     updateList();
 
     connect(ui->watchList, &QListWidget::itemDoubleClicked, this, &dockWatchList::onItemDoubleClicked);
@@ -52,6 +55,7 @@ void dockWatchList::refreshList(QList<WatchItem>& lista) {
     for (const WatchItem& item: lista) {
         QListWidgetItem* qItem = new QListWidgetItem(item.name);
         qItem->setData(Qt::UserRole, item.ticker);
+        qItem->setData(Qt::UserRole + 2, item.ticker);
         ui->watchList->addItem(qItem);
     }
 

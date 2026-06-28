@@ -32,7 +32,8 @@ SOURCES += \
     src/searchmarket.cpp \
     src/stockdockwidget.cpp \
     src/tvscreener.cpp \
-    src/uimanager.cpp
+    src/uimanager.cpp \
+    src/watchlistdelegate.cpp
 
 HEADERS += \
     customwebenginepage.h \
@@ -47,7 +48,8 @@ HEADERS += \
     src/stockdockwidget.h \
     src/systray.h \
     src/tvscreener.h \
-    src/uimanager.h
+    src/uimanager.h \
+    src/watchlistdelegate.h
 
 FORMS += \
     src/dialogabout.ui \
