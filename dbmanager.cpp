@@ -208,7 +208,8 @@ Stock DbManager::getStockByTicker(const QString& ticker) {
     if (!q->exec()) {   qWarning() << "getStockByTicker error:" << q->lastError().text();   }
     if (q->next()) {
         data.name = q->value(3).toString();
-        qInfo() << q->value(3).toString();
+        data.description = q->value(4).toString();
+        data.isin = q->value(5).toString();
     }
     return data;
 }

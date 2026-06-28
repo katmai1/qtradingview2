@@ -10,6 +10,7 @@ dockWatchList::dockWatchList(QWidget *parent)
 {
     ui->setupUi(this);
     ui->watchList->setItemDelegate(new WatchListDelegate(this));
+    ui->watchList->setAlternatingRowColors(true);
 
     updateList();
 
@@ -42,6 +43,7 @@ void dockWatchList::updateList() {
         Stock data = DbManager::getInstance().getStockByTicker(item.ticker);
         if (!data.name.isEmpty()) {
             item.name = data.name;
+            item.description = data.description;
         }
         itemList.append(item);
 
@@ -55,7 +57,9 @@ void dockWatchList::refreshList(QList<WatchItem>& lista) {
     for (const WatchItem& item: lista) {
         QListWidgetItem* qItem = new QListWidgetItem(item.name);
         qItem->setData(Qt::UserRole, item.ticker);
-        qItem->setData(Qt::UserRole + 2, item.ticker);
+        qItem->setData(Qt::UserRole + 1, item.name);
+        qItem->setData(Qt::UserRole + 2, item.description);
+        qItem->setData(Qt::UserRole + 3, item.tag);
         ui->watchList->addItem(qItem);
     }
 
