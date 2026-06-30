@@ -22,6 +22,9 @@
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <widget class="QComboBox" name="comboTag"/>
+    </item>
+    <item>
      <widget class="QListWidget" name="watchList"/>
     </item>
    </layout>

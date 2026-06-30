@@ -12,11 +12,16 @@ dockWatchList::dockWatchList(QWidget *parent)
     , ui(new Ui::dockWatchList)
 {
     ui->setupUi(this);
+
+    // cargamos tags en el combo y conectamos
+    ui->comboTag->addItem("Todos");
+    for (const QString& tag : watchlistTagOrder()) { ui->comboTag->addItem(tag);    }
+    connect(ui->comboTag, &QComboBox::currentTextChanged, this, &dockWatchList::onFilterTag);
+
+    // configuramos lista, actualizamos y conectamos
     ui->watchList->setItemDelegate(new WatchListDelegate(this));
     ui->watchList->setAlternatingRowColors(true);
-
     updateList();
-
     connect(ui->watchList, &QListWidget::itemDoubleClicked, this, &dockWatchList::onItemDoubleClicked);
 
     // menu contextual
@@ -77,6 +82,15 @@ void dockWatchList::onItemDoubleClicked(QListWidgetItem* item) {
     emit loadSymbol(ticker);
 }
 
+void dockWatchList::onFilterTag(const QString& tag) {
+    for (int i = 0; i < ui->watchList->count(); i++) {
+        QListWidgetItem* item = ui->watchList->item(i);
+        QString itemTag = item->data(Qt::UserRole + 3).toString();
+        bool visible = (tag == "Todos") || (itemTag == tag);
+        item->setHidden(!visible);
+    }
+}
+
 // menu contextual
 void dockWatchList::onContextMenu(const QPoint& pos)
 {
@@ -92,11 +106,15 @@ void dockWatchList::onContextMenu(const QPoint& pos)
     QMenu menu(this);
     // submenu tag
     QMenu* submenuTag = menu.addMenu("Cambiar etiqueta");
-    QMap<QString, QColor> tags = watchlistTags();
-    for (auto it = tags.constBegin(); it != tags.constEnd(); ++it) {
-        QAction* action = submenuTag->addAction(it.key());
-        action->setData(it.key());  // guardamos el nombre del tag en la action
+    for (const QString& tag : watchlistTagOrder()) {
+        QAction* action = submenuTag->addAction(tag);
+        action->setData(tag);
     }
+    // QMap<QString, QColor> tags = watchlistTags();
+    // for (auto it = tags.constBegin(); it != tags.constEnd(); ++it) {
+    //     QAction* action = submenuTag->addAction(it.key());
+    //     action->setData(it.key());  // guardamos el nombre del tag en la action
+    // }
     //
     QAction* actionIsin    = menu.addAction("Copiar ISIN");
     QAction* actionElim   = menu.addAction("Eliminar");
