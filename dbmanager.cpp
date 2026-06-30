@@ -227,3 +227,16 @@ bool DbManager::deleteWLbyTicker(const QString& ticker) {
     }
     return q->numRowsAffected() > 0;
 }
+
+// actualiza tag de la tabla watchlist
+bool DbManager::updateTag(const QString& ticker, const QString& tag) {
+    auto* q = new QSqlQuery();
+    q->prepare("UPDATE watch SET tag = :tag WHERE ticker = :ticker");
+    q->bindValue(":tag", tag);
+    q->bindValue(":ticker", ticker);
+    if (!q->exec()) {
+        qWarning() << "updateTag error:" << q->lastError().text();
+        return false;
+    }
+    return q->numRowsAffected() > 0;
+}
