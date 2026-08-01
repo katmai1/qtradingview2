@@ -39,29 +39,8 @@ dockWatchList::~dockWatchList()
 }
 
 void dockWatchList::updateList() {
-    // get all wl
-    auto* q = new QSqlQuery();
-    q->exec("SELECT * FROM watch");
-
-    // crea lista
-    QList<WatchItem> itemList;
-    while (q->next()) {
-        WatchItem item;
-        item.ticker = q->value(1).toString();
-        item.type = q->value(2).toString();
-        item.tag = q->value(3).toString();
-        item.notes = q->value(4).toString();
-
-        Stock data = DbManager::getInstance().getStockByTicker(item.ticker);
-        if (!data.name.isEmpty()) {
-            item.name = data.name;
-            item.description = data.description;
-            item.isin = data.isin;
-        }
-        itemList.append(item);
-
-        qDebug() << QString("%1 (%2)").arg(item.name, item.ticker);
-    }
+    // una sola query (JOIN watch + stocks) en vez de 1 query por ticker
+    QList<WatchItem> itemList = DbManager::getInstance().loadWatchlist();
     refreshList(itemList);
 }
 

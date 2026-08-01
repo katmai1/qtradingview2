@@ -3,18 +3,7 @@
 
 #include "qlistwidget.h"
 #include <QDockWidget>
-#include <QSqlQuery>
-
-struct WatchItem {
-    QString ticker;
-    QString type;
-    QString tag;
-    QString notes;
-    QString name;
-    QString description;
-    QString isin;
-    double price;
-};
+#include "dbmanager.h"  // trae WatchItem
 
 inline QMap<QString, QColor> watchlistTags()
 {

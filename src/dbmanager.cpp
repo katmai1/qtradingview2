@@ -180,7 +180,7 @@ QList<Stock> DbManager::loadStocks(const QString& market) {
     return result;
 }
 
-QList<Crypto> DbManager::loadCrypto(const QString& exchange = "BINANCE") {
+QList<Crypto> DbManager::loadCrypto(const QString& exchange) {
     QList<Crypto> result;
     QSqlQuery q;
     q.prepare("SELECT ticker, name, description, close, volume FROM crypto WHERE exchange = :exchange");
@@ -202,41 +202,70 @@ QList<Crypto> DbManager::loadCrypto(const QString& exchange = "BINANCE") {
 Stock DbManager::getStockByTicker(const QString& ticker) {
     Stock data{};
 
-    auto* q = new QSqlQuery();
-    q->prepare("SELECT * FROM stocks WHERE ticker = :ticker");
-    q->bindValue(":ticker", ticker);
-    if (!q->exec()) {   qWarning() << "getStockByTicker error:" << q->lastError().text();   }
-    if (q->next()) {
-        data.name = q->value(3).toString();
-        data.description = q->value(4).toString();
-        data.isin = q->value(5).toString();
+    QSqlQuery q;
+    q.prepare("SELECT name, description, isin FROM stocks WHERE ticker = :ticker");
+    q.bindValue(":ticker", ticker);
+    if (!q.exec()) {   qWarning() << "getStockByTicker error:" << q.lastError().text();   }
+    if (q.next()) {
+        data.name        = q.value("name").toString();
+        data.description = q.value("description").toString();
+        data.isin        = q.value("isin").toString();
     }
     return data;
 }
 
-// Crypto getCryptoByTicker(const QString& ticker){}
+// devuelve toda la watchlist en una sola query, con los datos de "stocks" ya unidos
+// (evita el N+1: antes se hacía 1 query por cada ticker de la watchlist)
+QList<WatchItem> DbManager::loadWatchlist() {
+    QList<WatchItem> result;
+
+    QSqlQuery q;
+    q.prepare(R"(
+        SELECT w.ticker, w.type, w.tag, w.notes,
+               s.name, s.description, s.isin
+        FROM watch w
+        LEFT JOIN stocks s ON s.ticker = w.ticker
+    )");
+    if (!q.exec()) {
+        qWarning() << "loadWatchlist error:" << q.lastError().text();
+        return result;
+    }
+
+    while (q.next()) {
+        result.append({
+            .ticker      = q.value("ticker").toString(),
+            .type        = q.value("type").toString(),
+            .tag         = q.value("tag").toString(),
+            .notes       = q.value("notes").toString(),
+            .name        = q.value("name").toString(),
+            .description = q.value("description").toString(),
+            .isin        = q.value("isin").toString(),
+        });
+    }
+    return result;
+}
 
 // elimina entrada de la tabla
 bool DbManager::deleteWLbyTicker(const QString& ticker) {
-    auto* q = new QSqlQuery();
-    q->prepare("DELETE FROM watch WHERE ticker = :ticker");
-    q->bindValue(":ticker", ticker);
-    if (!q->exec()) {
-        qWarning() << "deleteStockByTicker error:" << q->lastError().text();
+    QSqlQuery q;
+    q.prepare("DELETE FROM watch WHERE ticker = :ticker");
+    q.bindValue(":ticker", ticker);
+    if (!q.exec()) {
+        qWarning() << "deleteWLbyTicker error:" << q.lastError().text();
         return false;
     }
-    return q->numRowsAffected() > 0;
+    return q.numRowsAffected() > 0;
 }
 
 // actualiza tag de la tabla watchlist
 bool DbManager::updateTag(const QString& ticker, const QString& tag) {
-    auto* q = new QSqlQuery();
-    q->prepare("UPDATE watch SET tag = :tag WHERE ticker = :ticker");
-    q->bindValue(":tag", tag);
-    q->bindValue(":ticker", ticker);
-    if (!q->exec()) {
-        qWarning() << "updateTag error:" << q->lastError().text();
+    QSqlQuery q;
+    q.prepare("UPDATE watch SET tag = :tag WHERE ticker = :ticker");
+    q.bindValue(":tag", tag);
+    q.bindValue(":ticker", ticker);
+    if (!q.exec()) {
+        qWarning() << "updateTag error:" << q.lastError().text();
         return false;
     }
-    return q->numRowsAffected() > 0;
+    return q.numRowsAffected() > 0;
 }
