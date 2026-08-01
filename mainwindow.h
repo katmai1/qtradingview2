@@ -57,25 +57,25 @@ private:
     Ui::MainWindow *ui;
     QTextEdit *tdebug;
     SystemTrayIcon *trayIcon;
-    SettingsManager *settings;
+
     TvScreener* screener;
     dockWatchList* dockWatch;
 
     // funcion para conectar docks y gestionar su visibilidad con los settings
     bool m_closing = false;
     inline void connectDock(QDockWidget* dock, QAction* action, const QString& key) {
-        bool visible = settings->getValue(key, false, "View").toBool();
+        bool visible = SettingsManager::getInstance().getValue(key, false, "View").toBool();
         dock->setVisible(visible);
         action->setChecked(visible);
 
         connect(action, &QAction::toggled, [this, dock, key](bool checked) {
             dock->setVisible(checked);
-            settings->setValue(key, checked, "View");
+            SettingsManager::getInstance().setValue(key, checked, "View");
         });
         connect(dock, &QDockWidget::visibilityChanged, [this, action, key](bool visible) {
             if (m_closing) return;
             action->setChecked(visible);
-            settings->setValue(key, visible, "View");
+            SettingsManager::getInstance().setValue(key, visible, "View");
         });
     }
 

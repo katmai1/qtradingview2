@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // declaramos settings y asignamos el valor created a true para que cree la carpeta de configuracion si no existía
-    SettingsManager settings;
+    SettingsManager& settings = SettingsManager::getInstance();
     settings.setValue("created", "true");
 
     // configura idioma

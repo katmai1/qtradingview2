@@ -15,14 +15,13 @@ struct Languages {
 
 class SettingsManager {
 public:
-    SettingsManager() {
-        // Configura QSettings con la organización y el nombre de la aplicación
-        m_settings = new QSettings("QTradingview2", "QTradingview2");
+    static SettingsManager& getInstance() {
+        static SettingsManager instance;
+        return instance;
     }
 
-    ~SettingsManager() {
-        delete m_settings;
-    }
+    SettingsManager(const SettingsManager&) = delete;
+    SettingsManager& operator=(const SettingsManager&) = delete;
 
     // Método para obtener un valor de configuración
     QVariant getValue(const QString &key, const QVariant &defaultValue = QVariant(), const QString &group = "Options") const {
@@ -106,6 +105,15 @@ public:
     }
 
 private:
+    SettingsManager() {
+        // Configura QSettings con la organización y el nombre de la aplicación
+        m_settings = new QSettings("QTradingview2", "QTradingview2");
+    }
+
+    ~SettingsManager() {
+        delete m_settings;
+    }
+
     QSettings *m_settings;
 };
 

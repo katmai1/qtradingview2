@@ -21,7 +21,7 @@
 // ************************************************************************************************
 // Main Window
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), settings(new SettingsManager())
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     // load ui
     ui->setupUi(this);
@@ -42,9 +42,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(dockWatch, &dockWatchList::loadSymbol, this, [this](const QString& ticker) {    ui->webview->loadChart(ticker); });
 
     // load views
-    this->ui->dockDebug->setVisible(settings->getValue("debug", false, "View").toBool());
-    this->ui->statusbar->setVisible(settings->getValue("statusbar", false, "View").toBool());
-    this->ui->actionStatusbar->setChecked(settings->getValue("statusbar", false, "View").toBool());
+    this->ui->dockDebug->setVisible(SettingsManager::getInstance().getValue("debug", false, "View").toBool());
+    this->ui->statusbar->setVisible(SettingsManager::getInstance().getValue("statusbar", false, "View").toBool());
+    this->ui->actionStatusbar->setChecked(SettingsManager::getInstance().getValue("statusbar", false, "View").toBool());
 
     // screener...
     auto* profile = qobject_cast<CustomWebEnginePage*>(ui->webview->page())->profile();
@@ -68,7 +68,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete settings;
 }
 
 // SatusBar
@@ -100,14 +99,14 @@ void MainWindow::on_actionOptions_triggered()
 
 // ************************************************************************************************
 // Save view options checked value in settings
-void MainWindow::on_actionDebug_triggered(bool checked) {   settings->setValue("debug", checked, "View");    }
+void MainWindow::on_actionDebug_triggered(bool checked) {   SettingsManager::getInstance().setValue("debug", checked, "View");    }
 
-void MainWindow::on_actionStatusbar_triggered(bool checked) {   settings->setValue("statusbar", checked, "View");   }
+void MainWindow::on_actionStatusbar_triggered(bool checked) {   SettingsManager::getInstance().setValue("statusbar", checked, "View");   }
 
 void MainWindow::on_actionFullscreen_triggered(bool checked) {
     if (checked) {  this->showFullScreen();    }
     else {  this->showMaximized();  }
-    settings->setValue("fullscreen", checked, "View");
+    SettingsManager::getInstance().setValue("fullscreen", checked, "View");
 }
 
 // ejecuta javascript de test
@@ -128,8 +127,8 @@ void MainWindow::on_actionTest_triggered()
 
 void MainWindow::on_actionSaveHTML_triggered()
 {
-    this->ui->webview->page()->toHtml([this](const QString &html) {
-        QFile file(settings->pathDir() + "/web.html");
+    this->ui->webview->page()->toHtml([](const QString &html) {
+        QFile file(SettingsManager::getInstance().pathDir() + "/web.html");
         if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QTextStream out(&file);
             out << html;

@@ -18,15 +18,12 @@ dialogoptions::dialogoptions(MainWindow *parent) :
 {
     ui->setupUi(this);
 
-    //config settings;
-    SettingsManager settings;
-
     this->addLanguages();
 
     // seleccion el idioma configurado en el combo
     for(int i = 0; i < this->ui->comboLanguage->count(); ++i) {
         ComboItem item = this->ui->comboLanguage->itemData(i).value<ComboItem>();
-        if (item.extraData == settings.language()) {
+        if (item.extraData == SettingsManager::getInstance().language()) {
             this->ui->comboLanguage->setCurrentIndex(i);
         }
     }
@@ -45,9 +42,9 @@ void dialogoptions::on_buttonBox_accepted()
     QString newLanguage = currentItem.extraData;
 
     // compara con el anterior y si es diferent lo guarda
-    QString oldLanguage = settings.language();
+    QString oldLanguage = SettingsManager::getInstance().language();
     if (newLanguage != oldLanguage) {
-        settings.setValue("language", newLanguage);
+        SettingsManager::getInstance().setValue("language", newLanguage);
         QMessageBox::information(nullptr, "Info", "El idioma seleccionado se cargará al reiniciar la aplicación");
     }
 }
@@ -55,12 +52,11 @@ void dialogoptions::on_buttonBox_accepted()
 // carga idiomas en el combo
 void dialogoptions::addLanguages()
 {
-    SettingsManager settings;
     // añade opcion sistema
     ComboItem system = {"Sistema", "system"};
     this->ui->comboLanguage->addItem(system.name, QVariant::fromValue(system));
     // carga lista de idiomas disponibles y los añade
-    QList<Languages> languages = settings.availableLanguages();
+    QList<Languages> languages = SettingsManager::getInstance().availableLanguages();
     foreach (const Languages &lang, languages) {
         ComboItem idioma = {lang.name, lang.locale};
         this->ui->comboLanguage->addItem(idioma.name, QVariant::fromValue(idioma));

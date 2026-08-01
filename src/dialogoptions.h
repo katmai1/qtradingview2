@@ -25,7 +25,6 @@ private slots:
 private:
     Ui::dialogoptions *ui;
     MainWindow *mwin;
-    SettingsManager settings;
 };
 
 #endif // DIALOGOPTIONS_H

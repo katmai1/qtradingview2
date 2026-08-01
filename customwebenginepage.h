@@ -35,7 +35,7 @@ public:
 private:
     static QWebEngineProfile* createProfile(QObject *parent) {
         auto *profile = new QWebEngineProfile("qtradingview2", parent);
-        SettingsManager settings;
+        SettingsManager& settings = SettingsManager::getInstance();
         profile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
         profile->setCachePath(settings.pathDir());
         profile->setPersistentStoragePath(settings.pathDir());
