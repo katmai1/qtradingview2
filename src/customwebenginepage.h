@@ -6,7 +6,7 @@
 #include <QWebEngineCookieStore>
 #include <QWebEngineSettings>
 
-#include "src/settings.h"
+#include "settings.h"
 
 
 class CustomWebEnginePage : public QWebEnginePage

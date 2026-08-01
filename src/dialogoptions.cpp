@@ -3,7 +3,7 @@
 #include "ui_dialogoptions.h"
 #include <QComboBox>
 #include <QMessageBox>
-#include "src/settings.h"
+#include "settings.h"
 
 
 struct ComboItem {

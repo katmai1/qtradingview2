@@ -3,7 +3,7 @@
 #include <QApplication>
 #include <QTranslator>
 
-#include "src/systray.h"
+#include "systray.h"
 #include <src/settings.h>
 
 // programa principal

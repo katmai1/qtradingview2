@@ -3,6 +3,7 @@ QT       += core gui webenginewidgets widgets network sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
+INCLUDEPATH += src
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -21,13 +22,13 @@ DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
 
 
 SOURCES += \
-    customwebenginepage.cpp \
-    customwebengineview.cpp \
-    dbmanager.cpp \
+    src/customwebenginepage.cpp \
+    src/customwebengineview.cpp \
+    src/dbmanager.cpp \
     src/dialogabout.cpp \
     src/dialogoptions.cpp \
-    main.cpp \
-    mainwindow.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp \
     src/dockwatchlist.cpp \
     src/searchmarket.cpp \
     src/stockdockwidget.cpp \
@@ -36,12 +37,12 @@ SOURCES += \
     src/watchlistdelegate.cpp
 
 HEADERS += \
-    customwebenginepage.h \
-    customwebengineview.h \
-    dbmanager.h \
+    src/customwebenginepage.h \
+    src/customwebengineview.h \
+    src/dbmanager.h \
     src/dialogabout.h \
     src/dialogoptions.h \
-    mainwindow.h \
+    src/mainwindow.h \
     src/dockwatchlist.h \
     src/searchmarket.h \
     src/settings.h \
@@ -54,7 +55,7 @@ HEADERS += \
 FORMS += \
     src/dialogabout.ui \
     src/dialogoptions.ui \
-    mainwindow.ui \
+    src/mainwindow.ui \
     src/dockwatchlist.ui \
     src/searchmarket.ui \
     src/stockdockwidget.ui

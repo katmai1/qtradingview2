@@ -1,6 +1,6 @@
 #include "mainwindow.h"
-#include "src/dialogabout.h"
-#include "src/dialogoptions.h"
+#include "dialogabout.h"
+#include "dialogoptions.h"
 
 #include "QObject"
 #include "QMessageBox"
@@ -10,9 +10,9 @@
 #include <QString>
 #include <QCloseEvent>
 
-#include "src/searchmarket.h"
-#include "src/uimanager.h"
-#include "src/tvscreener.h"
+#include "searchmarket.h"
+#include "uimanager.h"
+#include "tvscreener.h"
 #include "dbmanager.h"
 
 #include <unistd.h>

@@ -2,7 +2,7 @@
 #define DIALOGOPTIONS_H
 
 #include <QDialog>
-#include "src/settings.h"
+#include "settings.h"
 
 
 class MainWindow;

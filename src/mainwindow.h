@@ -2,15 +2,15 @@
 #define MAINWINDOW_H
 
 #include "qevent.h"
-#include "src/tvscreener.h"
+#include "tvscreener.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 #include <QTextEdit>
 #include <QCloseEvent>
 
-#include "src/systray.h"
-#include "src/settings.h"
-#include "src/dockwatchlist.h"
+#include "systray.h"
+#include "settings.h"
+#include "dockwatchlist.h"
 
 
 QT_BEGIN_NAMESPACE

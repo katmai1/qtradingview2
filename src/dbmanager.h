@@ -1,6 +1,6 @@
 #pragma once
 #include <QSqlDatabase>
-#include "src/tvscreener.h"
+#include "tvscreener.h"
 
 
 class DbManager {

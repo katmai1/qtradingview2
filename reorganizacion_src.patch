@@ -1,0 +1,207 @@
+diff --git a/QTradingview2.pro b/QTradingview2.pro
+index 190fd8b..cb47ee7 100644
+--- a/QTradingview2.pro
++++ b/QTradingview2.pro
+@@ -4,6 +4,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+ 
+ CONFIG += c++17
+ 
++INCLUDEPATH += src
++
+ # You can make your code fail to compile if it uses deprecated APIs.
+ # In order to do so, uncomment the following line.
+ #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+@@ -21,13 +23,13 @@ DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
+ 
+ 
+ SOURCES += \
+-    customwebenginepage.cpp \
+-    customwebengineview.cpp \
+-    dbmanager.cpp \
++    src/customwebenginepage.cpp \
++    src/customwebengineview.cpp \
++    src/dbmanager.cpp \
+     src/dialogabout.cpp \
+     src/dialogoptions.cpp \
+-    main.cpp \
+-    mainwindow.cpp \
++    src/main.cpp \
++    src/mainwindow.cpp \
+     src/dockwatchlist.cpp \
+     src/searchmarket.cpp \
+     src/stockdockwidget.cpp \
+@@ -36,12 +38,12 @@ SOURCES += \
+     src/watchlistdelegate.cpp
+ 
+ HEADERS += \
+-    customwebenginepage.h \
+-    customwebengineview.h \
+-    dbmanager.h \
++    src/customwebenginepage.h \
++    src/customwebengineview.h \
++    src/dbmanager.h \
+     src/dialogabout.h \
+     src/dialogoptions.h \
+-    mainwindow.h \
++    src/mainwindow.h \
+     src/dockwatchlist.h \
+     src/searchmarket.h \
+     src/settings.h \
+@@ -54,7 +56,7 @@ HEADERS += \
+ FORMS += \
+     src/dialogabout.ui \
+     src/dialogoptions.ui \
+-    mainwindow.ui \
++    src/mainwindow.ui \
+     src/dockwatchlist.ui \
+     src/searchmarket.ui \
+     src/stockdockwidget.ui
+diff --git a/customwebenginepage.cpp b/src/customwebenginepage.cpp
+similarity index 100%
+rename from customwebenginepage.cpp
+rename to src/customwebenginepage.cpp
+diff --git a/customwebenginepage.h b/src/customwebenginepage.h
+similarity index 98%
+rename from customwebenginepage.h
+rename to src/customwebenginepage.h
+index 3c54643..a59f108 100644
+--- a/customwebenginepage.h
++++ b/src/customwebenginepage.h
+@@ -6,7 +6,7 @@
+ #include <QWebEngineCookieStore>
+ #include <QWebEngineSettings>
+ 
+-#include "src/settings.h"
++#include "settings.h"
+ 
+ 
+ class CustomWebEnginePage : public QWebEnginePage
+diff --git a/customwebengineview.cpp b/src/customwebengineview.cpp
+similarity index 100%
+rename from customwebengineview.cpp
+rename to src/customwebengineview.cpp
+diff --git a/customwebengineview.h b/src/customwebengineview.h
+similarity index 100%
+rename from customwebengineview.h
+rename to src/customwebengineview.h
+diff --git a/dbmanager.cpp b/src/dbmanager.cpp
+similarity index 100%
+rename from dbmanager.cpp
+rename to src/dbmanager.cpp
+diff --git a/dbmanager.h b/src/dbmanager.h
+similarity index 95%
+rename from dbmanager.h
+rename to src/dbmanager.h
+index 8bc9480..5958b8f 100644
+--- a/dbmanager.h
++++ b/src/dbmanager.h
+@@ -1,6 +1,6 @@
+ #pragma once
+ #include <QSqlDatabase>
+-#include "src/tvscreener.h"
++#include "tvscreener.h"
+ 
+ 
+ class DbManager {
+diff --git a/src/dialogoptions.cpp b/src/dialogoptions.cpp
+index 0f02f6f..255c365 100644
+--- a/src/dialogoptions.cpp
++++ b/src/dialogoptions.cpp
+@@ -3,7 +3,7 @@
+ #include "ui_dialogoptions.h"
+ #include <QComboBox>
+ #include <QMessageBox>
+-#include "src/settings.h"
++#include "settings.h"
+ 
+ 
+ struct ComboItem {
+diff --git a/src/dialogoptions.h b/src/dialogoptions.h
+index 426ad07..e2f64e5 100644
+--- a/src/dialogoptions.h
++++ b/src/dialogoptions.h
+@@ -2,7 +2,7 @@
+ #define DIALOGOPTIONS_H
+ 
+ #include <QDialog>
+-#include "src/settings.h"
++#include "settings.h"
+ 
+ 
+ class MainWindow;
+diff --git a/main.cpp b/src/main.cpp
+similarity index 97%
+rename from main.cpp
+rename to src/main.cpp
+index ffee372..f5e9076 100644
+--- a/main.cpp
++++ b/src/main.cpp
+@@ -3,7 +3,7 @@
+ #include <QApplication>
+ #include <QTranslator>
+ 
+-#include "src/systray.h"
++#include "systray.h"
+ #include <src/settings.h>
+ 
+ // programa principal
+diff --git a/mainwindow.cpp b/src/mainwindow.cpp
+similarity index 97%
+rename from mainwindow.cpp
+rename to src/mainwindow.cpp
+index d9386bc..e8dc9cb 100644
+--- a/mainwindow.cpp
++++ b/src/mainwindow.cpp
+@@ -1,6 +1,6 @@
+ #include "mainwindow.h"
+-#include "src/dialogabout.h"
+-#include "src/dialogoptions.h"
++#include "dialogabout.h"
++#include "dialogoptions.h"
+ 
+ #include "QObject"
+ #include "QMessageBox"
+@@ -10,9 +10,9 @@
+ #include <QString>
+ #include <QCloseEvent>
+ 
+-#include "src/searchmarket.h"
+-#include "src/uimanager.h"
+-#include "src/tvscreener.h"
++#include "searchmarket.h"
++#include "uimanager.h"
++#include "tvscreener.h"
+ #include "dbmanager.h"
+ 
+ #include <unistd.h>
+diff --git a/mainwindow.h b/src/mainwindow.h
+similarity index 95%
+rename from mainwindow.h
+rename to src/mainwindow.h
+index 96495a7..469d82c 100644
+--- a/mainwindow.h
++++ b/src/mainwindow.h
+@@ -2,15 +2,15 @@
+ #define MAINWINDOW_H
+ 
+ #include "qevent.h"
+-#include "src/tvscreener.h"
++#include "tvscreener.h"
+ #include "ui_mainwindow.h"
+ #include <QMainWindow>
+ #include <QTextEdit>
+ #include <QCloseEvent>
+ 
+-#include "src/systray.h"
+-#include "src/settings.h"
+-#include "src/dockwatchlist.h"
++#include "systray.h"
++#include "settings.h"
++#include "dockwatchlist.h"
+ 
+ 
+ QT_BEGIN_NAMESPACE
+diff --git a/mainwindow.ui b/src/mainwindow.ui
+similarity index 100%
+rename from mainwindow.ui
+rename to src/mainwindow.ui
