@@ -2,6 +2,7 @@
 #include "ui_dockwatchlist.h"
 #include "dbmanager.h"
 #include "watchlistdelegate.h"
+#include "settings.h"
 
 #include <QClipboard>
 #include <QApplication>
@@ -12,16 +13,20 @@ dockWatchList::dockWatchList(QWidget *parent)
     , ui(new Ui::dockWatchList)
 {
     ui->setupUi(this);
+    auto* settings = new SettingsManager();
 
     // cargamos tags en el combo y conectamos
     ui->comboTag->addItem("Todos");
     for (const QString& tag : watchlistTagOrder()) { ui->comboTag->addItem(tag);    }
     connect(ui->comboTag, &QComboBox::currentTextChanged, this, &dockWatchList::onFilterTag);
+    ui->comboTag->setCurrentIndex(settings->getValue("lastTag", 1, "watchlist").toInt());
 
     // configuramos lista, actualizamos y conectamos
     ui->watchList->setItemDelegate(new WatchListDelegate(this));
     ui->watchList->setAlternatingRowColors(true);
     updateList();
+    onFilterTag(ui->comboTag->currentText());
+
     connect(ui->watchList, &QListWidget::itemDoubleClicked, this, &dockWatchList::onItemDoubleClicked);
 
     // menu contextual

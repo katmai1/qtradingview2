@@ -21,6 +21,8 @@ inline QMap<QString, QColor> watchlistTags()
     return {
         { "En cartera",            QColor(0x26, 0xa6, 0x9a) }, // verde
         { "Orden abierta",         QColor(0x26, 0xa6, 0x9a) },
+        { "Esperando earning",       QColor(0xff, 0xd7, 0x00) },
+        { "Candidato",       QColor(0xff, 0xd7, 0x00) },
         { "Esperando corrección",  QColor(0xff, 0xa7, 0x26) }, // naranja
         { "Pendiente de análisis", QColor(0x42, 0xa5, 0xf5) }, // azul
         { "Descartado",            QColor(0xef, 0x53, 0x50) }, // rojo
@@ -32,6 +34,8 @@ inline QStringList watchlistTagOrder()
     return {
         "En cartera",
         "Orden abierta",
+        "Candidato",
+        "Esperando earning",
         "Esperando corrección",
         "Pendiente de análisis",
         "Descartado"

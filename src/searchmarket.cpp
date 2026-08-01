@@ -159,6 +159,10 @@ void searchMarket::on_butonUpdate_released()
 {
     if (m_type == AssetType::Stocks) {
         m_screener->fetchMarket("france");
+        m_screener->fetchMarket("netherlands");
+        m_screener->fetchMarket("portugal");
+        m_screener->fetchMarket("belgium");
+
     } else {
         m_screener->fetchCrypto("BINANCE");
     }
