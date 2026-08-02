@@ -84,11 +84,11 @@ jobs:
               share/applications/qtradingview2.desktop=/usr/share/applications/qtradingview2.desktop \
               share/icons/hicolor/256x256/apps/qtradingview2.png=/usr/share/icons/hicolor/256x256/apps/qtradingview2.png \
               share/metainfo/qtradingview2.metainfo.xml=/usr/share/metainfo/qtradingview2.metainfo.xml \
-              lib=/opt/qtradingview2/lib \
-              libexec=/opt/qtradingview2/libexec \
-              resources=/opt/qtradingview2/resources \
-              translations=/opt/qtradingview2/translations \
-              plugins=/opt/qtradingview2/plugins
+              lib/=/opt/qtradingview2/lib \
+              libexec/=/opt/qtradingview2/libexec \
+              resources/=/opt/qtradingview2/resources \
+              translations/=/opt/qtradingview2/translations \
+              plugins/=/opt/qtradingview2/plugins
 
       - name: Subir como artifact
         uses: actions/upload-artifact@v4
