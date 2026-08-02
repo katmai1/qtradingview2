@@ -66,7 +66,7 @@ jobs:
           mkdir -p AppDir/usr/libexec AppDir/usr/resources AppDir/usr/translations/qtwebengine_locales
 
           cp "$QT_LIBEXEC/QtWebEngineProcess" AppDir/usr/libexec/
-          cp "$QT_RESOURCES"/*.pak AppDir/usr/resources/
+          cp -r "$QT_RESOURCES"/. AppDir/usr/resources/
           cp -r "$QT_TRANSLATIONS/qtwebengine_locales/"* AppDir/usr/translations/qtwebengine_locales/
 
       - name: Generar .deb
