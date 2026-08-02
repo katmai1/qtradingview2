@@ -107,7 +107,7 @@ public:
 private:
     SettingsManager() {
         // Configura QSettings con la organización y el nombre de la aplicación
-        m_settings = new QSettings("QTradingview2", "QTradingview2");
+        m_settings = new QSettings("qtradingview2", "qtradingview2");
     }
 
     ~SettingsManager() {

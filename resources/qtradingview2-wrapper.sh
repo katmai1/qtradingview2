@@ -7,4 +7,4 @@ export QTWEBENGINEPROCESS_PATH="$HERE/libexec/QtWebEngineProcess"
 export QTWEBENGINE_RESOURCES_PATH="$HERE/resources"
 export QTWEBENGINE_LOCALES_PATH="$HERE/translations/qtwebengine_locales"
 export QTWEBENGINE_DISABLE_SANDBOX=1
-exec "$HERE/bin/qtradingview2" "$@"
+exec "$HERE/libexec/qtradingview2" "$@"

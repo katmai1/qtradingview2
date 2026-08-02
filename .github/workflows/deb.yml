@@ -28,7 +28,7 @@ jobs:
       - name: Configurar y compilar (qmake)
         run: |
           mkdir build && cd build
-          qmake ../QTradingview2.pro
+          qmake ../qtradingview2.pro
           make -j$(nproc)
 
       - name: Listar binarios generados (debug)
