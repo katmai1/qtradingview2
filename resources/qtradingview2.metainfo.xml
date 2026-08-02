@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>qtradingview2</id>
+  <name>QTradingView2</name>
+  <summary>Trading watchlist and charting tool</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>Herramienta de escritorio para seguimiento de watchlist y gráficos de trading.</p>
+  </description>
+  <launchable type="desktop-id">qtradingview2.desktop</launchable>
+  <provides>
+    <binary>qtradingview2</binary>
+  </provides>
+</component>

@@ -36,9 +36,10 @@ jobs:
 
       - name: Preparar AppDir
         run: |
-          mkdir -p AppDir/usr/bin AppDir/usr/libexec AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
+          mkdir -p AppDir/usr/bin AppDir/usr/libexec AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps AppDir/usr/share/metainfo
           cp build/QTradingview2 AppDir/usr/libexec/qtradingview2
           cp resources/qtradingview2.desktop AppDir/usr/share/applications/
+          cp resources/qtradingview2.metainfo.xml AppDir/usr/share/metainfo/
           cp resources/icon.png AppDir/usr/share/icons/hicolor/256x256/apps/qtradingview2.png
           chmod +x resources/qtradingview2-wrapper.sh
           cp resources/qtradingview2-wrapper.sh AppDir/usr/bin/qtradingview2
