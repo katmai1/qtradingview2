@@ -76,7 +76,7 @@ jobs:
               --prefix /opt/qtradingview2 \
               --deb-no-default-config-files \
               -C AppDir/usr \
-              bin lib share libexec resources translations \
+              bin lib share libexec resources translations plugins \
               bin/qtradingview2=/usr/bin/qtradingview2
 
       - name: Subir como artifact
