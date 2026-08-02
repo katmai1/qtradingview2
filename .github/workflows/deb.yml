@@ -31,10 +31,13 @@ jobs:
           qmake ../QTradingview2.pro
           make -j$(nproc)
 
+      - name: Listar binarios generados (debug)
+        run: ls -la build/
+
       - name: Preparar AppDir
         run: |
           mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
-          cp build/qtradingview2 AppDir/usr/bin/
+          cp build/QTradingview2 AppDir/usr/bin/qtradingview2
           cp resources/qtradingview2.desktop AppDir/usr/share/applications/
           cp resources/icon.png AppDir/usr/share/icons/hicolor/256x256/apps/qtradingview2.png
 
