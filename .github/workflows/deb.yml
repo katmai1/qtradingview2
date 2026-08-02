@@ -15,6 +15,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: "6.11.1"
+          modules: "qtwebengine qtpositioning qtwebchannel"
 
       - name: Instalar herramientas de empaquetado
         run: |
@@ -27,23 +28,44 @@ jobs:
       - name: Configurar y compilar (qmake)
         run: |
           mkdir build && cd build
-          qmake ../QTradingview2.pro
+          qmake ../qtradingview2.pro
           make -j$(nproc)
 
-      - name: Instalar en AppDir
-        run: cmake --install build --prefix AppDir/usr
+      - name: Preparar AppDir
+        run: |
+          mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
+          cp build/qtradingview2 AppDir/usr/bin/
+          cp resources/qtradingview2.desktop AppDir/usr/share/applications/
+          cp resources/icon.png AppDir/usr/share/icons/hicolor/256x256/apps/qtradingview2.png
 
       - name: Bundlear librerías Qt
         run: |
           export QMAKE=$(which qmake6 || which qmake)
           linuxdeployqt AppDir/usr/bin/qtradingview2 -qmake=$QMAKE -no-translations
 
+      - name: Copiar recursos de QtWebEngine
+        run: |
+          QT_LIBEXEC=$QT_ROOT_DIR/libexec
+          QT_RESOURCES=$QT_ROOT_DIR/resources
+          QT_TRANSLATIONS=$QT_ROOT_DIR/translations
+
+          mkdir -p AppDir/usr/libexec AppDir/usr/resources AppDir/usr/translations/qtwebengine_locales
+
+          cp "$QT_LIBEXEC/QtWebEngineProcess" AppDir/usr/libexec/
+          cp "$QT_RESOURCES"/*.pak AppDir/usr/resources/
+          cp -r "$QT_TRANSLATIONS/qtwebengine_locales/"* AppDir/usr/translations/qtwebengine_locales/
+
+      - name: Preparar wrapper de lanzamiento
+        run: chmod +x resources/qtradingview2-wrapper.sh
+
       - name: Generar .deb
         run: |
           fpm -s dir -t deb -n qtradingview2 \
               -v "${GITHUB_REF_NAME#v}" \
               --prefix /opt/qtradingview2 \
-              -C AppDir/usr bin lib share
+              --deb-no-default-config-files \
+              -C AppDir/usr bin lib share libexec resources translations \
+              resources/qtradingview2-wrapper.sh=/usr/bin/qtradingview2
 
       - name: Subir como artifact
         uses: actions/upload-artifact@v4

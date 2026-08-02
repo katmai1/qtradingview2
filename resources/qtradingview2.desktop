@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=QTradingView2
+Comment=Trading watchlist and charting tool
+Exec=qtradingview2
+Icon=qtradingview2
+Categories=Office;Finance;
+Terminal=false
