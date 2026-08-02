@@ -44,6 +44,9 @@ jobs:
           find . -type f ! -name 'libqsqlite.so' -delete
           ls -la .
 
+      - name: Eliminar plugins de geolocalización no usados
+        run: rm -rf "$QT_ROOT_DIR/plugins/position"
+
       - name: Bundlear librerías Qt
         run: |
           export QMAKE=$(which qmake6 || which qmake)
