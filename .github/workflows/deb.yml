@@ -36,8 +36,8 @@ jobs:
 
       - name: Preparar AppDir
         run: |
-          mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
-          cp build/QTradingview2 AppDir/usr/bin/qtradingview2-bin
+          mkdir -p AppDir/usr/bin AppDir/usr/libexec AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
+          cp build/QTradingview2 AppDir/usr/libexec/qtradingview2
           cp resources/qtradingview2.desktop AppDir/usr/share/applications/
           cp resources/icon.png AppDir/usr/share/icons/hicolor/256x256/apps/qtradingview2.png
           chmod +x resources/qtradingview2-wrapper.sh
@@ -55,7 +55,7 @@ jobs:
       - name: Bundlear librerías Qt
         run: |
           export QMAKE=$(which qmake6 || which qmake)
-          linuxdeployqt AppDir/usr/bin/qtradingview2-bin -qmake=$QMAKE -no-translations
+          linuxdeployqt AppDir/usr/libexec/qtradingview2 -qmake=$QMAKE -no-translations
 
       - name: Copiar recursos de QtWebEngine
         run: |
@@ -69,12 +69,16 @@ jobs:
           cp -r "$QT_RESOURCES"/. AppDir/usr/resources/
           cp -r "$QT_TRANSLATIONS/qtwebengine_locales/"* AppDir/usr/translations/qtwebengine_locales/
 
+      - name: Preparar script postinst
+        run: chmod +x resources/postinst.sh
+
       - name: Generar .deb
         run: |
           fpm -s dir -t deb -n qtradingview2 \
               -v "${GITHUB_REF_NAME#v}" \
               --prefix /opt/qtradingview2 \
               --deb-no-default-config-files \
+              --after-install resources/postinst.sh \
               -C AppDir/usr \
               bin lib share libexec resources translations plugins \
               bin/qtradingview2=/usr/bin/qtradingview2
