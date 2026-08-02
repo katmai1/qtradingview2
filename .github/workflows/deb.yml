@@ -81,8 +81,11 @@ jobs:
               --deb-no-default-config-files \
               --after-install resources/postinst.sh \
               -C AppDir/usr \
-              bin lib share libexec resources translations plugins \
-              bin/qtradingview2=/usr/bin/qtradingview2
+              bin lib libexec resources translations plugins \
+              bin/qtradingview2=/usr/bin/qtradingview2 \
+              share/applications/qtradingview2.desktop=/usr/share/applications/qtradingview2.desktop \
+              share/icons/hicolor/256x256/apps/qtradingview2.png=/usr/share/icons/hicolor/256x256/apps/qtradingview2.png \
+              share/metainfo/qtradingview2.metainfo.xml=/usr/share/metainfo/qtradingview2.metainfo.xml
 
       - name: Subir como artifact
         uses: actions/upload-artifact@v4
