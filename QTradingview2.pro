@@ -78,7 +78,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     recursos.qrc
 
-DISTFILES += \
-    genver.sh \
-    update_git.py \
-    update_version.py
+DISTFILES +=

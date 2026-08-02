@@ -1,0 +1,58 @@
+name: Build .deb
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Qt oficial (igual que en local)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: "6.11.1"
+          modules: "qtsql"
+
+      - name: Instalar herramientas de empaquetado
+        run: |
+          sudo apt-get update
+          sudo gem install --no-document fpm
+          wget -q https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+          chmod +x linuxdeployqt-continuous-x86_64.AppImage
+          sudo mv linuxdeployqt-continuous-x86_64.AppImage /usr/local/bin/linuxdeployqt
+
+      - name: Configurar y compilar
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j$(nproc)
+
+      - name: Instalar en AppDir
+        run: cmake --install build --prefix AppDir/usr
+
+      - name: Bundlear librerías Qt
+        run: |
+          export QMAKE=$(which qmake6 || which qmake)
+          linuxdeployqt AppDir/usr/bin/qtradingview2 -qmake=$QMAKE -no-translations
+
+      - name: Generar .deb
+        run: |
+          fpm -s dir -t deb -n qtradingview2 \
+              -v "${GITHUB_REF_NAME#v}" \
+              --prefix /opt/qtradingview2 \
+              -C AppDir/usr bin lib share
+
+      - name: Subir como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qtradingview2-deb
+          path: "*.deb"
+
+      - name: Adjuntar a la Release (si es un tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.deb"
