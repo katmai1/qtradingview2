@@ -24,10 +24,11 @@ jobs:
           chmod +x linuxdeployqt-continuous-x86_64.AppImage
           sudo mv linuxdeployqt-continuous-x86_64.AppImage /usr/local/bin/linuxdeployqt
 
-      - name: Configurar y compilar
+      - name: Configurar y compilar (qmake)
         run: |
-          cmake -B build -DCMAKE_BUILD_TYPE=Release
-          cmake --build build -j$(nproc)
+          mkdir build && cd build
+          qmake ../qtradingview2.pro
+          make -j$(nproc)
 
       - name: Instalar en AppDir
         run: cmake --install build --prefix AppDir/usr
