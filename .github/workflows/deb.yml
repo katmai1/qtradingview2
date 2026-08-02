@@ -27,7 +27,7 @@ jobs:
       - name: Configurar y compilar (qmake)
         run: |
           mkdir build && cd build
-          qmake ../qtradingview2.pro
+          qmake ../QTradingview2.pro
           make -j$(nproc)
 
       - name: Instalar en AppDir
