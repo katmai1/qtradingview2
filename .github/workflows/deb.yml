@@ -38,8 +38,11 @@ jobs:
           cp resources/qtradingview2.desktop AppDir/usr/share/applications/
           cp resources/icon.png AppDir/usr/share/icons/hicolor/256x256/apps/qtradingview2.png
 
-      - name: Eliminar driver SQL no usado (Mimer)
-        run: rm -f "$QT_ROOT_DIR/plugins/sqldrivers/libqsqlmimer.so"
+      - name: Conservar solo el driver SQL usado (SQLite)
+        run: |
+          cd "$QT_ROOT_DIR/plugins/sqldrivers"
+          find . -type f ! -name 'libqsqlite.so' -delete
+          ls -la .
 
       - name: Bundlear librerías Qt
         run: |
