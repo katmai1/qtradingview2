@@ -8,17 +8,17 @@ INCLUDEPATH += src
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-VERSION_MAJOR = 1
-VERSION_MINOR = 7
-VERSION_PATCH = 0
+#VERSION_MAJOR = 1
+#VERSION_MINOR = 7
+#VERSION_PATCH = 0
 
-DEFINES += VERSION_MAJOR=$$VERSION_MAJOR VERSION_MINOR=$$VERSION_MINOR VERSION_PATCH=$$VERSION_PATCH
+#DEFINES += VERSION_MAJOR=$$VERSION_MAJOR VERSION_MINOR=$$VERSION_MINOR VERSION_PATCH=$$VERSION_PATCH
 
 # Calcula la versión completa
-VERSION_FULL = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}
+#VERSION_FULL = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}
 
 # Agrega la versión completa como una definición para que esté disponible en todo el proyecto
-DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
+#DEFINES += VERSION_FULL=\\\"$$VERSION_FULL\\\"
 
 
 SOURCES += \

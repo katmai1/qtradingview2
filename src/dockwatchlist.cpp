@@ -7,6 +7,8 @@
 #include <QClipboard>
 #include <QApplication>
 #include <QMenu>
+#include <QInputDialog>
+
 
 dockWatchList::dockWatchList(QWidget *parent)
     : QDockWidget(parent)
@@ -54,6 +56,7 @@ void dockWatchList::refreshList(QList<WatchItem>& lista) {
         qItem->setData(Qt::UserRole + 3, item.tag);
         qItem->setData(Qt::UserRole + 4, item.notes);
         qItem->setData(Qt::UserRole + 5, item.isin);
+        if (!item.notes.isEmpty()) {    qItem->setToolTip(item.notes);  }
         ui->watchList->addItem(qItem);
     }
 
@@ -94,6 +97,7 @@ void dockWatchList::onContextMenu(const QPoint& pos)
         action->setData(tag);
     }
     QAction* actionIsin    = menu.addAction("Copiar ISIN");
+    QAction* actionNotes = menu.addAction("Editar notas...");
     QAction* actionElim   = menu.addAction("Eliminar");
 
     // ##########################
@@ -124,4 +128,12 @@ void dockWatchList::onContextMenu(const QPoint& pos)
     }
 
     // notes
+    else if (selected == actionNotes) {
+        bool ok = false;
+        QString nuevaNota = QInputDialog::getMultiLineText(this, "Editar notas", "Notas para " + ticker, notes, &ok);
+        if (ok && DbManager::getInstance().updateNotes(ticker, nuevaNota)) {
+            item->setData(Qt::UserRole + 4, nuevaNota);
+            item->setToolTip(nuevaNota);
+        }
+    }
 }

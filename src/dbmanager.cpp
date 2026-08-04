@@ -269,3 +269,16 @@ bool DbManager::updateTag(const QString& ticker, const QString& tag) {
     }
     return q.numRowsAffected() > 0;
 }
+
+
+bool DbManager::updateNotes(const QString& ticker, const QString& notes) {
+    QSqlQuery q;
+    q.prepare("UPDATE watch SET notes = :notes WHERE ticker = :ticker");
+    q.bindValue(":notes", notes);
+    q.bindValue(":ticker", ticker);
+    if (!q.exec()) {
+        qWarning() << "updateNotes error:" << q.lastError().text();
+        return false;
+    }
+    return q.numRowsAffected() > 0;
+}

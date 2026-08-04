@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     UIManager::getInstance()->setTextEdit(ui->txtDebug);
     qInstallMessageHandler(customMessageHandler);
 
-    qInfo() << "Iniciando version: " << QString("v%1").arg(VERSION_FULL);
+    qInfo() << QString("Iniciando version: v%1").arg(QCoreApplication::applicationVersion());
 
     // init db
     DbManager::getInstance().init();

@@ -34,6 +34,7 @@ public:
     QList<WatchItem> loadWatchlist();
     bool deleteWLbyTicker(const QString& ticker);
     bool updateTag(const QString& ticker, const QString& tag);
+    bool updateNotes(const QString& ticker, const QString& notes);
 
 private:
     DbManager() = default;

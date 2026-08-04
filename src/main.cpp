@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QCoreApplication::setApplicationName("qtradingview2");
+    QCoreApplication::setApplicationVersion("1.9.7");
 
     // declaramos settings y asignamos el valor created a true para que cree la carpeta de configuracion si no existía
     SettingsManager& settings = SettingsManager::getInstance();

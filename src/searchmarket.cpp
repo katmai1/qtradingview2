@@ -71,7 +71,6 @@ searchMarket::searchMarket(AssetType type, TvScreener* screener, QWidget *parent
         int row = index.row();
         QString ticker = m_model->data(m_model->index(row, 1)).toString();
         emit loadSymbol(ticker);
-        //add2WL(ticker, "stock");
         qDebug() << "Doble click en:" << ticker;
     });
 
