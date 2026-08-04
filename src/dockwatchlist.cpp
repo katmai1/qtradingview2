@@ -93,12 +93,6 @@ void dockWatchList::onContextMenu(const QPoint& pos)
         QAction* action = submenuTag->addAction(tag);
         action->setData(tag);
     }
-    // QMap<QString, QColor> tags = watchlistTags();
-    // for (auto it = tags.constBegin(); it != tags.constEnd(); ++it) {
-    //     QAction* action = submenuTag->addAction(it.key());
-    //     action->setData(it.key());  // guardamos el nombre del tag en la action
-    // }
-    //
     QAction* actionIsin    = menu.addAction("Copiar ISIN");
     QAction* actionElim   = menu.addAction("Eliminar");
 
@@ -108,7 +102,10 @@ void dockWatchList::onContextMenu(const QPoint& pos)
     QAction* selected = menu.exec(ui->watchList->mapToGlobal(pos));
 
     // copia ISIN
-    if (selected == actionIsin) {   QApplication::clipboard()->setText(isin);   }
+    if (selected == actionIsin) {
+        QApplication::clipboard()->setText(isin);
+        qInfo() << ticker + ": Copiado ISIN (" + isin + ")";
+    }
     // elimina de watchlist
     else if (selected == actionElim) {
         if (DbManager::getInstance().deleteWLbyTicker(ticker)) {
