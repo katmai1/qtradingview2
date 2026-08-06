@@ -3,6 +3,8 @@
 #include "ui_searchmarket.h"
 #include <QStyledItemDelegate>
 #include <QLocale>
+#include <QTimer>
+
 
 // delegate para convertir valores a num comprensibles
 class NumberDelegate : public QStyledItemDelegate {
@@ -43,6 +45,7 @@ searchMarket::searchMarket(AssetType type, TvScreener* screener, QWidget *parent
     , m_screener(screener)
 {
     ui->setupUi(this);
+    ui->editFilter->installEventFilter(this);
 
     m_model = new QSqlQueryModel(this);
     m_type = type;
@@ -98,6 +101,14 @@ searchMarket::searchMarket(AssetType type, TvScreener* screener, QWidget *parent
             m_model->setQuery(m_query.arg(""));
         });
     }
+}
+
+bool searchMarket::eventFilter(QObject* watched, QEvent* event)
+{
+    if (watched == ui->editFilter && event->type() == QEvent::FocusIn) {
+        QTimer::singleShot(0, ui->editFilter, &QLineEdit::selectAll);
+    }
+    return QDialog::eventFilter(watched, event);
 }
 
 searchMarket::~searchMarket()

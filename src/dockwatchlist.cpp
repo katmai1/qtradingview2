@@ -123,6 +123,7 @@ void dockWatchList::onContextMenu(const QPoint& pos)
 
         if (DbManager::getInstance().updateTag(ticker, nuevoTag)) {
             item->setData(Qt::UserRole + 3, nuevoTag);
+            //updateList();
             ui->watchList->update();  // repinta el item con el nuevo tag
         }
     }

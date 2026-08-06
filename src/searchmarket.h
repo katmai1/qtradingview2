@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSqlQueryModel>
+#include <QEvent>
 #include "tvscreener.h"
 
 enum class AssetType { Stocks, Crypto };
@@ -16,6 +17,9 @@ class searchMarket : public QDialog
 public:
     explicit searchMarket(AssetType type, TvScreener* screener, QWidget *parent = nullptr);
     ~searchMarket();
+
+protected:
+    bool eventFilter(QObject* watched, QEvent* event) override;
 
 private slots:
     void on_butonUpdate_released();
